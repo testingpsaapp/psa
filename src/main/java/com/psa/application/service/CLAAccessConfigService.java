@@ -14,7 +14,7 @@ public class CLAAccessConfigService {
 	
 	public String saveCLAAcessConfig(CLAAcessConfig cLAAcessConfig)
 	{
-		String result ="CLAAcessConfig Save Failed";
+		String result ="{\"message\": \"PSA Access Configuration Save Failed\"}";
 		CLAAcessConfig newCLAAcessConfig =null;
 		newCLAAcessConfig=cLAAcessConfigRepository.saveAndFlush(cLAAcessConfig);
 		if(newCLAAcessConfig==null)
@@ -23,7 +23,7 @@ public class CLAAccessConfigService {
 		}
 		else
 		{
-			result ="CLAAcessConfig Save Successful";
+			result ="{\"message\": \"PSA Access Configuration Saved Successfully\"}";
 		}
 		
 		return result;

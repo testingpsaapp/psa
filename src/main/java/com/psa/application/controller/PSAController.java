@@ -183,6 +183,7 @@ public class PSAController {
 	{
 		String result = "";
 		result = cLAAccessConfigService.saveCLAAcessConfig(cLAAccessConfig);
+		System.out.println(result);
 		return result;
 	}
 	

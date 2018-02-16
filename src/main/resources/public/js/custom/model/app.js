@@ -21,9 +21,5 @@ psaapp.controller('mainPsaAppController', function($rootScope,$scope,$http) {
 		}]);
 
 
-/*psaAccessController Starts below*/
-psaapp.controller('commDlistConfigAppController', function($scope,$http) 
-{
-	
-});
+
 		
