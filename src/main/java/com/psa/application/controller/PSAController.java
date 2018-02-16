@@ -34,7 +34,7 @@ import com.psa.application.utilities.CommonUtilities;
 public class PSAController {
 	
 	@Autowired
-	CommonUtilities commonUtilities;
+	CommonUtilities commonUtilities; 
 	
 	@Autowired
 	CommDlistConfigService commDlistConfigService;
