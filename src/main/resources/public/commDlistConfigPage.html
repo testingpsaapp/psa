@@ -1,0 +1,169 @@
+<!--  <div class="container" style ="width: 99%;margin-top: 2px">-->
+		<div>
+            <p>  </p>
+				<nav class="navbar navbar-inverse " style= "background-color: #294e89; ">
+				  <div class="container-fluid">
+				    <div class="navbar-header" >
+				      <a class="navbar-brand" href="#">Admin Console</a>
+				    </div>
+				    <ul class="nav navbar-nav" >
+				      <li class="active"><a href="#">Communication DList Configuration</a></li>
+				      
+				    </ul>
+				  </div>
+				  </nav>
+				  
+				  <div class="container" style ="width: 99%;margin-top: 2px">
+				  <div class="row">
+					  <div class="col-sm-3" style="color: #405a7c;"><strong>Communication Type</strong></div>
+					  <div class="col-sm-3"> 	
+						  <div class="dropdown">
+						    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id ="comm_type_butt" value="">Select Communication Type
+						    <span class="caret"></span></button>
+						    <ul class="dropdown-menu">
+						      <li><a href="" ng-click="changeCommDlistDD('Major Incident','comm_type_butt')">Major Incident</a></li>
+						      <li><a href="" ng-click="changeCommDlistDD('Standard Incident','comm_type_butt')">Standard Incident</a></li>
+						      <li><a href="" ng-click="changeCommDlistDD('Briefing Paper','comm_type_butt')">Briefing Paper</a></li>
+						      					      
+						    </ul>
+						  </div>
+						  <input type ="hidden" ng-model ="comm_type"/>
+						 
+					  </div>
+					  <div class="col-sm-3" style="color: #405a7c;"><strong>Incident Type</strong></div>
+					  <div class="col-sm-3"> 
+					  	<div class="dropdown">
+						    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="inc_type_butt">Incident Type
+						    <span class="caret"></span></button>
+						    <ul class="dropdown-menu">
+						      <li><a href="" ng-click="changeCommDlistDD('Major','inc_type_butt')">Major</a></li>
+						      <li><a href="" ng-click="changeCommDlistDD('Standard','inc_type_butt')">Standard</a></li>
+						      					      
+						    </ul>
+						  </div>
+						  <input type ="hidden" ng-model="inc_type"/>
+					  </div>
+					 </div>
+					 <div class="row">
+					  <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Incident Priority</strong></div>
+					  <div class="col-sm-3" style="margin-top: 2%"> 
+					  	<div class="dropdown">
+						    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="inc_priority_butt">Incident Priority
+						    <span class="caret"></span></button>
+						    <ul class="dropdown-menu">
+						      <li><a href="" ng-click="changeCommDlistDD('Severity 1','inc_priority_butt')">Severity 1</a></li>
+						      <li><a href="" ng-click="changeCommDlistDD('Severity 2 High','inc_priority_butt')">Severity 2 High</a></li>
+						      <li><a href="" ng-click="changeCommDlistDD('Severity 2 Standard','inc_priority_butt')">Severity 2 Standard</a></li>
+						      <li><a href="" ng-click="changeCommDlistDD('Severity 3','inc_priority_butt')">Severity 3</a></li>
+						      <li><a href="" ng-click="changeCommDlistDD('Priority 1','inc_priority_butt')">Priority 1</a></li>
+						      <li><a href="" ng-click="changeCommDlistDD('Priority 2','inc_priority_butt')">Priority 2</a></li>
+						      <li><a href="" ng-click="changeCommDlistDD('Priority 3','inc_priority_butt')">Priority 3</a></li>
+						      <li><a href="" ng-click="changeCommDlistDD('Priority 4','inc_priority_butt')">Priority 4</a></li>					      
+						    </ul>
+						  </div>
+						  <input type ="hidden" ng-model="inc_priority"/>
+					  </div>
+					  
+					  <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Impacted Country</strong></div>
+					  
+	
+					  <div class="col-sm-3" style="margin-top: 2%"> 
+					  	<div class="dropdown">
+						    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="impacted_country_butt">Impacted Country
+						    <span class="caret"></span></button>
+						    <ul class="dropdown-menu">
+						      <li ng-repeat="country in countries">
+        						<a href="" ng-click="changeCommDlistDD(country.countryName,'impacted_country_butt')">	{{country.countryName}} </a>
+    							</li>
+						      			      
+						    </ul>
+						    <input type ="hidden" ng-model="impacted_country"/>
+						  </div>
+					  </div>
+					  </div>
+					  <div class="row">
+					  <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Impacted LOB</strong></div>
+					  
+					
+					  <div class="col-sm-3" style="margin-top: 2%"> 
+					  	<div class="dropdown">
+						    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="impacted_lob_butt">Impacted LOB
+						    <span class="caret"></span></button>
+						    <ul class="dropdown-menu">
+						      <li><a href="" ng-click="changeCommDlistDD('Core Banking','impacted_lob_butt')">Core Banking</a></li>
+						      <li><a href="" ng-click="changeCommDlistDD('Cards','impacted_lob_butt')">Cards</a></li>
+						      <li><a href="" ng-click="changeCommDlistDD('CMS','impacted_lob_butt')">CMS</a></li>
+						      <li><a href="" ng-click="changeCommDlistDD('Digital','impacted_lob_butt')">Digital</a></li>
+						      <li><a href="" ng-click="changeCommDlistDD('Wealth Management','impacted_lob_butt')">Wealth Management</a></li>
+						      <li><a href="" ng-click="changeCommDlistDD('DABI','impacted_lob_butt')">DABI</a></li>
+						      <li><a href="" ng-click="changeCommDlistDD('ESB','impacted_lob_butt')">ESB</a></li>		      
+						    </ul>
+						  </div>
+						  <input type ="hidden" ng-model="impacted_lob"/>
+					  </div>
+					  
+					  <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>To Mail Id</strong></div>
+					  
+					
+					  <div class="col-sm-3" style="margin-top: 2%"> 
+					  	<input type="text" class="form-control" id="toMailId" ng-model="to_mail_id">
+					  </div>
+				  </div>
+				<div class="row">
+					
+					<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>CC Mail Id</strong></div>
+					  
+					
+					  <div class="col-sm-3" style="margin-top: 2%"> 
+					  	<input type="text" class="form-control" id="ccMailId" ng-model="cc_mail_id">
+					  </div>
+					  
+					  <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>BCC Mail Id</strong></div>
+					  
+					
+					  <div class="col-sm-3" style="margin-top: 2%"> 
+					  	<input type="text" class="form-control" id="bccMailId" ng-model="bcc_mail_id">
+					  </div>
+				</div>
+				
+				<div class="row" style=" margin-top: 2%">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="saveConfig()">Save Configuration</button></div>
+				<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="searchConfig()">Search Configuration</button></div>
+				<div class="col-sm-3"></div>
+				</div>
+			</div>
+			<div style ="margin-top: 2%"><p>  </p></div>
+			<div class="alert alert-success" ng-show="successMessageModel">
+				<p><strong>{{saveMessage.message}}</strong></p>
+			</div>
+			<div class="alert alert-danger" ng-show="failureMessageModel">
+				<p><strong>{{saveMessage.message}}</strong></p>
+			</div>
+			<table class="table table-bordered" ng-show="tableConfigDList">
+		    <thead>
+		      <tr>
+		        <th>Communication Type</th>
+		        <th>Incident Type</th>
+		        <th>Incident Priority</th>
+		        <th>Impacted Country</th>
+		        <th>Impacted Lob</th>
+		        <th>To Email Id</th>
+		        <th>CC Email Id</th>
+		        <th>BCC Email Id</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr ng-repeat="x in listOfcommconfig">
+		        <td>{{x.commType}}</td>
+		        <td>{{x.incType}}</td>
+		        <td>{{x.incPriority}}</td>
+		        <td>{{x.impactedCtry}}</td>
+		        <td>{{x.impactedLob}}</td>
+		        <td>{{x.toIds}}</td>
+		        <td>{{x.cc}}</td>
+		        <td>{{x.bcc}}</td>
+        	  </tr>
+            </tbody>
+        </table>
+		</div>

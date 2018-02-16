@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Production Support Automation</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../css/lib/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../css/lib/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="../css/lib/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../css/lib/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body >
+
+	<div ng-app="mainPsaApp" ng-controller="mainPsaAppController" ng-init="loadData()">
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">PSA Console</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        
+                        
+                        <li>
+                            <a href="#"><i class="fa fa-volume-up fa-fw"></i>Communication<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="">Briefing Paper Publisher</a>
+                                </li>
+                                <li>
+                                    <a href="">Change Communication</a>
+                                </li>
+								<li>
+                                    <a href="">Incident - MIM Communication	</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+						<li>
+                            <a href="#"><i class="fa fa-group fa-fw"></i>Triage Leads Activity<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="">Critical / Daily Call Incident Tracker</a>
+                                </li>
+                                <li>
+                                    <a href="">Incident Dashboard</a>
+                                </li>
+								<li>
+                                    <a href="">Country Dashboard</a>
+                                </li>
+								<li>
+                                    <a href="">Daily Incident Activity</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+						<li>
+                            <a href="#"><i class="fa fa-gears fa-fw"></i>Admin Console<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#!commDlistConfigPage">Communication Dlist Configuration</a>
+                                </li>
+                                <li>
+                                    <a href="#!psaAccessPage">PSA Access Configuration</a>
+                                </li>
+								<li>
+                                    <a href="#!lobConfigPage">LOB Configuration</a>
+                                </li>
+								<li>
+                                    <a href="#!triageLeadConfigPage">Triage Lead Configuration</a>
+                                </li>
+								<li>
+                                    <a href="#!appConfigPage">Application Configuration</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                         <li>
+                            <a href="#"><i class="fa fa-th-list fa-fw"></i>My Worklist <span class="badge">5</span></a>
+						</li>
+                          
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+            <div ng-view></div>
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+   </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../js/lib/jquery.min.js"></script>
+
+	<!-- AngularJS -->
+	<script src="../js/lib/angular.min.js"></script>
+	<script src="../js/lib/angular-route.js"></script>
+	
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../js/lib/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../js/lib/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="../js/lib/raphael.min.js"></script>
+    <script src="../js/lib/morris.min.js"></script>
+    <script src="../js/lib/morris-data.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../js/lib/sb-admin-2.js"></script>
+	
+	<!-- Custom Angular JavaScript -->
+	<script src="../js/custom/app.js"></script>
+	
+	<!-- Custom JS -->
+	<script src="../js/custom/custom.js"></script>
+</body>
+
+</html>
