@@ -42,14 +42,16 @@ public class CommDlistConfigService
 		commDlistConfig = commDlistConfigRepository.getCommDlistConfigByCTITIPIL(commType, incType, incPriority, impactedLob, impactedCtry);
 		if(commDlistConfig==null)
 		{
-			result ="No Data";
+			result ="{\"message\":\"No Data\"}";
 		}
 		else
 		{
-			result = "{toIds:"+commDlistConfig.getToIds()+","
-					+ "cc:"+commDlistConfig.getCc()+","
-					+ "bcc:"+commDlistConfig.getBcc()+"}";
+			result = "{\"message\":\"Data Exists\", "
+					+ "\"toIds\":\""+commDlistConfig.getToIds()+"\","
+					+ "\"cc\":\""+commDlistConfig.getCc()+"\","
+					+ "\"bcc\":\""+commDlistConfig.getBcc()+"\"}";
 		}
+		System.out.println(result);
 		return result;
 	}
 	

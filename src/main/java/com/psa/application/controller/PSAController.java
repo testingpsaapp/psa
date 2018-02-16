@@ -78,7 +78,7 @@ public class PSAController {
 		return result;
 	}
 	
-	@RequestMapping(path="/commDlistConfig", method = RequestMethod.GET)
+	@RequestMapping(path="/commDlistConfig/check", method = RequestMethod.POST)
 	public String getCommDlistConfig(@RequestBody CommDlistConfig commDlistConfig)
 	{
 		String result = "";

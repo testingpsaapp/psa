@@ -106,7 +106,7 @@
 					  
 					
 					  <div class="col-sm-3" style="margin-top: 2%"> 
-					  	<input type="text" class="form-control" id="toMailId" ng-model="to_mail_id">
+					  	<input type="email" class="form-control" id="toMailId" ng-model="to_mail_id" validate-email>
 					  </div>
 				  </div>
 				<div class="row">
@@ -115,14 +115,14 @@
 					  
 					
 					  <div class="col-sm-3" style="margin-top: 2%"> 
-					  	<input type="text" class="form-control" id="ccMailId" ng-model="cc_mail_id">
+					  	<input type="email" class="form-control" id="ccMailId" ng-model="cc_mail_id" validate-email>
 					  </div>
 					  
 					  <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>BCC Mail Id</strong></div>
 					  
 					
 					  <div class="col-sm-3" style="margin-top: 2%"> 
-					  	<input type="text" class="form-control" id="bccMailId" ng-model="bcc_mail_id">
+					  	<input type="email" class="form-control" id="bccMailId" ng-model="bcc_mail_id" validate-email>
 					  </div>
 				</div>
 				
@@ -140,6 +140,7 @@
 			<div class="alert alert-danger" ng-show="failureMessageModel">
 				<p><strong>{{saveMessage.message}}</strong></p>
 			</div>
+			
 			<table class="table table-bordered" ng-show="tableConfigDList">
 		    <thead>
 		      <tr>
@@ -166,4 +167,5 @@
         	  </tr>
             </tbody>
         </table>
+        
 		</div>
