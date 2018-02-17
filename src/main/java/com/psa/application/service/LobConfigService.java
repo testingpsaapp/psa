@@ -1,5 +1,7 @@
 package com.psa.application.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +36,12 @@ public class LobConfigService
 		LobConfig lobConfig = null;
 		lobConfig = lobConfigRepository.getLobConfigBySoeId(soeId);
 		return lobConfig;
+	}
+	
+	public List<LobConfig> getAllLobConfig()
+	{
+		List<LobConfig> listOfLobConfig = null;
+		listOfLobConfig= lobConfigRepository.findAll();
+		return listOfLobConfig;
 	}
 }

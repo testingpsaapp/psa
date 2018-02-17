@@ -82,6 +82,23 @@
 				<div class="alert alert-danger" ng-show="failureMessageModel">
 					<p><strong>{{saveMessage.message}}</strong></p>
 				</div>
-				
+				<table class="table table-bordered" ng-show="tableLobConfigList">
+		    <thead>
+		      <tr>
+		        <th>SOE ID</th>
+		        <th>Impacted Lob</th>
+		        <th>Application</th>
+		        <th>Role</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr ng-repeat="x in listOfLobConfig">
+		        <td>{{x.soeId}}</td>
+		        <td>{{x.lob}}</td>
+		        <td>{{x.app}}</td>
+		        <td>{{x.role}}</td>
+        	  </tr>
+            </tbody>
+        </table>
 				
 </div><!-- Main div ends here -->

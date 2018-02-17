@@ -82,5 +82,14 @@ psaapp.controller('lobConfigController', function($scope,$http)
 			
 		};
 		
+		$scope.listOfLobConfig =[];
+		$scope.searchConfiguration= function(){
+			
+			$http.get('/lobConfig/all').then(function(data){
+	              $scope.listOfLobConfig = data.data;
+	              $scope.tableLobConfigList=true;
+	              console.log($scope.listOfLobConfig);
+	         });
+		}
 		
 });//main controller ends here

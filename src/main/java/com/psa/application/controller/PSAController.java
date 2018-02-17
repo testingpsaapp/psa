@@ -129,6 +129,14 @@ public class PSAController {
 		return result;
 	}
 	
+	@RequestMapping(path="/appConfig/all", method = RequestMethod.GET)
+	public List<AppConfig> getAllAppConfig()
+	{
+		List<AppConfig> listOfAppConfig= null;
+		listOfAppConfig = appConfigService.getAllAppConfig();
+		return listOfAppConfig;
+	}
+	
 	@RequestMapping(path="/appConfig", method = RequestMethod.GET)
 	public String getAppConfig(@RequestBody AppConfig appConfig)
 	{
@@ -167,6 +175,13 @@ public class PSAController {
 		LobConfig lobConfig = null;
 		lobConfig = lobConfigService.getLobConfigBySoeId(soeId);
 		return lobConfig;
+	}
+	@RequestMapping(path="/lobConfig/all", method = RequestMethod.GET)
+	public List<LobConfig> getAllLobConfig()
+	{
+		List<LobConfig> listOfLobConfig = null;
+		listOfLobConfig = lobConfigService.getAllLobConfig();
+		return listOfLobConfig;
 	}
 	
 	@RequestMapping(path="/lobConfig", method = RequestMethod.PUT)

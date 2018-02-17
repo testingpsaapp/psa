@@ -57,4 +57,11 @@ public class AppConfigService {
 		listOfAppConfig = appConfigRepository.getAppConfigByLobName(lob);
 		return listOfAppConfig;
 	}
+	
+	public List<AppConfig> getAllAppConfig()
+	{
+		List<AppConfig> listOfAppConfig=null;
+		listOfAppConfig = appConfigRepository.findAll();
+		return listOfAppConfig;
+	}
 }
