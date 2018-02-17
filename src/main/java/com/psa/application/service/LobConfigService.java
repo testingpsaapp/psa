@@ -14,7 +14,7 @@ public class LobConfigService
 	
 	public String saveLobConfig(LobConfig lobConfig)
 	{
-		String result ="Lob Config Save Failed";
+		String result ="{\"message\":\"Lob Config Save Failed\"}";
 		LobConfig lobConfigNew = null;
 		lobConfigNew=lobConfigRepository.saveAndFlush(lobConfig);
 		if(lobConfigNew==null)
@@ -23,7 +23,7 @@ public class LobConfigService
 		}
 		else
 		{
-			result = "Lob Config Save Successful";
+			result = "{\"message\":\"Lob Config Saved Successfully\"}";
 		}
 		
 		return result;

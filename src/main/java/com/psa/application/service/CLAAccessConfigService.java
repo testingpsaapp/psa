@@ -1,5 +1,7 @@
 package com.psa.application.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +36,12 @@ public class CLAAccessConfigService {
 		CLAAcessConfig cLAAcessConfig = null;
 		cLAAcessConfig = cLAAcessConfigRepository.getCLAAcessConfigBySoeId(soeId);
 		return cLAAcessConfig;
+	}
+	
+	public List<CLAAcessConfig> getAllCLAAcessConfig()
+	{
+		List<CLAAcessConfig> listOfAllClaAccessConfig = null;
+		listOfAllClaAccessConfig=cLAAcessConfigRepository.findAll();
+		return listOfAllClaAccessConfig;
 	}
 }

@@ -63,4 +63,14 @@ psaapp.controller('psaAccessController', function($scope,$http)
 		
 	};
 	 
+	
+	 $scope.searchConfiguration = function()
+	 {
+		 $scope.listOfPsaAccessConfig = [];
+         $http.get('/cLAAcessConfig/all').then(function(data){
+              $scope.listOfPsaAccessConfig = data.data;
+              $scope.tablePsaAccess = true;
+              //console.log($scope.countries);
+         })
+	 };
 });

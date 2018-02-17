@@ -54,7 +54,7 @@
 				 	 <div class="row" style=" margin-top: 2%">
 					<div class="col-sm-3"></div>
 					<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="saveConfiguration()">Save Configuration</button></div>
-					<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary">Search Configuration</button></div>
+					<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="searchConfiguration()">Search Configuration</button></div>
 					<div class="col-sm-3"></div>
 				  </div>
 				  <div style ="margin-top: 2%"><p>  </p></div>
@@ -64,5 +64,21 @@
 			<div class="alert alert-danger" ng-show="failureMessageModel">
 				<p><strong>{{saveMessage.message}}</strong></p>
 			</div>
-			
+			<table class="table table-bordered" ng-show="tablePsaAccess">
+		    <thead>
+		      <tr>
+		        <th>Access Type</th>
+		        <th>Access Role</th>
+		        <th>Soe Id</th>
+		       </tr>
+		    </thead>
+		    <tbody>
+		      <tr ng-repeat="x in listOfPsaAccessConfig">
+		        <td>{{x.accessType}}</td>
+		        <td>{{x.accessRole}}</td>
+		        <td>{{x.soeId}}</td>
+		        
+        	  </tr>
+            </tbody>
+        </table>
 			</div><!-- main div ends here -->

@@ -137,6 +137,14 @@ public class PSAController {
 		return result;
 	}
 	
+	@RequestMapping(path="/appConfig/{lob}", method = RequestMethod.GET)
+	public List<AppConfig> getAppConfigByLob(@PathVariable String lob)
+	{
+		List<AppConfig> listOfAppConfig= null;
+		listOfAppConfig = appConfigService.getAppConfigByLobName(lob);
+		return listOfAppConfig;
+	}
+	
 	/*
 	 * AppConfig service url mapping ends
 	 * */
@@ -203,6 +211,13 @@ public class PSAController {
 		return result;
 	}
 	
+	@RequestMapping(path="/cLAAcessConfig/all", method = RequestMethod.GET)
+	public List<CLAAcessConfig> getCLAAcessConfig()
+	{
+		List<CLAAcessConfig> listOfAllClaAccessConfig=null;
+		listOfAllClaAccessConfig = cLAAccessConfigService.getAllCLAAcessConfig();
+		return listOfAllClaAccessConfig;
+	}
 	/*
 	 * CLAAcessConfig service url mapping ends
 	 * */

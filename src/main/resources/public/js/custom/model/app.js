@@ -11,7 +11,10 @@ psaapp.controller('mainPsaAppController', function($rootScope,$scope,$http) {
 				templateUrl:"/commDlistConfigPage.html",
 				controller:	"commDlistConfigAppController"
 			}).
-			when("/lobConfigPage",{templateUrl:"/lobConfigPage.html"}).
+			when("/lobConfigPage",{
+				templateUrl:"/lobConfigPage.html",
+				controller:	"lobConfigController"
+			}).
 			when("/appConfigPage",{templateUrl:"/appConfigPage.html"}).
 			when("/psaAccessPage",{
 				templateUrl:"/psaAccessPage.html",

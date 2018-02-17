@@ -1,5 +1,7 @@
 package com.psa.application.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,4 +51,10 @@ public class AppConfigService {
 		return result;
 	}
 	
+	public List<AppConfig> getAppConfigByLobName(String lob)
+	{
+		List<AppConfig> listOfAppConfig=null;
+		listOfAppConfig = appConfigRepository.getAppConfigByLobName(lob);
+		return listOfAppConfig;
+	}
 }
