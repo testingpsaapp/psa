@@ -1,10 +1,10 @@
 /**
  * 
  */
-psaapp.controller('psaAccessController', function($scope,$http) 
+psaapp.controller('appConfigController', function($scope,$http) 
 {
 	
-	 $scope.changePSAAccessDD =function changeAppConfigDD(ddVal,dd)
+	 $scope.changeAppConfigDD =function changeAppConfigDD(ddVal,dd)
 	 {
 			//alert(ddVal);
 			document.getElementById(dd).innerHTML=ddVal+"<span class=\"caret\"></span>";
