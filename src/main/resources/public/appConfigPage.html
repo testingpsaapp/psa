@@ -19,16 +19,16 @@
 					  <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>LOB</strong></div>
 					  <div class="col-sm-3" style="margin-top: 2%"> 
 					  	<div class="dropdown">
-						    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">LOB
+						    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="lob_butt" value="">LOB
 						    <span class="caret"></span></button>
 						    <ul class="dropdown-menu">
-						      <li><a href="#">Core Banking</a></li>
-						      <li><a href="#">Cards</a></li>
-						      <li><a href="#">CMS</a></li>
-						      <li><a href="#">Digital</a></li>
-						      <li><a href="#">Wealth Management</a></li>
-						      <li><a href="#">DABI</a></li>
-						      <li><a href="#">ESB</a></li>		      
+						      <li><a href="" ng-click="changeAppConfigDD('Core Banking','lob_butt')">Core Banking</a></li>
+						      <li><a href="" ng-click="changeAppConfigDD('Cards','lob_butt')">Cards</a></li>
+						      <li><a href="" ng-click="changeAppConfigDD('CMS','lob_butt')">CMS</a></li>
+						      <li><a href="" ng-click="changeAppConfigDD('Digital','lob_butt')">Digital</a></li>
+						      <li><a href="" ng-click="changeAppConfigDD('Wealth Management','lob_butt')">Wealth Management</a></li>
+						      <li><a href="" ng-click="changeAppConfigDD('DABI','lob_butt')">DABI</a></li>
+						      <li><a href="" ng-click="changeAppConfigDD('ESB','lob_butt')">ESB</a></li>		      
 						    </ul>
 						  </div>
 				  	  </div>
@@ -37,12 +37,12 @@
 				  	  <div class ="row">
 				  	 <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>DList</strong></div>
 					  <div class="col-sm-3" style="margin-top: 2%"> 
-						<input type="text" class="form-control" id="dList">
+						<input type="text" class="form-control" id="dList" ng-model="dlist">
 					  </div>
 				  	  
 				  	  <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>SNOW DList</strong></div>
 					  <div class="col-sm-3" style="margin-top: 2%"> 
-						<input type="text" class="form-control" id="snowdList">
+						<input type="text" class="form-control" id="snowdList" ng-model="snowdListd">
 					  </div>
 				  	  </div>
 				  
