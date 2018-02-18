@@ -1,4 +1,5 @@
-<p>  </p>
+	<div>		
+				<p>  </p>
 				<nav class="navbar navbar-inverse " style= "background-color: #294e89; ">
 				  <div class="container-fluid">
 				    <div class="navbar-header" >
@@ -13,7 +14,7 @@
 				  <div class="row">
 					  <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Application Name</strong></div>
 					  <div class="col-sm-3" style="margin-top: 2%"> 
-						<input type="text" class="form-control" id="soeId">
+						<input type="text" class="form-control" id="appName" ng-model="appName">
 					  </div>
 					  
 					  <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>LOB</strong></div>
@@ -31,36 +32,37 @@
 						      <li><a href="" ng-click="changeAppConfigDD('ESB','lob_butt')">ESB</a></li>		      
 						    </ul>
 						  </div>
+						  <input type ="hidden" ng-model ="lob"/>
 				  	  </div>
 				  	  </div>
 				  	  
 				  	  <div class ="row">
 				  	 <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>DList</strong></div>
 					  <div class="col-sm-3" style="margin-top: 2%"> 
-						<input type="text" class="form-control" id="dList" ng-model="dlist">
+						<input type="text" class="form-control" id="dList" ng-model="dList">
 					  </div>
 				  	  
 				  	  <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>SNOW DList</strong></div>
 					  <div class="col-sm-3" style="margin-top: 2%"> 
-						<input type="text" class="form-control" id="snowdList" ng-model="snowdListd">
+						<input type="text" class="form-control" id="snowdList" ng-model="snowdList">
 					  </div>
 				  	  </div>
 				  
 				   <div class ="row">
 				  	 <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>LOB Lead</strong></div>
 					  <div class="col-sm-3" style="margin-top: 2%"> 
-						<input type="text" class="form-control" id="loblead">
+						<input type="text" class="form-control" id="loblead" ng-model="lobLead">
 					  </div>
 				  	  
 				  	  <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>PSM</strong></div>
 					  <div class="col-sm-3" style="margin-top: 2%"> 
-						<input type="text" class="form-control" id="psm">
+						<input type="text" class="form-control" id="psm" ng-model="psm">
 					  </div>
 				  	  </div>
 				  <div class ="row">
 				  	 <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>PSSM</strong></div>
 					  <div class="col-sm-3" style="margin-top: 2%"> 
-						<input type="text" class="form-control" id="pssm">
+						<input type="text" class="form-control" id="pssm" ng-model="pssm">
 					  </div>
 				  	  
 				  	  
@@ -68,7 +70,40 @@
 				  
 				  <div class="row" style=" margin-top: 2%">
 					<div class="col-sm-3"></div>
-					<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary">Save Configuration</button></div>
-					<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary">Search Configuration</button></div>
+					<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="saveConfiguration()">Save Configuration</button></div>
+					<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="searchConfiguration()">Search Configuration</button></div>
 					<div class="col-sm-3"></div>
 				  </div>
+				  <div style ="margin-top: 2%"><p>  </p></div>
+				<div class="alert alert-success" ng-show="successMessageModel">
+					<p><strong>{{saveMessage.message}}</strong></p>
+				</div>
+				<div class="alert alert-danger" ng-show="failureMessageModel">
+					<p><strong>{{saveMessage.message}}</strong></p>
+				</div>
+				<table class="table table-bordered" ng-show="tableAppConfig">
+		    <thead>
+		      <tr>
+		        <th>Application Name</th>
+		        <th>Lob</th>
+		        <th>DList</th>
+		        <th>SNOW Dlist</th>
+		        <th>Lob Lead</th>
+		        <th>PSM</th>
+		        <th>PSSM</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr ng-repeat="x in listOfAppConfig">
+		        <td>{{x.appName}}</td>
+		        <td>{{x.lob}}</td>
+		        <td>{{x.dList}}</td>
+		        <td>{{x.snowDlist}}</td>
+		        <td>{{x.lobLead}}</td>
+		        <td>{{x.psm}}</td>
+		        <td>{{x.pssm}}</td>
+        	  </tr>
+            </tbody>
+        </table>
+				  
+	</div>

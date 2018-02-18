@@ -16,7 +16,7 @@ public class AppConfigService {
 	
 	public String saveAppConfig(AppConfig appConfig)
 	{
-		String result ="App Config Save Failed";
+		String result ="{\"message\":\"Application Configuration Save Failed\"}";
 		AppConfig savedAppConfig = null;
 		savedAppConfig = appConfigRepository.saveAndFlush(appConfig);
 		if(savedAppConfig == null)
@@ -25,7 +25,7 @@ public class AppConfigService {
 		}
 		else
 		{
-			result ="App Config Save Sucessful";
+			result ="{\"message\":\"Application Configuration Saved Successfully\"}";
 		}
 		return result;
 	}
