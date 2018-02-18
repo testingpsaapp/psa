@@ -155,3 +155,17 @@ CREATE TABLE email_template (
 template_id varchar(40),
 template LONGTEXT
 );
+
+CREATE TABLE triage_lead_config (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+tl_soe_id varchar(40),
+region varchar(40),
+country varchar(40)
+);
+
+CREATE TABLE countries (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+country_code varchar(50),
+country_name varchar(100),
+region varchar(40)
+);
