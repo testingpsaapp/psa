@@ -11,6 +11,8 @@ public class Countries {
 	private long id;
 	private String countryCode;
 	private String countryName;
+	private String region;
+	
 	
 	@Id
 	public long getId() {
@@ -32,5 +34,10 @@ public class Countries {
 		this.countryName = countryName;
 	}
 	
-	
+	public String getRegion() {
+		return region;
+	}
+	public void setRegion(String region) {
+		this.region = region;
+	}
 }

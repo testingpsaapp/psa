@@ -23,7 +23,10 @@ psaapp.controller('mainPsaAppController', function($rootScope,$scope,$http) {
 				templateUrl:"/psaAccessPage.html",
 				controller:	"psaAccessController"
 			}).
-			when("/triageLeadConfigPage",{templateUrl:"/triageLeadConfigPage.html"})
+			when("/triageLeadConfigPage",{
+				templateUrl:"/triageLeadConfigPage.html",
+				controller: "triageLeadConfigController"
+			})
 		}]);
 
 

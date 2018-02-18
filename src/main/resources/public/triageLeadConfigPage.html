@@ -1,3 +1,4 @@
+<div>
 <p>  </p>
 				<nav class="navbar navbar-inverse " style= "background-color: #294e89; ">
 				  <div class="container-fluid">
@@ -13,22 +14,23 @@
 				  <div class="row">
 					   <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Triage Lead SOE ID</strong></div>
 					  <div class="col-sm-3" style="margin-top: 2%"> 
-						<input type="text" class="form-control" id="tlSoeId">
+						<input type="text" class="form-control" id="tlSoeId" ng-model="tlSoeId">
 					  </div>
 					  
 					  <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Region</strong></div>
 					  <div class="col-sm-3" style="margin-top: 2%"> 
 					  	<div class="dropdown">
-						    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Select Region
+						    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="region_butt">Select Region
 						    <span class="caret"></span></button>
 						    <ul class="dropdown-menu">
-						      <li><a href="#">NAM</a></li>
-						      <li><a href="#">LATAM</a></li>
-						      <li><a href="#">EMEA</a></li>
-						      <li><a href="#">APAC</a></li>
+						      <li><a href="" ng-click="changeTriageLeadConfigDD('NAM','region_butt')">NAM</a></li>
+						      <li><a href="" ng-click="changeTriageLeadConfigDD('LATAM','region_butt')">LATAM</a></li>
+						      <li><a href="" ng-click="changeTriageLeadConfigDD('EMEA','region_butt')">EMEA</a></li>
+						      <li><a href="" ng-click="changeTriageLeadConfigDD('APAC','region_butt')">APAC</a></li>
 						      	      
 						    </ul>
 						  </div>
+						  <input type ="hidden" ng-model ="region"/>
 				  	  </div>
 				  	  </div>
 				  	  
@@ -36,23 +38,50 @@
 				  	 	  <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Country</strong></div>
 					  <div class="col-sm-3" style="margin-top: 2%"> 
 					  	<div class="dropdown">
-						    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Select Country
+						    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="country_butt">Select Country
 						    <span class="caret"></span></button>
 						    <ul class="dropdown-menu">
-						      <li><a href="#">Australia</a></li>
-						      <li><a href="#">Hong Kong</a></li>
-						      <li><a href="#">Singapore</a></li>
-						      <li><a href="#">China</a></li>
+						      <li ng-repeat="country in countries">
+        						<a href="" ng-click="changeTriageLeadConfigDD(country.countryName,'country_butt')">{{country.countryName}}</a>
+    							</li>
 						      	      
 						    </ul>
 						  </div>
+						  <input type ="hidden" ng-model ="country"/>
 				  	  </div>
 				  	  
 				 	 </div>
 				 	 
 				 	 <div class="row" style=" margin-top: 2%">
 					<div class="col-sm-3"></div>
-					<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary">Save Configuration</button></div>
-					<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary">Search Configuration</button></div>
+					<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="saveTriageLeadConfig()">Save Configuration</button></div>
+					<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="searchTriageLeadConfig()">Search Configuration</button></div>
 					<div class="col-sm-3"></div>
 				  </div>
+				  <div style ="margin-top: 2%"><p>  </p></div>
+			<div class="alert alert-success" ng-show="successMessageModel">
+				<p><strong>{{saveMessage.message}}</strong></p>
+			</div>
+			<div class="alert alert-danger" ng-show="failureMessageModel">
+				<p><strong>{{saveMessage.message}}</strong></p>
+			</div>
+			
+			<table class="table table-bordered" ng-show="tableTriageLeadConfig">
+		    <thead>
+		      <tr>
+		        <th>Triage Lead SOE ID</th>
+		        <th>Region</th>
+		        <th>Country</th>
+		       
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr ng-repeat="x in listOfTriageLeadConfig">
+		        <td>{{x.tlSoeId}}</td>
+		        <td>{{x.region}}</td>
+		        <td>{{x.country}}</td>
+		     
+        	  </tr>
+            </tbody>
+        </table>
+	</div> <!--Main Div ends here-->

@@ -21,6 +21,7 @@ import com.psa.application.model.Countries;
 import com.psa.application.model.DailyCallIncidentTracker;
 import com.psa.application.model.DailyIncAct;
 import com.psa.application.model.LobConfig;
+import com.psa.application.model.TriageLeadConfig;
 import com.psa.application.service.AppConfigService;
 import com.psa.application.service.CLAAccessConfigService;
 import com.psa.application.service.CommDlistConfigService;
@@ -28,6 +29,7 @@ import com.psa.application.service.CountryService;
 import com.psa.application.service.DailyCallIncidentTrackerService;
 import com.psa.application.service.DailyIncActService;
 import com.psa.application.service.LobConfigService;
+import com.psa.application.service.TriageLeadConfigService;
 import com.psa.application.utilities.CommonUtilities;
 
 @RestController
@@ -59,6 +61,9 @@ public class PSAController {
 	
 	@Autowired
 	CountryService countryService;
+	
+	@Autowired
+	TriageLeadConfigService triageLeadConfigService;
 	
 	@RequestMapping("/testing")
 	public String test()
@@ -333,9 +338,35 @@ public class PSAController {
 		return countryService.getAllCountry();
 	}
 	
+	@RequestMapping(path="/countries/{region}", method = RequestMethod.GET)
+	public List<Countries> getAllCountriesByRegion(@PathVariable String region)
+	{
+		return countryService.getAllCountryRegion(region);
+	}
+	
 	@RequestMapping(path="/countries", method = RequestMethod.POST)
 	public List<Countries> saveCountry(@RequestBody Countries country)
 	{
 		return countryService.saveCountry(country);
+	}
+	
+	/*
+	 * Triage Lead COnfig URL mapping starts
+	 * */
+	
+	@RequestMapping(path="/triageLeadConfig", method = RequestMethod.POST)
+	public String saveTriageLeadConfig(@RequestBody TriageLeadConfig triageLeadConfig)
+	{
+		String message="";
+		message=triageLeadConfigService.saveTriageLeadConfiguration(triageLeadConfig);
+		return message;
+	}
+	
+	@RequestMapping(path="/triageLeadConfig/all", method = RequestMethod.GET)
+	public List<TriageLeadConfig> getAllTriageLeadConfig()
+	{
+		List<TriageLeadConfig> listOfTriageLeadConfig=null;
+		listOfTriageLeadConfig=triageLeadConfigService.getAllTriageLeadConfiguration();
+		return listOfTriageLeadConfig;
 	}
 }

@@ -27,5 +27,13 @@ public class CountryService {
 		return allCountry;
 	}
 
+	public List<Countries> getAllCountryRegion(String region) {
+		// TODO Auto-generated method stub
+		List<Countries> allCountry=null;
+		allCountry = countryRepository.findAllByRegion(region);
+		return allCountry;
+		
+	}
+
 
 }

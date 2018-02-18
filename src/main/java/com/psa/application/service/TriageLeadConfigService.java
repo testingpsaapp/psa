@@ -1,5 +1,7 @@
 package com.psa.application.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +27,10 @@ public class TriageLeadConfigService
 			message="{\"message\":\"Triage Lead Configuration Saved Successfully\"}";
 		}
 		return message;
+	}
+	public List<TriageLeadConfig> getAllTriageLeadConfiguration() {
+		List<TriageLeadConfig> listOfTriageLeadConfig = null;
+		listOfTriageLeadConfig=triageLeadConfigRepository.findAll();
+		return listOfTriageLeadConfig;
 	}
 }
