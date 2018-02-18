@@ -78,7 +78,8 @@ psaapp.controller('appConfigController', function($scope,$http)
 	             $scope.lobLead="";
 	             $scope.psm="";
 	             $scope.pssm="";
-	            	 
+	             document.getElementById("lob_butt").innerHTML="Select LOB"+"<span class=\"caret\"></span>";
+	             document.getElementById("lob_butt").value="";	 
 			 },function (data) {
 					
 		        	$scope.saveMessage = data.data;
