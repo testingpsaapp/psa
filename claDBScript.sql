@@ -167,5 +167,6 @@ CREATE TABLE countries (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 country_code varchar(50),
 country_name varchar(100),
-region varchar(40)
+region varchar(40),
+country_dlist varchar(500)
 );

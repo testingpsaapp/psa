@@ -12,6 +12,8 @@ public class Countries {
 	private String countryCode;
 	private String countryName;
 	private String region;
+	private String countryDlist;
+	
 	
 	
 	@Id
@@ -39,5 +41,12 @@ public class Countries {
 	}
 	public void setRegion(String region) {
 		this.region = region;
+	}
+	
+	public String getCountryDlist() {
+		return countryDlist;
+	}
+	public void setCountryDlist(String countryDlist) {
+		this.countryDlist = countryDlist;
 	}
 }

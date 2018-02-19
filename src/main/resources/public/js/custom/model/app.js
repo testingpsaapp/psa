@@ -26,6 +26,10 @@ psaapp.controller('mainPsaAppController', function($rootScope,$scope,$http) {
 			when("/triageLeadConfigPage",{
 				templateUrl:"/triageLeadConfigPage.html",
 				controller: "triageLeadConfigController"
+			}).
+			when("/incidentMIMComm",{
+				templateUrl:"/incident_comm_page.html",
+				controller: "incidentCommController"
 			})
 		}]);
 

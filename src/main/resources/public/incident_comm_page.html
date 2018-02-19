@@ -1,0 +1,76 @@
+<div>
+	<p></p>
+	<nav class="navbar navbar-inverse " style= "background-color: #294e89; ">
+		<div class="container-fluid">
+			<div class="navbar-header" >
+				 <a class="navbar-brand" href="#">Communication</a>
+			</div>
+			<ul class="nav navbar-nav" >
+				<li class="active"><a href="#">Incident Communication</a></li>
+			</ul>
+		</div>
+	</nav>
+	
+	  <div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Incident Number</strong></div>
+		<div class="col-sm-3" style="margin-top: 2%"> 
+			<input type="text" class="form-control" id="appName" ng-model="inc_num">
+	  	</div>
+	  	
+	  	<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Incident Type</strong></div>
+		<div class="col-sm-3" style="margin-top: 2%"> 
+			 <div class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="incident_type_butt" value="">Select Incident Type
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a href="" ng-click="changeIncidentCommDD('Major Incident','incident_type_butt')">Major Incident</a></li>
+					<li><a href="" ng-click="changeIncidentCommDD('Standard Incident','incident_type_butt')">Standard Incident</a></li>
+				</ul>
+			</div>
+	  	</div>
+	  </div><!-- row 1 ends -->
+	  
+	  
+	  <div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Incident Severity</strong></div>
+		<div class="col-sm-3" style="margin-top: 2%"> 
+			 <div class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="incident_severity_butt" value="">Select Incident Severity
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li ng-repeat="severity in listOfseverity">
+        				<a href="" ng-click="changeIncidentCommDD(severity.severityType,'impacted_country_butt')">{{severity.severityType}} </a>
+    				</li>
+				</ul>
+				<input type ="hidden" ng-model="incident_severity"/>
+			</div>			
+	  	</div>
+	  	
+	  	<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Incident Date</strong></div>
+	  	<div class="col-sm-3" style="color: #405a7c; margin-top: 2%">
+	  		 <div class="input-group">
+		        <div class="input-group-addon">
+		         <i class="fa fa-calendar">
+		         </i>
+		        </div>
+		        <input class="form-control" id="date" name="incident_date" placeholder="MM/DD/YYYY" type="text" ng-model="incident_date"/>
+       		</div>
+    	</div>
+	  </div><!-- row 2 ends -->
+		
+</div><!-- main app ends here -->
+
+<script>
+		$(document).ready(function(){
+			var date_input=$('input[name="incident_date"]'); //our date input has the name "incident_date"
+			var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+			date_input.datepicker({
+				format: 'mm/dd/yyyy',
+				container: container,
+				todayHighlight: true,
+				autoclose: true,
+			})
+		})
+	</script>
