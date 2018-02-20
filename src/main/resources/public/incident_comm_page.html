@@ -59,7 +59,136 @@
        		</div>
     	</div>
 	  </div><!-- row 2 ends -->
+	
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Impacting Region</strong></div>
+		<div class="col-sm-3" style="margin-top: 2%"> 
+			<div class="dropdown">
+			<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="impacted_region_butt">Select Region
+			<span class="caret"></span></button>
+		      <ul class="dropdown-menu">
+				<li><a href="" ng-click="changeIncidentCommDD('NAM','impacted_region_butt')">NAM</a></li>
+				<li><a href="" ng-click="changeIncidentCommDD('LATAM','impacted_region_butt')">LATAM</a></li>
+				<li><a href="" ng-click="changeIncidentCommDD('EMEA','impacted_region_butt')">EMEA</a></li>
+				<li><a href="" ng-click="changeIncidentCommDD('APAC','impacted_region_butt')">APAC</a></li>
+			  </ul>
+		    </div>
+			<input type ="hidden" ng-model ="impacted_region"/>
+		</div>
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Impacted Country</strong></div>
+		<div class="col-sm-3" style="margin-top: 2%"> 
+			<div class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="impacted_country_butt">Select Country
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li ng-repeat="country in countries">
+        				<a href="" ng-click="changeIncidentCommDD(country.countryName,'country_butt')">{{country.countryName}}</a>
+    				</li>						      	      
+				</ul>
+			</div>
+			<input type ="hidden" ng-model ="impacted_country"/>
+		</div>	
+	</div><!-- row 3 ends -->
+	
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Impacted Sector</strong></div>
+		<div class="col-sm-3" style="margin-top: 2%"> 
+			<label class="checkbox-inline"><input type="checkbox" value="" ng-model="impacted_sector_cti">CTI</label>
+			<label class="checkbox-inline"><input type="checkbox" value="" ng-model="impacted_sector_icg">ICG</label>
+			<label class="checkbox-inline"><input type="checkbox" value="" ng-model="impacted_sector_gcg">GCG</label>
+		</div>	
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Impact Start Time</strong></div>
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><input type="text" class="form-control" id="start_time" placeholder="Enter Start Time" ng-model="start_time"></div>
+			
+	</div><!-- row 4 ends -->
+	
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Impact End Time</strong></div>
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><input type="text" class="form-control" id="start_time" placeholder="Enter End Time" ng-model="end_time"></div>
 		
+		 <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Impacted LOB</strong></div>
+		 <div class="col-sm-3" style="margin-top: 2%"> 
+					  	<select multiple class="form-control" id="sel2" ng-model="impacted_lob">
+					        <option>CMS</option>
+					        <option>CARDS</option>
+					        <option>CBK</option>
+					        <option>DIGITAL</option>
+					        <option>ESB</option>
+					        <option>DABI</option>
+					        <option>WEALTH MANAGEMENT</option>
+					     </select>
+						 
+		 </div>
+		 
+	</div><!-- row 5 ends -->
+	
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Title</strong></div>
+		<div class="col-sm-9" style="color: #405a7c; margin-top: 2%"><input type="text" class="form-control" id="start_time" ng-model="title"></div>
+	</div> <!-- row 6 ends -->
+	
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Description</strong></div>
+		<div class="col-sm-9" style="color: #405a7c; margin-top: 2%"><textarea class="form-control" rows="5" id="description" ng-model="description"></textarea></div>
+	</div><!-- row 7 ends -->
+	
+	<div class="row">
+	<div class="col-sm-12"style="color: #405a7c; margin-top: 2%">
+	<table class="table table-bordered" >
+		    <thead>
+		      <tr>
+		        <th>Impacted Channel / Application</th>
+		        <th>Nature Of Impact</th>
+		        <th>Volume Of Impact</th>
+		        <th>Action</th>
+		       </tr>
+		    </thead>
+		    <tbody>
+		     <tr>
+		        <td>
+			        <select class="form-control" id="impacted_channel_1" ng-model="impacted_channel_1">
+				        <option></option>
+				    </select>
+      			</td>
+		        <td>
+		        	<textarea class="form-control" rows="5" id="nature_of_impact_1" ng-model="nature_of_impact_1"></textarea>
+		        </td>
+		        <td>
+		        	<input type="text" class="form-control" id="volume_of_impact" ng-model="volume_of_impact_1">
+		        </td>
+		        <td>
+		        	<button type="button" class="btn btn-success">+</button>
+		        	<button type="button" class="btn btn-danger">-</button>
+		        </td>		        
+        	  </tr>
+            </tbody>
+        </table>
+        </div>
+	</div><!-- row 8 ends -->
+	
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Fix Details</strong></div>
+		<div class="col-sm-9" style="color: #405a7c; margin-top: 2%"><textarea class="form-control" rows="5" id="fix_details" ng-model="fix_details"></textarea></div>
+	</div><!-- row 9 ends -->
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Communication Type</strong></div>
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%">
+			<select class="form-control" id="comm_type" ng-model="comm_type">
+				        <option>Initial</option>
+				        <option>Update</option>
+				        <option>Resolved</option>
+			</select>
+		</div>
+	</div><!-- row 10 ends -->
+	
+	<div class="row" style=" margin-top: 2%">
+		<div class="col-sm-3"></div>
+		<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="submitForApproval()">Submit</button></div>
+		<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="approve()">Approve</button></div>
+		<div class="col-sm-3"></div>
+	
+	</div><!-- row 11 ends -->
 </div><!-- main app ends here -->
 
 <script>
