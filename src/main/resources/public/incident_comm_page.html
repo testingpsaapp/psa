@@ -28,6 +28,7 @@
 					<li><a href="" ng-click="changeIncidentCommDD('Standard Incident','incident_type_butt')">Standard Incident</a></li>
 				</ul>
 			</div>
+			<input type ="hidden" ng-model ="incident_type"/>
 	  	</div>
 	  </div><!-- row 1 ends -->
 	  
@@ -40,7 +41,7 @@
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
-					<li ng-repeat="severity in listOfseverity">
+					<li ng-repeat="severity in incidentSeverity">
         				<a href="" ng-click="changeIncidentCommDD(severity.severityType,'impacted_country_butt')">{{severity.severityType}} </a>
     				</li>
 				</ul>
@@ -83,7 +84,7 @@
 				</button>
 				<ul class="dropdown-menu">
 					<li ng-repeat="country in countries">
-        				<a href="" ng-click="changeIncidentCommDD(country.countryName,'country_butt')">{{country.countryName}}</a>
+        				<a href="" ng-click="changeIncidentCommDD(country.countryName,'impacted_country_butt')">{{country.countryName}}</a>
     				</li>						      	      
 				</ul>
 			</div>
@@ -109,14 +110,14 @@
 		
 		 <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Impacted LOB</strong></div>
 		 <div class="col-sm-3" style="margin-top: 2%"> 
-					  	<select multiple class="form-control" id="sel2" ng-model="impacted_lob">
+					  	<select multiple class="form-control" id="sel2" ng-model="impacted_lob" ng-change="getApplications()">
+					        <option>Core Banking</option>
+					        <option>Cards</option>
 					        <option>CMS</option>
-					        <option>CARDS</option>
-					        <option>CBK</option>
-					        <option>DIGITAL</option>
-					        <option>ESB</option>
+					        <option>Digital</option>
+					        <option>Wealth Management</option>
 					        <option>DABI</option>
-					        <option>WEALTH MANAGEMENT</option>
+					        <option>ESB</option>
 					     </select>
 						 
 		 </div>
@@ -135,7 +136,7 @@
 	
 	<div class="row">
 	<div class="col-sm-12"style="color: #405a7c; margin-top: 2%">
-	<table class="table table-bordered" >
+	<table class="table table-bordered" id="impact_table">
 		    <thead>
 		      <tr>
 		        <th>Impacted Channel / Application</th>
@@ -144,11 +145,11 @@
 		        <th>Action</th>
 		       </tr>
 		    </thead>
-		    <tbody>
+		    <tbody >
 		     <tr>
 		        <td>
 			        <select class="form-control" id="impacted_channel_1" ng-model="impacted_channel_1">
-				        <option></option>
+				        <option ng-repeat="x in applications">{{x.appName}}</option>
 				    </select>
       			</td>
 		        <td>
@@ -158,8 +159,8 @@
 		        	<input type="text" class="form-control" id="volume_of_impact" ng-model="volume_of_impact_1">
 		        </td>
 		        <td>
-		        	<button type="button" class="btn btn-success">+</button>
-		        	<button type="button" class="btn btn-danger">-</button>
+		        	<button type="button" class="btn btn-success" ng-click="addImpact()">+</button>
+		        	<button type="button" class="btn btn-danger" ng-click="deleteImpact()">-</button>
 		        </td>		        
         	  </tr>
             </tbody>
@@ -180,6 +181,7 @@
 				        <option>Resolved</option>
 			</select>
 		</div>
+		
 	</div><!-- row 10 ends -->
 	
 	<div class="row" style=" margin-top: 2%">

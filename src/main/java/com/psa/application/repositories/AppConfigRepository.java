@@ -24,4 +24,6 @@ public interface AppConfigRepository extends JpaRepository<AppConfig, Long> {
 	
 	@Query("SELECT a FROM AppConfig a WHERE LOWER(a.lob) = LOWER(:lob)")
 	public List<AppConfig> getAppConfigByLobName(@Param("lob") String lob);
+
+	
 }

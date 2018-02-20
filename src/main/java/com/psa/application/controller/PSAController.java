@@ -158,6 +158,14 @@ public class PSAController {
 		return listOfAppConfig;
 	}
 	
+	@RequestMapping(path="/appConfig/multiple", method = RequestMethod.POST)
+	public List<AppConfig> getAppConfigByMultipleLob(@RequestBody String[] lob)
+	{
+		List<AppConfig> listOfAppConfig= null;
+		listOfAppConfig = appConfigService.getAppConfigByMultipleLobName(lob);
+		return listOfAppConfig;
+	}
+	
 	/*
 	 * AppConfig service url mapping ends
 	 * */

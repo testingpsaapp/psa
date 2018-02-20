@@ -1,5 +1,6 @@
 package com.psa.application.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,28 @@ public class AppConfigService {
 	{
 		List<AppConfig> listOfAppConfig=null;
 		listOfAppConfig = appConfigRepository.findAll();
+		return listOfAppConfig;
+	}
+
+	public List<AppConfig> getAppConfigByMultipleLobName(String[] lob) 
+	{
+		List<AppConfig> listOfAppConfig=new ArrayList<AppConfig> ();
+		//String temporaryLob="";
+		System.out.println("Lobs received::"+lob);
+		
+			for(int i=0;i<lob.length;i++)
+			{
+				System.out.println("Lob::"+lob[i]);
+				List<AppConfig> tempList=appConfigRepository.getAppConfigByLobName(lob[i]);
+				for(int j=0;j<tempList.size();j++)
+				{
+					System.out.println(tempList.get(j).getAppName());
+					listOfAppConfig.add(tempList.get(j));
+				}
+			}
+		
+		 
+		
 		return listOfAppConfig;
 	}
 }

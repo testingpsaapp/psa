@@ -30,6 +30,10 @@ psaapp.controller('mainPsaAppController', function($rootScope,$scope,$http) {
 			when("/incidentMIMComm",{
 				templateUrl:"/incident_comm_page.html",
 				controller: "incidentCommController"
+			}).
+			when("/countryBusinessPage",{
+				templateUrl:"/countryBusinessPage.html",
+				//controller: "incidentCommController"
 			})
 		}]);
 
