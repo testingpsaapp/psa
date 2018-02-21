@@ -20,6 +20,7 @@ import com.psa.application.model.CommDlistConfig;
 import com.psa.application.model.Countries;
 import com.psa.application.model.DailyCallIncidentTracker;
 import com.psa.application.model.DailyIncAct;
+import com.psa.application.model.IncidentComm;
 import com.psa.application.model.LobConfig;
 import com.psa.application.model.TriageLeadConfig;
 import com.psa.application.service.AppConfigService;
@@ -28,6 +29,7 @@ import com.psa.application.service.CommDlistConfigService;
 import com.psa.application.service.CountryService;
 import com.psa.application.service.DailyCallIncidentTrackerService;
 import com.psa.application.service.DailyIncActService;
+import com.psa.application.service.IncidentCommService;
 import com.psa.application.service.LobConfigService;
 import com.psa.application.service.TriageLeadConfigService;
 import com.psa.application.utilities.CommonUtilities;
@@ -64,6 +66,9 @@ public class PSAController {
 	
 	@Autowired
 	TriageLeadConfigService triageLeadConfigService;
+	
+	@Autowired
+	IncidentCommService incidentCommService;
 	
 	@RequestMapping("/testing")
 	public String test()
@@ -376,5 +381,17 @@ public class PSAController {
 		List<TriageLeadConfig> listOfTriageLeadConfig=null;
 		listOfTriageLeadConfig=triageLeadConfigService.getAllTriageLeadConfiguration();
 		return listOfTriageLeadConfig;
+	}
+	
+	/*
+	 * Incident Communication Service Starts
+	 * */
+	@RequestMapping(path="/incidentCommunication/review", method = RequestMethod.POST)
+	public String submitIncidentCommunicationForReview(@RequestBody IncidentComm incidentComm) throws JSONException, MessagingException
+	{
+		String result="{\"message\":\"Incident Communication Submission Failed\"}";
+		System.out.println("Inside Controller");
+		result=incidentCommService.submitIncidentCommunicationForReview(incidentComm);
+		return result;
 	}
 }

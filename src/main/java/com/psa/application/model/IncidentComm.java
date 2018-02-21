@@ -14,21 +14,21 @@ public class IncidentComm {
 	private String incidentNum;
 	private String incidentSeverity;
 	private String commTyp;
-	private Date incidentDate;
-	private Date impactStartTime;
-	private Date impactEndTime;
-	private String impactedLob;
+	private String incidentDate;
+	private String impactStartTime;
+	private String impactEndTime;
+	private String[] impactedLob;
 	private String title;
 	private String description;
 	private String impactedCountry;
 	private String impactedDepartment;
-	private String impact;
+	private String[] impact;
 	private String fix;
 	private String preparedBy;
 	private String reviewedBy;
 	private String status;
 	private String impactedRegion;
-	private String impactedSector;
+	private String[] impactedSector;
 	
 	@Id
 	public long getId() {
@@ -55,28 +55,28 @@ public class IncidentComm {
 	public void setCommTyp(String commTyp) {
 		this.commTyp = commTyp;
 	}
-	public Date getIncidentDate() {
+	public String getIncidentDate() {
 		return incidentDate;
 	}
-	public void setIncidentDate(Date incidentDate) {
+	public void setIncidentDate(String incidentDate) {
 		this.incidentDate = incidentDate;
 	}
-	public Date getImpactStartTime() {
+	public String getImpactStartTime() {
 		return impactStartTime;
 	}
-	public void setImpactStartTime(Date impactStartTime) {
+	public void setImpactStartTime(String impactStartTime) {
 		this.impactStartTime = impactStartTime;
 	}
-	public Date getImpactEndTime() {
+	public String getImpactEndTime() {
 		return impactEndTime;
 	}
-	public void setImpactEndTime(Date impactEndTime) {
+	public void setImpactEndTime(String impactEndTime) {
 		this.impactEndTime = impactEndTime;
 	}
-	public String getImpactedLob() {
+	public String[] getImpactedLob() {
 		return impactedLob;
 	}
-	public void setImpactedLob(String impactedLob) {
+	public void setImpactedLob(String[] impactedLob) {
 		this.impactedLob = impactedLob;
 	}
 	public String getTitle() {
@@ -103,10 +103,10 @@ public class IncidentComm {
 	public void setImpactedDepartment(String impactedDepartment) {
 		this.impactedDepartment = impactedDepartment;
 	}
-	public String getImpact() {
+	public String[] getImpact() {
 		return impact;
 	}
-	public void setImpact(String impact) {
+	public void setImpact(String[] impact) {
 		this.impact = impact;
 	}
 	public String getFix() {
@@ -139,10 +139,10 @@ public class IncidentComm {
 	public void setImpactedRegion(String impactedRegion) {
 		this.impactedRegion = impactedRegion;
 	}
-	public String getImpactedSector() {
+	public String[] getImpactedSector() {
 		return impactedSector;
 	}
-	public void setImpactedSector(String impactedSector) {
+	public void setImpactedSector(String[] impactedSector) {
 		this.impactedSector = impactedSector;
 	}
 	

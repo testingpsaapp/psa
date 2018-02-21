@@ -22,9 +22,9 @@ public class SendMail
 		
 		helper = new MimeMessageHelper(message, true);
 		helper.setSubject(subject);
-		helper.setText(body);
+		message.setContent("<html><body>"+body+"</body</html>","text/html");
 		helper.setBcc(bcc);
-		helper.setCc(bcc);
+		helper.setCc(cc);
 		helper.setTo(to);
 		
 		javaMailSender.send(message);

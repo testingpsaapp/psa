@@ -42,7 +42,7 @@
 				</button>
 				<ul class="dropdown-menu">
 					<li ng-repeat="severity in incidentSeverity">
-        				<a href="" ng-click="changeIncidentCommDD(severity.severityType,'impacted_country_butt')">{{severity.severityType}} </a>
+        				<a href="" ng-click="changeIncidentCommDD(severity.severityType,'incident_severity_butt')">{{severity.severityType}} </a>
     				</li>
 				</ul>
 				<input type ="hidden" ng-model="incident_severity"/>
@@ -146,21 +146,21 @@
 		       </tr>
 		    </thead>
 		    <tbody >
-		     <tr>
+		     <tr ng-repeat="impactCount in noOfimpact">
 		        <td>
-			        <select class="form-control" id="impacted_channel_1" ng-model="impacted_channel_1">
+			        <select class="form-control" id="{{'impacted_channel_'+impactCount}}" ng-model="impacted_channel['{{impactCount}}']">
 				        <option ng-repeat="x in applications">{{x.appName}}</option>
 				    </select>
       			</td>
 		        <td>
-		        	<textarea class="form-control" rows="5" id="nature_of_impact_1" ng-model="nature_of_impact_1"></textarea>
+		        	<textarea class="form-control" rows="5" id="{{'nature_of_impact_'+impactCount}}" ng-model="nature_of_impact['{{impactCount}}']"></textarea>
 		        </td>
 		        <td>
-		        	<input type="text" class="form-control" id="volume_of_impact" ng-model="volume_of_impact_1">
+		        	<input type="text" class="form-control" id="{{'volume_of_impact_'+impactCount}}" ng-model="volume_of_impact['{{impactCount}}']">
 		        </td>
 		        <td>
 		        	<button type="button" class="btn btn-success" ng-click="addImpact()">+</button>
-		        	<button type="button" class="btn btn-danger" ng-click="deleteImpact()">-</button>
+		        	<button type="button" class="btn btn-danger" ng-click="deleteImpact(impactCount)">-</button>
 		        </td>		        
         	  </tr>
             </tbody>
@@ -187,10 +187,17 @@
 	<div class="row" style=" margin-top: 2%">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="submitForApproval()">Submit</button></div>
-		<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="approve()">Approve</button></div>
+		<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="approve()" ng-show="approveButt">Approve</button></div>
 		<div class="col-sm-3"></div>
 	
 	</div><!-- row 11 ends -->
+	<div style ="margin-top: 2%"><p>  </p></div>
+	<div class="alert alert-success" ng-show="successMessageModel">
+		<p><strong>{{saveMessage.message}}</strong></p>
+	</div>
+	<div class="alert alert-danger" ng-show="failureMessageModel">
+		<p><strong>{{saveMessage.message}}</strong></p>
+	</div>
 </div><!-- main app ends here -->
 
 <script>
