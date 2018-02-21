@@ -8,6 +8,25 @@ psaapp.controller('incidentCommController', function($scope,$http)
 	$scope.applications=[];
 	$scope.noOfimpact=["1"];
 	$scope.approveButt=false;
+	$scope.submitButt=true;
+	var t = window.location.href.indexOf('action=review');
+	//alert(t);
+	if(t!=-1)
+	{
+		$scope.approveButt=true;
+		$scope.submitButt=false;
+		$scope.incCommRetrieve=[];
+		$scope.inc_num=window.location.href.split('?')[1].split('=')[1].split('&')[0];
+		
+			$http.get('/incidentCommunication/'+$scope.inc_num).then(function(data){
+	              $scope.incCommRetrieve = data.data;
+	              
+	              console.log($scope.incCommRetrieve);
+	              console.log($scope.incCommRetrieve.incidentDate);
+			});
+		$scope.incident_date= $scope.incCommRetrieve.incidentDate;
+	}
+	
 	$scope.changeIncidentCommDD=function changeIncidentCommDD(ddVal,dd)
 	{
 		document.getElementById(dd).innerHTML=ddVal+"<span class=\"caret\"></span>";

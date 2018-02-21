@@ -394,4 +394,13 @@ public class PSAController {
 		result=incidentCommService.submitIncidentCommunicationForReview(incidentComm);
 		return result;
 	}
+	
+	@RequestMapping(path="/incidentCommunication/{incNum}", method = RequestMethod.GET)
+	public IncidentComm getIncidentCommunicationForApprove(@PathVariable String incNum)
+	{
+		IncidentComm incidentComm =null;
+		System.out.println("Inside Controller");
+		incidentComm=incidentCommService.getIncCommForReview(incNum);
+		return incidentComm;
+	}
 }

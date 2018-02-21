@@ -115,4 +115,11 @@ public class IncidentCommService
 		}
 		return result;
 	}
+
+	public IncidentComm getIncCommForReview(String incNum) {
+		// TODO Auto-generated method stub
+		IncidentComm incidentComm = null;
+		incidentComm = incidentCommRepository.findIncCommByIncNum(incNum);
+		return incidentComm;
+	}
 }
