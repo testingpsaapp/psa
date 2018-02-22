@@ -10,6 +10,7 @@ psaapp.controller('incidentCommController', function($scope,$http)
 	$scope.approveButt=false;
 	$scope.submitButt=true;
 	var t = window.location.href.indexOf('action=review');
+	$scope.incident_date="";
 	//alert(t);
 	if(t!=-1)
 	{
@@ -22,9 +23,72 @@ psaapp.controller('incidentCommController', function($scope,$http)
 	              $scope.incCommRetrieve = data.data;
 	              
 	              console.log($scope.incCommRetrieve);
-	              console.log($scope.incCommRetrieve.incidentDate);
+	              $scope.changeIncidentCommDD($scope.incCommRetrieve.incidentSeverity,'incident_severity_butt');
+	              var tempIncType=$scope.incCommRetrieve.incidentSeverity;
+	              if((tempIncType).indexOf('Priority')> -1)
+	              {
+	            	  $scope.changeIncidentCommDD('Standard Incident','incident_type_butt');
+	              }
+	              else
+	              {
+	            	  $scope.changeIncidentCommDD('Major Incident','incident_type_butt');
+	              }
+	              
+	              $scope.changeIncidentCommDD($scope.incCommRetrieve.impactedRegion,'impacted_region_butt');
+	              $scope.changeIncidentCommDD($scope.incCommRetrieve.impactedCountry,'impacted_country_butt');
+	              $scope.start_time=$scope.incCommRetrieve.impactStartTime;
+	              $scope.end_time=$scope.incCommRetrieve.impactEndTime;
+	              var tempImpSec=$scope.incCommRetrieve.impactedSector;
+	              for(var i=0; i<tempImpSec.length;i++)
+	              {
+	            	  if(tempImpSec[i]=='CTI')
+	            	  {
+	            		  $scope.impacted_sector_cti=true;
+	            	  }
+	            	  else if(tempImpSec[i]=='GCG')
+	            	  {
+	            		  $scope.impacted_sector_gcg=true;
+	            	  }
+	            	  else if(tempImpSec[i]=='ICG')
+	            	  {
+	            		  $scope.impacted_sector_icg=true;
+	            	  }
+	              }
+	              $scope.impacted_lob=$scope.incCommRetrieve.impactedLob;
+	            //alert($scope.impacted_lob);
+		      		$http.post('/appConfig/multiple',$scope.impacted_lob).then(function(data){
+		                  $scope.applications = data.data;
+		                  //console.log(data);
+		                  //console.log($scope.applications);
+		      		});
+	              $scope.title = $scope.incCommRetrieve.title;
+	              $scope.description=$scope.incCommRetrieve.description;
+	              $scope.comm_type=$scope.incCommRetrieve.commTyp;
+	              $scope.fix_details=$scope.incCommRetrieve.fix;
+	              var tempImpact=$scope.incCommRetrieve.impact;
+	              if(tempImpact.length>1)
+	              {
+	            	  $scope.noOfimpact=[];
+		              for(var i=0;i<tempImpact.length;i++)
+		              {
+		            	  var a=parseInt(i)+1;
+		            	  $scope.noOfimpact.push(a);
+		            	  //alert(tempImpact[i]["channel"]);
+		            	  //alert(obj.channel);
+		            	  $('#impacted_channel_'+a).val("CBOL");
+		            	  //$('#nature_of_impact_'+a).text(tempImpact[i]["natureOfImpact"]);
+		            	  //$('#volume_of_impact_'+a).text(tempImpact[i]["volumeOfImpact"]);
+		              }
+	              }
+	              else
+	              {
+	            	  $('#impacted_channel_1').val("CBOL");
+	            	  $('#nature_of_impact_1').val(tempImpact[i]["natureOfImpact"]);
+	            	  $('#volume_of_impact_1').val(tempImpact[i]["volumeOfImpact"]);
+	              }
 			});
-		$scope.incident_date= $scope.incCommRetrieve.incidentDate;
+		
+		
 	}
 	
 	$scope.changeIncidentCommDD=function changeIncidentCommDD(ddVal,dd)

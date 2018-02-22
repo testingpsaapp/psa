@@ -1,0 +1,214 @@
+<div>
+	<p></p>
+	<nav class="navbar navbar-inverse " style= "background-color: #294e89; ">
+		<div class="container-fluid">
+			<div class="navbar-header" >
+				 <a class="navbar-brand" href="#">Communication</a>
+			</div>
+			<ul class="nav navbar-nav" >
+				<li class="active"><a href="#">Briefing Paper Publisher</a></li>
+			</ul>
+		</div>
+	</nav>
+	
+	  <div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Incident Number</strong></div>
+		<div class="col-sm-3" style="margin-top: 2%"> 
+			<input type="text" class="form-control" id="appName" ng-model="inc_num">
+	  	</div>
+	  	
+	  	<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Incident Type</strong></div>
+		<div class="col-sm-3" style="margin-top: 2%"> 
+			 <div class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="incident_type_butt" value="">Select Incident Type
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a href="" ng-click="changeIncidentCommDD('Major Incident','incident_type_butt')">Major Incident</a></li>
+					<li><a href="" ng-click="changeIncidentCommDD('Standard Incident','incident_type_butt')">Standard Incident</a></li>
+				</ul>
+			</div>
+			<input type ="hidden" ng-model ="incident_type"/>
+	  	</div>
+	  </div><!-- row 1 ends -->
+	  
+	  
+	  <div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Incident Severity</strong></div>
+		<div class="col-sm-3" style="margin-top: 2%"> 
+			 <div class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="incident_severity_butt" value="">Select Incident Severity
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li ng-repeat="severity in incidentSeverity">
+        				<a href="" ng-click="changeIncidentCommDD(severity.severityType,'incident_severity_butt')">{{severity.severityType}} </a>
+    				</li>
+				</ul>
+				<input type ="hidden" ng-model="incident_severity"/>
+			</div>			
+	  	</div>
+	  	
+	  	<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Incident Date</strong></div>
+	  	<div class="col-sm-3" style="color: #405a7c; margin-top: 2%">
+	  		 <div class="input-group">
+		        <div class="input-group-addon">
+		         <i class="fa fa-calendar">
+		         </i>
+		        </div>
+		        <input class="form-control" id="date" name="incident_date" placeholder="MM/DD/YYYY" type="text" ng-model="incident_date"/>
+       		</div>
+    	</div>
+	  </div><!-- row 2 ends -->
+	
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Impacting Region</strong></div>
+		<div class="col-sm-3" style="margin-top: 2%"> 
+			<div class="dropdown">
+			<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="impacted_region_butt">Select Region
+			<span class="caret"></span></button>
+		      <ul class="dropdown-menu">
+				<li><a href="" ng-click="changeIncidentCommDD('NAM','impacted_region_butt')">NAM</a></li>
+				<li><a href="" ng-click="changeIncidentCommDD('LATAM','impacted_region_butt')">LATAM</a></li>
+				<li><a href="" ng-click="changeIncidentCommDD('EMEA','impacted_region_butt')">EMEA</a></li>
+				<li><a href="" ng-click="changeIncidentCommDD('APAC','impacted_region_butt')">APAC</a></li>
+			  </ul>
+		    </div>
+			<input type ="hidden" ng-model ="impacted_region"/>
+		</div>
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Impacted Country</strong></div>
+		<div class="col-sm-3" style="margin-top: 2%"> 
+			<div class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="impacted_country_butt">Select Country
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li ng-repeat="country in countries">
+        				<a href="" ng-click="changeIncidentCommDD(country.countryName,'impacted_country_butt')">{{country.countryName}}</a>
+    				</li>						      	      
+				</ul>
+			</div>
+			<input type ="hidden" ng-model ="impacted_country"/>
+		</div>	
+	</div><!-- row 3 ends -->
+	
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Impacted Sector</strong></div>
+		<div class="col-sm-3" style="margin-top: 2%"> 
+			<label class="checkbox-inline"><input type="checkbox" value="" ng-model="impacted_sector_cti">CTI</label>
+			<label class="checkbox-inline"><input type="checkbox" value="" ng-model="impacted_sector_icg">ICG</label>
+			<label class="checkbox-inline"><input type="checkbox" value="" ng-model="impacted_sector_gcg">GCG</label>
+		</div>	
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Impact Start Time</strong></div>
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><input type="text" class="form-control" id="start_time" placeholder="Enter Start Time" ng-model="start_time"></div>
+			
+	</div><!-- row 4 ends -->
+	
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Impact End Time</strong></div>
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><input type="text" class="form-control" id="start_time" placeholder="Enter End Time" ng-model="end_time"></div>
+		
+		 <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Impacted LOB</strong></div>
+		 <div class="col-sm-3" style="margin-top: 2%"> 
+					  	<select multiple class="form-control" id="sel2" ng-model="impacted_lob" ng-change="getApplications()">
+					        <option>Core Banking</option>
+					        <option>Cards</option>
+					        <option>CMS</option>
+					        <option>Digital</option>
+					        <option>Wealth Management</option>
+					        <option>DABI</option>
+					        <option>ESB</option>
+					     </select>
+						 
+		 </div>
+		 
+	</div><!-- row 5 ends -->
+	
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Title</strong></div>
+		<div class="col-sm-9" style="color: #405a7c; margin-top: 2%"><input type="text" class="form-control" id="start_time" ng-model="title"></div>
+	</div> <!-- row 6 ends -->
+	
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Description</strong></div>
+		<div class="col-sm-9" style="color: #405a7c; margin-top: 2%"><textarea class="form-control" rows="5" id="description" ng-model="description"></textarea></div>
+	</div><!-- row 7 ends -->
+	
+	<div class="row">
+	<div class="col-sm-12"style="color: #405a7c; margin-top: 2%">
+	<table class="table table-bordered" id="impact_table">
+		    <thead>
+		      <tr>
+		        <th>Impacted Channel / Application</th>
+		        <th>Nature Of Impact</th>
+		        <th>Volume Of Impact</th>
+		        <th>Action</th>
+		       </tr>
+		    </thead>
+		    <tbody >
+		     <tr ng-repeat="impactCount in noOfimpact">
+		        <td>
+			        <select class="form-control" id="{{'impacted_channel_'+impactCount}}" ng-model="impacted_channel['{{impactCount}}']">
+				        <option ng-repeat="x in applications">{{x.appName}}</option>
+				    </select>
+      			</td>
+		        <td>
+		        	<textarea class="form-control" rows="5" id="{{'nature_of_impact_'+impactCount}}" ng-model="nature_of_impact['{{impactCount}}']"></textarea>
+		        </td>
+		        <td>
+		        	<input type="text" class="form-control" id="{{'volume_of_impact_'+impactCount}}" ng-model="volume_of_impact['{{impactCount}}']">
+		        </td>
+		        <td>
+		        	<button type="button" class="btn btn-success" ng-click="addImpact()">+</button>
+		        	<button type="button" class="btn btn-danger" ng-click="deleteImpact(impactCount)">-</button>
+		        </td>		        
+        	  </tr>
+            </tbody>
+        </table>
+        </div>
+	</div><!-- row 8 ends -->
+	
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Fix Details</strong></div>
+		<div class="col-sm-9" style="color: #405a7c; margin-top: 2%"><textarea class="form-control" rows="5" id="fix_details" ng-model="fix_details"></textarea></div>
+	</div><!-- row 9 ends -->
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Communication Type</strong></div>
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%">
+			<select class="form-control" id="comm_type" ng-model="comm_type">
+				        <option>Initial</option>
+				        <option>Update</option>
+				        <option>Resolved</option>
+			</select>
+		</div>
+		
+	</div><!-- row 10 ends -->
+	
+	<div class="row" style=" margin-top: 2%">
+		<div class="col-sm-3"></div>
+		<div class="col-sm-6" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="submitForApproval()" ng-show="submitButt">Submit</button><!--</div>-->
+		<!--  <div class="col-sm-3" style="align-content: center;">--><button type="button" class="btn btn-primary" ng-click="approve()" ng-show="approveButt">Approve</button>  </div>
+		<div class="col-sm-3"></div>
+	
+	</div><!-- row 11 ends -->
+	<div style ="margin-top: 2%"><p>  </p></div>
+	<div class="alert alert-success" ng-show="successMessageModel">
+		<p><strong>{{saveMessage.message}}</strong></p>
+	</div>
+	<div class="alert alert-danger" ng-show="failureMessageModel">
+		<p><strong>{{saveMessage.message}}</strong></p>
+	</div>
+</div><!-- main app ends here -->
+
+<script>
+		$(document).ready(function(){
+			var date_input=$('input[name="incident_date"]'); //our date input has the name "incident_date"
+			var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+			date_input.datepicker({
+				format: 'mm/dd/yyyy',
+				container: container,
+				todayHighlight: true,
+				autoclose: true,
+			})
+		})
+	</script>
