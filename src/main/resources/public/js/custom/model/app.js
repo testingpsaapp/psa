@@ -48,6 +48,10 @@ psaapp.controller('mainPsaAppController', function($rootScope,$scope,$http) {
 			when("/dailyIncidentActivity",{
 				templateUrl:"/dailyIncidentActivityPage.html",
 				controller: "dailyIncidentActivityController"				
+			}).
+			when("/criticalIncidentTrackerPage",{
+				templateUrl:"/criticalIncidentTrackerPage.html",
+				controller: "criticalIncidentTrackerController"				
 			})
 		}]);
 
