@@ -13,7 +13,9 @@ public class Countries {
 	private String countryName;
 	private String region;
 	private String countryDlist;
-	
+	private String techHead;
+	private String ontHead;
+	private String cbmHead;
 	
 	
 	@Id
@@ -48,5 +50,23 @@ public class Countries {
 	}
 	public void setCountryDlist(String countryDlist) {
 		this.countryDlist = countryDlist;
+	}
+	public String getTechHead() {
+		return techHead;
+	}
+	public void setTechHead(String techHead) {
+		this.techHead = techHead;
+	}
+	public String getOntHead() {
+		return ontHead;
+	}
+	public void setOntHead(String ontHead) {
+		this.ontHead = ontHead;
+	}
+	public String getCbmHead() {
+		return cbmHead;
+	}
+	public void setCbmHead(String cbmHead) {
+		this.cbmHead = cbmHead;
 	}
 }

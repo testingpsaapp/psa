@@ -35,7 +35,8 @@ psaapp.controller('incidentCommController', function($scope,$http)
 	              }
 	              
 	              $scope.changeIncidentCommDD($scope.incCommRetrieve.impactedRegion,'impacted_region_butt');
-	              $scope.changeIncidentCommDD($scope.incCommRetrieve.impactedCountry,'impacted_country_butt');
+	              //$scope.changeIncidentCommDD($scope.incCommRetrieve.impactedCountry,'impacted_country_butt');
+	              $scope.impacted_country=$scope.incCommRetrieve.impactedCountry;
 	              $scope.start_time=$scope.incCommRetrieve.impactStartTime;
 	              $scope.end_time=$scope.incCommRetrieve.impactEndTime;
 	              var tempImpSec=$scope.incCommRetrieve.impactedSector;

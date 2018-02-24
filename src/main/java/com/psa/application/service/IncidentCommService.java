@@ -64,9 +64,21 @@ public class IncidentCommService
 				template=template.replaceAll("@@incSeverity@@", newIncidentComm.getIncidentSeverity());
 				template=template.replaceAll("@@date@@", newIncidentComm.getIncidentDate().toString());
 				template=template.replaceAll("@@startTime@@", newIncidentComm.getImpactStartTime().toString());
-				template=template.replaceAll("@@endTime@@", newIncidentComm.getImpactEndTime().toString());
+				if(newIncidentComm.getImpactEndTime()!=null)
+				{
+					template=template.replaceAll("@@endTime@@", newIncidentComm.getImpactEndTime().toString());
+				}
+				else
+				{
+					template=template.replaceAll("@@endTime@@","TBD");
+				}
 				template=template.replaceAll("@@region@@", newIncidentComm.getImpactedRegion());
-				template=template.replaceAll("@@countries@@", newIncidentComm.getImpactedCountry());
+				String formattedImpactedCountry="";
+				for(int i=0;i<newIncidentComm.getImpactedCountry().length;i++)
+				{
+					formattedImpactedCountry+=newIncidentComm.getImpactedCountry()[i]+",";
+				}
+				template=template.replaceAll("@@countries@@", formattedImpactedCountry);
 				String formattedImpactedSector="";
 				for(int i=0;i<newIncidentComm.getImpactedSector().length;i++)
 				{

@@ -5,11 +5,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="cla_access_config")
-public class CLAAcessConfig {
-
+@Table(name="access_module")
+public class AccessModule {
 	private long id;
-	private String soeId;
 	private String mainModule;
 	private String subModule;
 	private String role;
@@ -20,12 +18,6 @@ public class CLAAcessConfig {
 	}
 	public void setId(long id) {
 		this.id = id;
-	}
-	public String getSoeId() {
-		return soeId;
-	}
-	public void setSoeId(String soeId) {
-		this.soeId = soeId;
 	}
 	public String getMainModule() {
 		return mainModule;
@@ -46,8 +38,6 @@ public class CLAAcessConfig {
 		this.role = role;
 	}
 	
+	
 
-	
-	
-	
 }

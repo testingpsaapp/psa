@@ -12,38 +12,51 @@
 				  </div>
 				  </nav>
 				  <div class="row">
-					  <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Access Type</strong></div>
+					  <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Module</strong></div>
 					  <div class="col-sm-3" style="margin-top: 2%"> 
 					  	<div class="dropdown">
-						    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id ="access_type_butt" value="">Select Access Type
+						    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id ="module_butt" value="">Select Module
 						    <span class="caret"></span></button>
 						    <ul class="dropdown-menu">
-						      <li><a href="" ng-click="changePSAAccessDD('Admin Console','access_type_butt')">Admin Console</a></li>
-						      <li><a href="" ng-click="changePSAAccessDD('Communication','access_type_butt')">Communication</a></li>
-						      <li><a href="" ng-click="changePSAAccessDD('Triage Lead Activity','access_type_butt')">Triage Lead Activity</a></li>
+						       <li ng-repeat="module in modules">
+        						<a href="" ng-click="changePSAAccessDD(module.mainModule,'module_butt')">{{module.mainModule}}</a>
+    						   </li>
 						      	      
 						    </ul>
 						  </div>
-						  <input type ="hidden" ng-model ="access_type"/>
+						  <input type ="hidden" ng-model ="module"/>
 				  	  </div>
 					  
-					  <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Access Role</strong></div>
+					  <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Sub Module</strong></div>
 					  <div class="col-sm-3" style="margin-top: 2%"> 
 					  	<div class="dropdown">
-						    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id ="access_role_butt" value="">Select Access Role
+						    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id ="sub_module_butt" value="">Select Sub Module
 						    <span class="caret"></span></button>
 						    <ul class="dropdown-menu">
-						      <li><a href="" ng-click="changePSAAccessDD('Admin','access_role_butt')">Admin</a></li>
-						      <li><a href="" ng-click="changePSAAccessDD('Reviewer Level 1','access_role_butt')">Reviewer Level 1</a></li>
-						      <li><a href="" ng-click="changePSAAccessDD('Reviewer Level 2','access_role_butt')">Reviewer Level 2</a></li>
-						      <li><a href="" ng-click="changePSAAccessDD('Maker','access_role_butt')">Maker</a></li>
+						      <li ng-repeat="subModule in subModules">
+        						<a href="" ng-click="changePSAAccessDD(subModule.subModule,'sub_module_butt')">{{subModule.subModule}}</a>
+    						   </li>
 						    </ul>
 						  </div>
-						  <input type ="hidden" ng-model ="access_role"/>
+						  <input type ="hidden" ng-model ="sub_module"/>
 				  	  </div>
 				  	  </div>
 				  	  
 				  	  <div class ="row">
+				  	    <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Role</strong></div>
+					  <div class="col-sm-3" style="margin-top: 2%"> 
+					  	<div class="dropdown">
+						    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id ="role_butt" value="">Select Role
+						    <span class="caret"></span></button>
+						    <ul class="dropdown-menu">
+						      <li ng-repeat="role in roles">
+        						<a href="" ng-click="changePSAAccessDD(role.role,'role_butt')">{{role.role}}</a>
+    						   </li>
+						    </ul>
+						  </div>
+						  <input type ="hidden" ng-model ="role"/>
+				  	  </div>
+				  	  
 				  	 <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>SOE ID</strong></div>
 					  <div class="col-sm-3" style="margin-top: 2%"> 
 						<input type="text" class="form-control" id="soeId" ng-model="soeId">
@@ -67,17 +80,18 @@
 			<table class="table table-bordered" ng-show="tablePsaAccess">
 		    <thead>
 		      <tr>
-		        <th>Access Type</th>
-		        <th>Access Role</th>
-		        <th>Soe Id</th>
+		        <th>Module</th>
+		        <th>Sub Module</th>
+		        <th>Role</th>
+		        <th>SOE ID</th>
 		       </tr>
 		    </thead>
 		    <tbody>
 		      <tr ng-repeat="x in listOfPsaAccessConfig">
-		        <td>{{x.accessType}}</td>
-		        <td>{{x.accessRole}}</td>
+		        <td>{{x.mainModule}}</td>
+		        <td>{{x.subModule}}</td>
+		        <td>{{x.role}}</td>
 		        <td>{{x.soeId}}</td>
-		        
         	  </tr>
             </tbody>
         </table>

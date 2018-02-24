@@ -78,18 +78,12 @@
 		</div>
 		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Impacted Country</strong></div>
 		<div class="col-sm-3" style="margin-top: 2%"> 
-			<div class="dropdown">
-				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="impacted_country_butt">Select Country
-					<span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu">
-					<li ng-repeat="country in countries">
-        				<a href="" ng-click="changeIncidentCommDD(country.countryName,'impacted_country_butt')">{{country.countryName}}</a>
-    				</li>						      	      
-				</ul>
-			</div>
-			<input type ="hidden" ng-model ="impacted_country"/>
-		</div>	
+					  	<select multiple class="form-control" id="impacted_country" ng-model="impacted_country">
+					        <option ng-repeat="country in countries">{{country.countryName}}</option>
+					    </select>
+						 
+		 </div>
+		
 	</div><!-- row 3 ends -->
 	
 	<div class="row">

@@ -170,3 +170,11 @@ country_name varchar(100),
 region varchar(40),
 country_dlist varchar(500)
 );
+
+create table access_module
+(
+	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`main_module` varchar(300) NOT NULL,
+	`sub_module` varchar(300) NOT NULL,
+	`role` varchar(300) NOT NULL
+);

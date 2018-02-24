@@ -3,7 +3,7 @@
  */
 var psaapp = angular.module('mainPsaApp', ['ngRoute']);
 psaapp.controller('mainPsaAppController', function($rootScope,$scope,$http) {
-		
+
 })
 .config(['$routeProvider',function($routeProvider){
 		$routeProvider.
@@ -33,11 +33,17 @@ psaapp.controller('mainPsaAppController', function($rootScope,$scope,$http) {
 			}).
 			when("/countryBusinessPage",{
 				templateUrl:"/countryBusinessPage.html",
-				//controller: "incidentCommController"
+				controller: "countryBusinessPageController"
 			}).
 			when("/briefingPaperPublisher",{
 				templateUrl:"/briefingPaperPublisherPage.html",
 				controller: "briefingPaperPublisherController"
+			}).
+			when("/triageLeadIncidentDashboard",{
+				templateUrl:"/triageLeadAssignedIncidentDashboard.html",
+				//templateUrl:"<canvas id=\"bar\" class=\"chart chart-bar\" chart-data=\"data\" chart-labels=\"labels\" chart-series=\"series\"></canvas>",
+				controller: "BarCtrl"
+				
 			})
 		}]);
 

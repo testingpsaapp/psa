@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.psa.application.mail.SendMail;
+import com.psa.application.model.AccessModule;
 import com.psa.application.model.AppConfig;
 import com.psa.application.model.CLAAcessConfig;
 import com.psa.application.model.CommDlistConfig;
@@ -23,6 +24,7 @@ import com.psa.application.model.DailyIncAct;
 import com.psa.application.model.IncidentComm;
 import com.psa.application.model.LobConfig;
 import com.psa.application.model.TriageLeadConfig;
+import com.psa.application.service.AccessModuleService;
 import com.psa.application.service.AppConfigService;
 import com.psa.application.service.CLAAccessConfigService;
 import com.psa.application.service.CommDlistConfigService;
@@ -69,6 +71,9 @@ public class PSAController {
 	
 	@Autowired
 	IncidentCommService incidentCommService;
+	
+	@Autowired
+	AccessModuleService accessModuleService;
 	
 	@RequestMapping("/testing")
 	public String test()
@@ -363,6 +368,13 @@ public class PSAController {
 		return countryService.saveCountry(country);
 	}
 	
+	@RequestMapping(path="/countries/save", method = RequestMethod.POST)
+	public String saveCountryConfig(@RequestBody Countries country)
+	{
+		String result = "";
+		result=countryService.saveCountryConfig(country);
+		return result;
+	}
 	/*
 	 * Triage Lead COnfig URL mapping starts 
 	 * */
@@ -402,5 +414,37 @@ public class PSAController {
 		System.out.println("Inside Controller");
 		incidentComm=incidentCommService.getIncCommForReview(incNum);
 		return incidentComm;
+	}
+	
+	/*
+	 * Access Module Starts
+	 * 
+	 * */
+	@RequestMapping(path="/accessModule/all", method = RequestMethod.GET)
+	public List<AccessModule> getAllAccessModule()
+	{
+		List<AccessModule> listOfAccessModule =null;
+		System.out.println("Inside Controller");
+		listOfAccessModule=accessModuleService.getAllAccessModule();
+		return listOfAccessModule;
+	}
+	
+	
+	@RequestMapping(path="/accessModule/{mainModule}", method = RequestMethod.GET)
+	public List<AccessModule> getAllAccessModuleByMainModule(@PathVariable String mainModule)
+	{
+		List<AccessModule> listOfAccessModule =null;
+		System.out.println("Inside Controller");
+		listOfAccessModule=accessModuleService.getAllAccessModuleByMainModule(mainModule);
+		return listOfAccessModule;
+	}
+	
+	@RequestMapping(path="/accessModule/{mainModule}/{subModule}", method = RequestMethod.GET)
+	public List<AccessModule> getAllAccessModuleByMainModuleSubModule(@PathVariable("mainModule") String mainModule,@PathVariable("subModule") String subModule)
+	{
+		List<AccessModule> listOfAccessModule =null;
+		System.out.println("Inside Controller");
+		listOfAccessModule=accessModuleService.getAllAccessModuleByMainModuleAndSubModule(mainModule, subModule);
+		return listOfAccessModule;
 	}
 }

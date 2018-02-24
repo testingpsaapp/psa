@@ -173,16 +173,43 @@
 		<div class="col-sm-9" style="color: #405a7c; margin-top: 2%"><textarea class="form-control" rows="5" id="fix_details" ng-model="fix_details"></textarea></div>
 	</div><!-- row 9 ends -->
 	<div class="row">
-		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Communication Type</strong></div>
-		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%">
-			<select class="form-control" id="comm_type" ng-model="comm_type">
-				        <option>Initial</option>
-				        <option>Update</option>
-				        <option>Resolved</option>
-			</select>
-		</div>
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Preventive Actions</strong></div>
+		<div class="col-sm-9" style="color: #405a7c; margin-top: 2%"><textarea class="form-control" rows="5" id="fix_details" ng-model="preventive_actions"></textarea></div>
 		
 	</div><!-- row 10 ends -->
+	
+	<div class="row">
+		<div class="col-sm-12"style="color: #405a7c; margin-top: 2%">
+		<table class="table table-bordered" id="impact_table">
+		    <thead>
+		      <tr>
+		        <th>Chronology</th>
+		        <th>Action</th>
+		        <th>Date/Time</th>
+		        <th>Action</th>
+		       </tr>
+		    </thead>
+		    <tbody >
+		     <tr ng-repeat="chrono in noOfChrono">
+		        <td>
+			        <input type="text" class="form-control" id="{{'chrono_'+chrono}}" ng-model="chrono['{{chrono}}']">
+      			</td>
+		        <td>
+		        	<input type="text" class="form-control" id="{{'chrono_action_'+chrono}}" ng-model="chrono_action['{{chrono}}']">
+		        </td>
+		        <td>
+		        	<input type="text" class="form-control" id="{{'chrono_datetime_'+chrono}}" ng-model="chrono_datetime['{{chrono}}']">
+		        </td>
+		        <td>
+		        	<button type="button" class="btn btn-success" ng-click="addImpact()">+</button>
+		        	<button type="button" class="btn btn-danger" ng-click="deleteImpact(impactCount)">-</button>
+		        </td>		        
+        	  </tr>
+            </tbody>
+        </table>
+        </div>
+		
+	</div><!-- row 11 ends -->
 	
 	<div class="row" style=" margin-top: 2%">
 		<div class="col-sm-3"></div>
@@ -190,7 +217,7 @@
 		<!--  <div class="col-sm-3" style="align-content: center;">--><button type="button" class="btn btn-primary" ng-click="approve()" ng-show="approveButt">Approve</button>  </div>
 		<div class="col-sm-3"></div>
 	
-	</div><!-- row 11 ends -->
+	</div><!-- row 12 ends -->
 	<div style ="margin-top: 2%"><p>  </p></div>
 	<div class="alert alert-success" ng-show="successMessageModel">
 		<p><strong>{{saveMessage.message}}</strong></p>

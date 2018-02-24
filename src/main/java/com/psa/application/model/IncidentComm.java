@@ -1,7 +1,5 @@
 package com.psa.application.model;
 
-import java.sql.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -20,7 +18,7 @@ public class IncidentComm {
 	private String[] impactedLob;
 	private String title;
 	private String description;
-	private String impactedCountry;
+	private String[] impactedCountry;
 	private String impactedDepartment;
 	private String[] impact;
 	private String fix;
@@ -91,10 +89,10 @@ public class IncidentComm {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getImpactedCountry() {
+	public String[] getImpactedCountry() {
 		return impactedCountry;
 	}
-	public void setImpactedCountry(String impactedCountry) {
+	public void setImpactedCountry(String[] impactedCountry) {
 		this.impactedCountry = impactedCountry;
 	}
 	public String getImpactedDepartment() {

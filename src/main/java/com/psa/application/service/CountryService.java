@@ -35,5 +35,17 @@ public class CountryService {
 		
 	}
 
+	public String saveCountryConfig(Countries country) {
+		// TODO Auto-generated method stub
+		Countries newCountry = null;
+		String result= "{\"message\":\"Country Configuration Save Failed\"}";
+		newCountry = countryRepository.saveAndFlush(country);
+		if(newCountry!=null)
+		{
+			result= "{\"message\":\"Country Configuration Saved Successfully\"}";
+		}
+		return result;
+	}
+
 
 }
