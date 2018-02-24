@@ -1,0 +1,127 @@
+<div>
+<p>  </p>
+				<nav class="navbar navbar-inverse " style= "background-color: #294e89; ">
+				  <div class="container-fluid">
+				    <div class="navbar-header" >
+				      <a class="navbar-brand" href="#">Triage Leads Activity</a>
+				    </div>
+				    <ul class="nav navbar-nav" >
+				      <li class="active"><a href="#">Daily Incident Activity</a></li>
+				      
+				    </ul>
+				  </div>
+				  </nav>
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Incident Number</strong></div>
+		<div class="col-sm-3" style="margin-top: 2%"> 
+			<input type="text" class="form-control" id="inc_num" ng-model="inc_num">
+	  	</div>
+	  	<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Incident Date</strong></div>
+	  	<div class="col-sm-3" style="color: #405a7c; margin-top: 2%">
+	  		 <div class="input-group">
+		        <div class="input-group-addon">
+		         <i class="fa fa-calendar">
+		         </i>
+		        </div>
+		        <input class="form-control" id="date" name="incident_date" placeholder="MM/DD/YYYY" type="text" ng-model="incident_date"/>
+       		</div>
+    	</div>
+	</div>	
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Old Priority</strong></div>
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%">
+			<select class="form-control" id="old_priority" ng-model="old_priority">
+				        <option>Priority 1</option>
+				        <option>Priority 2</option>
+				        <option>Priority 3</option>
+				        <option>Priority 4</option>
+			</select>
+		</div>
+		
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>New Priority</strong></div>
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%">
+			<select class="form-control" id="new_priority" ng-model="new_priority">
+				        <option>Priority 1</option>
+				        <option>Priority 2</option>
+				        <option>Priority 3</option>
+				        <option>Priority 4</option>
+			</select>
+		</div>
+	</div>	
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Action Taken</strong></div>
+		<div class="col-sm-3" style="margin-top: 2%"> 
+			<input type="text" class="form-control" id="action_taken" ng-model="action_taken">
+	  	</div>
+	  	<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Action Category</strong></div>
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%">
+			<select class="form-control" id="action_category" ng-model="action_category">
+				        <option>Resolved</option>
+				        <option>Withdrawn</option>
+				        <option>Moved to L1</option>
+				        <option>Moved to L2</option>
+				        <option>Moved to L3</option>
+				        <option>Moved to CTI-OTHERS</option>
+				        <option>Moved to Business</option>
+				        <option>Converted to SR</option>
+			</select>
+		</div>
+	</div>	
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Country</strong></div>
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%">
+			<select class="form-control" id="country" ng-model="country">
+					        <option ng-repeat="x in listOfCountries">{{x.countryName}}</option>
+			</select>
+		</div>
+	</div>	
+	<div class="row" style=" margin-top: 2%">
+		<div class="col-sm-3"></div>
+		<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="saveInc()">Save Incident</button></div>
+		<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="searchInc()">Search Incident</button></div>
+		<div class="col-sm-3"></div>
+	</div>
+	<div style ="margin-top: 2%"><p>  </p></div>
+				<div class="alert alert-success" ng-show="successMessageModel">
+					<p><strong>{{saveMessage.message}}</strong></p>
+				</div>
+				<div class="alert alert-danger" ng-show="failureMessageModel">
+					<p><strong>{{saveMessage.message}}</strong></p>
+	</div>			  
+	<table class="table table-bordered" ng-show="tableDailyIncActy">
+		    <thead>
+		      <tr>
+		        <th>Incident Number</th>
+		        <th>Date</th>
+		        <th>Old Priority</th>
+		        <th>New Priority</th>
+		        <th>Action Taken</th>
+		        <th>Action Category</th>
+		        <th>Country</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr ng-repeat="x in listOfIncident">
+		        <td>{{x.incNum}}</td>
+		        <td>{{x.date}}</td>
+		        <td>{{x.oldPriority}}</td>
+		        <td>{{x.newPriority}}</td>
+		        <td>{{x.actTaken}}</td>
+		        <td>{{x.actCategory}}</td>
+		        <td>{{x.ctry}}</td>
+        	  </tr>
+            </tbody>
+        </table>
+</div>
+<script>
+		$(document).ready(function(){
+			var date_input=$('input[name="incident_date"]'); //our date input has the name "incident_date"
+			var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+			date_input.datepicker({
+				format: 'mm/dd/yyyy',
+				container: container,
+				todayHighlight: true,
+				autoclose: true,
+			})
+		})
+	</script>

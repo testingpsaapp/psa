@@ -270,7 +270,7 @@ public class PSAController {
 	 * */
 	
 	@RequestMapping(path="/dailyIncAct", method = RequestMethod.POST)
-	public String saveDailyIncAct(@PathVariable DailyIncAct dailyIncAct)
+	public String saveDailyIncAct(@RequestBody DailyIncAct dailyIncAct)
 	{
 		String result = "";
 		result = dailyIncActService.saveDailyIncAct(dailyIncAct);
@@ -278,7 +278,7 @@ public class PSAController {
 	}
 	
 	@RequestMapping(path="/dailyIncAct", method = RequestMethod.PUT)
-	public String updateDailyIncAct(@PathVariable DailyIncAct dailyIncAct)
+	public String updateDailyIncAct(@RequestBody DailyIncAct dailyIncAct)
 	{
 		String result = "";
 		result = dailyIncActService.saveDailyIncAct(dailyIncAct);
@@ -286,14 +286,14 @@ public class PSAController {
 	}
 	
 	@RequestMapping(path="/dailyIncAct/incNum/{incNum}", method = RequestMethod.GET)
-	public DailyIncAct searchDailyIncActByIncNum(@PathVariable String incNum)
+	public DailyIncAct searchDailyIncActByIncNum(@PathVariable("incNum") String incNum)
 	{
 		DailyIncAct dailyIncAct = dailyIncActService.searchDailyIncActByIncNum(incNum) ;
 		return dailyIncAct;
 	}
 	
 	@RequestMapping(path="/dailyIncAct/{soeId}/{date}", method = RequestMethod.GET)
-	public List<DailyIncAct> searchDailyIncActByDate(@PathVariable String date, @PathVariable String soeId) throws ParseException
+	public List<DailyIncAct> searchDailyIncActByDate(@PathVariable("soeId") String date, @PathVariable("date") String soeId) throws ParseException
 	{
 		List<DailyIncAct> listOfDdailyIncAct = dailyIncActService.searchAllDailyIncActByDate(commonUtilities.getSQLDate(date),soeId);
 		
@@ -301,9 +301,17 @@ public class PSAController {
 	}
 	
 	@RequestMapping(path="/dailyIncAct/{soeId}", method = RequestMethod.GET)
-	public List<DailyIncAct> searchAllDailyIncActBySoeId(@PathVariable String soeId) throws ParseException
+	public List<DailyIncAct> searchAllDailyIncActBySoeId(@PathVariable("soeId") String soeId) throws ParseException
 	{
 		List<DailyIncAct> listOfDdailyIncAct = dailyIncActService.searchAllDailyIncActBySoeId(soeId);
+		
+		return listOfDdailyIncAct;
+	}
+	
+	@RequestMapping(path="/dailyIncAct", method = RequestMethod.GET)
+	public List<DailyIncAct> searchAllDailyIncAct() throws ParseException
+	{
+		List<DailyIncAct> listOfDdailyIncAct = dailyIncActService.searchAllDailyIncAct();
 		
 		return listOfDdailyIncAct;
 	}
@@ -439,6 +447,14 @@ public class PSAController {
 		return message;
 	}
 	
+	@RequestMapping(path="/incidentCommunication/{incNum}/emailList", method = RequestMethod.GET)
+	public EmailList getIncidentCommunicationMailList(@PathVariable("incNum") String incNum)
+	{
+		EmailList emailList = null;
+		emailList=emailListService.getEmailListForIncidentCommunication(incNum);
+		return emailList;
+	}
+	
 	/*
 	 * Access Module Starts
 	 * 
@@ -471,11 +487,8 @@ public class PSAController {
 		return listOfAccessModule;
 	}
 	
-	@RequestMapping(path="/incidentCommunication/{incNum}/emailList", method = RequestMethod.GET)
-	public EmailList getIncidentCommunicationMailList(@PathVariable("incNum") String incNum)
-	{
-		EmailList emailList = null;
-		emailList=emailListService.getEmailListForIncidentCommunication(incNum);
-		return emailList;
-	}
+	/*
+	 * DailyIncidentActivity starts
+	 * */
+	
 }

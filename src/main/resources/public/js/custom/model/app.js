@@ -44,6 +44,10 @@ psaapp.controller('mainPsaAppController', function($rootScope,$scope,$http) {
 				//templateUrl:"<canvas id=\"bar\" class=\"chart chart-bar\" chart-data=\"data\" chart-labels=\"labels\" chart-series=\"series\"></canvas>",
 				controller: "BarCtrl"
 				
+			}).
+			when("/dailyIncidentActivity",{
+				templateUrl:"/dailyIncidentActivityPage.html",
+				controller: "dailyIncidentActivityController"				
 			})
 		}]);
 

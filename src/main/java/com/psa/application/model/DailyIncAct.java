@@ -1,7 +1,5 @@
 package com.psa.application.model;
 
-import java.sql.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,7 +10,7 @@ public class DailyIncAct {
 	
 	private long id;
 	private String incNum;
-	private Date date;
+	private String date;
 	private String oldPriority;
 	private String newPriority;
 	private String impact;
@@ -34,10 +32,10 @@ public class DailyIncAct {
 	public void setIncNum(String incNum) {
 		this.incNum = incNum;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public String getOldPriority() {

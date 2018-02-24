@@ -17,12 +17,12 @@ public class DailyIncActService {
 	
 	public String saveDailyIncAct(DailyIncAct dailyIncAct) 
 	{
-		String result="DailyIncAct save failed";
+		String result="{\"message\":\"Daily Incident Activity Save Failed\"}";
 		DailyIncAct newDailyIncAct = null;
 		newDailyIncAct=dailyIncActRepository.saveAndFlush(dailyIncAct);
 		if(newDailyIncAct!=null)
 		{
-			result = "DailyIncAct save successful";
+			result = "{\"message\":\"Daily Incident Activity Save Successful\"}";
 		}
 		return result;
 	}
@@ -42,6 +42,10 @@ public class DailyIncActService {
 	{
 		DailyIncAct dailyIncAct = dailyIncActRepository.findByIncNum(incNum);
 		return dailyIncAct;
+	}
+	public List<DailyIncAct> searchAllDailyIncAct() {
+		// TODO Auto-generated method stub
+		return dailyIncActRepository.findAll();
 	}
 	
 }
