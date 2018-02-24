@@ -32,6 +32,7 @@ import com.psa.application.service.CommDlistConfigService;
 import com.psa.application.service.CountryService;
 import com.psa.application.service.DailyCallIncidentTrackerService;
 import com.psa.application.service.DailyIncActService;
+import com.psa.application.service.EmailListService;
 import com.psa.application.service.IncidentCommService;
 import com.psa.application.service.LobConfigService;
 import com.psa.application.service.TriageLeadConfigService;
@@ -75,6 +76,9 @@ public class PSAController {
 	
 	@Autowired
 	AccessModuleService accessModuleService;
+	
+	@Autowired
+	EmailListService emailListService;
 	
 	@RequestMapping("/testing")
 	public String test()
@@ -417,6 +421,24 @@ public class PSAController {
 		return incidentComm;
 	}
 	
+	@RequestMapping(path="/incidentCommunication", method = RequestMethod.PUT)
+	public IncidentComm updateIncidentCommunicationPostApprove(@RequestBody IncidentComm incComm)
+	{
+		IncidentComm newIncidentComm =null;
+		System.out.println("Inside Controller");
+		newIncidentComm=incidentCommService.updateIncidentCommPostApprove(incComm);
+		return newIncidentComm;
+	}
+	
+	@RequestMapping(path="/incidentCommunication/approve/{incNum}", method = RequestMethod.POST)
+	public String finalApproveIncidentCommunication(@RequestBody EmailList emailList,@PathVariable("incNum") String incNum) throws JSONException, MessagingException
+	{
+		String message ="";
+		System.out.println("Inside Controller");
+		message=incidentCommService.finalApproveIncidentCommunication(emailList,incNum);
+		return message;
+	}
+	
 	/*
 	 * Access Module Starts
 	 * 
@@ -453,7 +475,7 @@ public class PSAController {
 	public EmailList getIncidentCommunicationMailList(@PathVariable("incNum") String incNum)
 	{
 		EmailList emailList = null;
-		
+		emailList=emailListService.getEmailListForIncidentCommunication(incNum);
 		return emailList;
 	}
 }

@@ -31,6 +31,12 @@ public class EmailTemplateGenerator{
 			IncidentComm newIncidentComm=(IncidentComm)obj;
 			body = emailTemplate.generateBody(templateId,newIncidentComm);
 		}
+		else if(templateId.equals("inc_comm_a"))
+		{
+			EmailTemplate emailTemplate = newIncMIMCommTemplate;
+			IncidentComm newIncidentComm=(IncidentComm)obj;
+			body = emailTemplate.generateBody(templateId,newIncidentComm);
+		}
 		return body;
 	}
 }

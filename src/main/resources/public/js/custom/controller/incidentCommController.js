@@ -11,6 +11,7 @@ psaapp.controller('incidentCommController', function($scope,$http)
 	$scope.submitButt=true;
 	var t = window.location.href.indexOf('action=review');
 	$scope.incident_date="";
+	$scope.emailList=[];
 	//alert(t);
 	if(t!=-1)
 	{
@@ -222,12 +223,86 @@ psaapp.controller('incidentCommController', function($scope,$http)
 	
 	$scope.approve=function()
 	{
-		alert("Modal Confirm");
+		$scope.impact=[];
+		for(x in $scope.noOfimpact)
+		{
+			var a=parseInt(x)+1;
+			//alert($('#impacted_channel_'+a).val());
+			$scope.impact.push("{\"channel\":\""+$('#impacted_channel_'+a).val()+"\","+"\"natureOfImpact\":\"" +$('#nature_of_impact_'+a).val()+"\","+"\"volumeOfImpact\":\""+$('#volume_of_impact_'+a).val()+"\"}");
+		}
+		console.log($scope.impact);
+		$scope.impacted_sector=[];
+		if($scope.impacted_sector_cti==true)
+		{
+			$scope.impacted_sector.push("CTI");
+		}
+		if($scope.impacted_sector_gcg==true)
+		{
+			$scope.impacted_sector.push("GCG");
+		}
+		if($scope.impacted_sector_icg==true)
+		{
+			$scope.impacted_sector.push("ICG");
+		}
+		$scope.incidentCommObj={
+			"id" : $scope.incCommRetrieve["id"],
+			"incidentNum":$scope.inc_num,
+			"incidentSeverity":$scope.incident_severity,
+			"commTyp":$scope.comm_type,
+			"incidentDate":$scope.incident_date,
+			"impactStartTime":$scope.start_time,
+			"impactEndTime":$scope.end_time,
+			"impactedLob":$scope.impacted_lob,
+			"title":$scope.title,
+			"description":$scope.description,
+			"impactedCountry":$scope.impacted_country,
+			"impact":$scope.impact,
+			"fix":$scope.fix_details,
+			"preparedBy":"default",
+			"reviewedBy":"default",
+			"status" :$scope.comm_type,
+			"impactedRegion" : $scope.impacted_region,
+			"impactedSector" : $scope.impacted_sector,
+			
+		};
+		
+		console.log($scope.incidentCommObj);
+		$http.put('/incidentCommunication', $scope.incidentCommObj)
+		 .then(function(data){
+			 $scope.emailList["listOfToMailId"]=($scope.to_mail_id).split(',');
+			 $scope.emailList["listOfCCMailId"]=($scope.cc_mail_id).split(',');
+			 $scope.emailList["listOfBCCMailId"]=($scope.bcc_mail_id).split(',');
+			 $http.post('/incidentCommunication/approve/'+$scope.inc_num,$scope.emailList)
+			 .then(function(data){
+				 $scope.saveMessage = data.data;
+	             console.log($scope.saveMessage);
+	             $scope.successMessageModel=true;
+	             $scope.failureMessageModel=false;
+			 },function(data){
+				 $scope.saveMessage = data.data;
+		            console.log($scope.saveMessage);
+		          $scope.failureMessageModel=true;
+		          $scope.successMessageModel=false;
+			 });
+		 },function(data){
+			 $scope.saveMessage = data.data;
+	            console.log($scope.saveMessage);
+	          $scope.failureMessageModel=true;
+	          $scope.successMessageModel=false;
+		 });
 	};
 	
 	$scope.checkBeforeApprove=function()
 	{
-		
-	}
+		$http.get('/incidentCommunication/'+$scope.inc_num+'/emailList').then(function(data){
+			$scope.emailList = data.data;
+			console.log($scope.emailList);
+			$scope.to_mail_id=$scope.emailList["listOfToMailId"];
+			$scope.cc_mail_id=$scope.emailList["listOfCCMailId"];
+			$scope.bcc_mail_id=$scope.emailList["listOfBCCMailId"];
+			
+		});
+	};
+	
 });
 

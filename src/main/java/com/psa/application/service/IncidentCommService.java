@@ -10,6 +10,7 @@ import org.json.*;
 
 import com.psa.application.emailTemplate.EmailTemplateGenerator;
 import com.psa.application.mail.SendMail;
+import com.psa.application.model.EmailList;
 import com.psa.application.model.IncidentComm;
 import com.psa.application.model.Worklist;
 import com.psa.application.repositories.IncidentCommRepository;
@@ -93,5 +94,39 @@ public class IncidentCommService
 		IncidentComm incidentComm = null;
 		incidentComm = incidentCommRepository.findIncCommByIncNum(incNum);
 		return incidentComm;
+	}
+
+	public IncidentComm updateIncidentCommPostApprove(IncidentComm incComm) {
+		// TODO Auto-generated method stub
+		IncidentComm newIncidentComm =null;
+		newIncidentComm=incidentCommRepository.saveAndFlush(incComm);
+		return newIncidentComm;
+	}
+
+	public String finalApproveIncidentCommunication(EmailList emailList, String incNum) throws JSONException, MessagingException {
+		// TODO Auto-generated method stub
+		String result="{\"message\":\"Incident Communication Approval Failed\"}";
+		//Step 1 Get Inc Details
+		IncidentComm incidentComm=incidentCommRepository.findIncCommByIncNum(incNum);
+		//Step 2 Prepare Mail Body
+		String template = emailTemplateGenerator.getEmailBody("inc_comm_a",incidentComm);
+		//Step 3 Mail to Stake holders
+		String subject = incidentComm.getIncidentNum()+"|"+incidentComm.getIncidentSeverity()+"|"+incidentComm.getTitle()+"|"+incidentComm.getCommTyp();
+		String[] toMailId = new String[emailList.getListOfToMailId().size()];
+		toMailId = emailList.getListOfToMailId().toArray(toMailId);
+		String[] ccMailId = new String[emailList.getListOfCCMailId().size()];
+		ccMailId = emailList.getListOfCCMailId().toArray(ccMailId);
+		String[] bccMailId = new String[emailList.getListOfBCCMailId().size()];
+		bccMailId = emailList.getListOfBCCMailId().toArray(bccMailId);
+		
+		
+		String mailingMessage=sendMail.sendMailToMultiple(toMailId,ccMailId ,bccMailId , subject, template);
+		if(("Mail Sending Successful").equals(mailingMessage))
+		{
+			System.out.println("Step 4 executed");
+			result="{\"message\":\"Incident Communication Submission Successful\"}";
+		}
+		
+		return result;
 	}
 }

@@ -31,4 +31,22 @@ public class SendMail
 		mailSendResult ="Mail Sending Successful";
 		return mailSendResult;
 	}
+	
+	public String sendMailToMultiple(String[] to, String[] cc, String[] bcc, String subject, String body) throws MessagingException
+	{
+		String mailSendResult ="Mail Sending Failed";
+		MimeMessage message = javaMailSender.createMimeMessage();
+		MimeMessageHelper helper;
+		
+		helper = new MimeMessageHelper(message, true);
+		helper.setSubject(subject);
+		message.setContent("<html><body>"+body+"</body</html>","text/html");
+		helper.setBcc(bcc);
+		helper.setCc(cc);
+		helper.setTo(to);
+		
+		javaMailSender.send(message);
+		mailSendResult ="Mail Sending Successful";
+		return mailSendResult;
+	}
 }
