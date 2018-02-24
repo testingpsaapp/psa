@@ -403,7 +403,7 @@ public class PSAController {
 	{
 		String result="{\"message\":\"Incident Communication Submission Failed\"}";
 		System.out.println("Inside Controller");
-		result=incidentCommService.submitIncidentCommunicationForReview(incidentComm);
+		result=incidentCommService.submitIncidentCommunicationForReview(incidentComm); 
 		return result;
 	}
 	

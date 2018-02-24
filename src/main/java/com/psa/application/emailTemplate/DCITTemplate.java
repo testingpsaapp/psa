@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.psa.application.model.DailyCallIncidentTracker;
+import com.psa.application.model.IncidentComm;
 import com.psa.application.repositories.EmailTemplateRepository;
 
 public class DCITTemplate implements EmailTemplate{
@@ -45,6 +46,12 @@ public class DCITTemplate implements EmailTemplate{
 		actionItem+=actionTable+"</tbody></table>";
 		bodyTemp=bodyTemp.replace("@@ActionItems@@", actionItem);
 		return bodyTemp;
+	}
+
+	@Override
+	public String replacePlaceHolder(String body, IncidentComm newIncidentComm) throws JSONException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
