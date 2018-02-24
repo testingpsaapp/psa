@@ -3,11 +3,13 @@ package com.psa.application.emailTemplate;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.psa.application.model.DailyCallIncidentTracker;
 import com.psa.application.model.IncidentComm;
 import com.psa.application.repositories.EmailTemplateRepository;
 
+@Component
 public class DCITTemplate implements EmailTemplate{
 
 	@Autowired
@@ -15,12 +17,12 @@ public class DCITTemplate implements EmailTemplate{
 	
 	
 	@Override
-	public String generateBody(String templateId,DailyCallIncidentTracker newDailyCallIncidentTracker) throws JSONException {
+	public String generateBody(String templateId,Object obj) throws JSONException {
 		
 		String bodyTemp ="";
 		String bodyFinal="";
 		bodyTemp = emailTemplateRepository.getEmailTemplateByTemplateId(templateId).getTemplate();
-		bodyFinal = replacePlaceHolder(bodyTemp,newDailyCallIncidentTracker);
+		bodyFinal = replacePlaceHolder(bodyTemp,(DailyCallIncidentTracker)obj);
 		return bodyFinal;
 	}
 

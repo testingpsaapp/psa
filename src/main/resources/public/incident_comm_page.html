@@ -181,10 +181,50 @@
 	<div class="row" style=" margin-top: 2%">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="submitForApproval()" ng-show="submitButt">Submit</button><!--</div>-->
-		<!--  <div class="col-sm-3" style="align-content: center;">--><button type="button" class="btn btn-primary" ng-click="approve()" ng-show="approveButt">Approve</button>  </div>
+		<!--  <div class="col-sm-3" style="align-content: center;">--><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-show="approveButt" ng-click="checkBeforeApprove()">Approve</button></div>
 		<div class="col-sm-3"></div>
 	
 	</div><!-- row 11 ends -->
+	
+	
+	 <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Please Confirm Recipients Below</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+			<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>To Mails Ids:</strong></div>
+			<div class="col-sm-9" style="margin-top: 2%"> 
+				<input type="text" class="form-control" id="to_mail_id" ng-model="to_mail_id">
+		  	</div>
+          </div>
+          <div class="row">
+			<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>CC Mails Ids:</strong></div>
+			<div class="col-sm-9" style="margin-top: 2%"> 
+				<input type="text" class="form-control" id="to_mail_id" ng-model="cc_mail_id">
+		  	</div>
+          </div>
+          <div class="row">
+			<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>BCC Mails Ids:</strong></div>
+			<div class="col-sm-9" style="margin-top: 2%"> 
+				<input type="text" class="form-control" id="to_mail_id" ng-model="bcc_mail_id">
+		  	</div>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="approve()">Confirm</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  </div>
+	
 	<div style ="margin-top: 2%"><p>  </p></div>
 	<div class="alert alert-success" ng-show="successMessageModel">
 		<p><strong>{{saveMessage.message}}</strong></p>

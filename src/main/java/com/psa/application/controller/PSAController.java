@@ -21,6 +21,7 @@ import com.psa.application.model.CommDlistConfig;
 import com.psa.application.model.Countries;
 import com.psa.application.model.DailyCallIncidentTracker;
 import com.psa.application.model.DailyIncAct;
+import com.psa.application.model.EmailList;
 import com.psa.application.model.IncidentComm;
 import com.psa.application.model.LobConfig;
 import com.psa.application.model.TriageLeadConfig;
@@ -446,5 +447,13 @@ public class PSAController {
 		System.out.println("Inside Controller");
 		listOfAccessModule=accessModuleService.getAllAccessModuleByMainModuleAndSubModule(mainModule, subModule);
 		return listOfAccessModule;
+	}
+	
+	@RequestMapping(path="/incidentCommunication/{incNum}/emailList", method = RequestMethod.GET)
+	public EmailList getIncidentCommunicationMailList(@PathVariable("incNum") String incNum)
+	{
+		EmailList emailList = null;
+		
+		return emailList;
 	}
 }

@@ -7,7 +7,7 @@ import com.psa.application.model.IncidentComm;
 
 public interface EmailTemplate 
 {
-	public String generateBody(String templateId,DailyCallIncidentTracker newDailyCallIncidentTracker) throws JSONException;
+	public String generateBody(String templateId,Object obj) throws JSONException;
 	public String replacePlaceHolder(String body,DailyCallIncidentTracker newDailyCallIncidentTracker) throws JSONException;
 	public String replacePlaceHolder(String body,IncidentComm newIncidentComm) throws JSONException;
 }

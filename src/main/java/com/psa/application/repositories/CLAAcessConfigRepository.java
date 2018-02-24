@@ -12,4 +12,7 @@ public interface CLAAcessConfigRepository extends JpaRepository<CLAAcessConfig,L
 
 	@Query("SELECT l FROM CLAAcessConfig l WHERE LOWER(l.soeId) = LOWER(:soeId)")
 	public CLAAcessConfig getCLAAcessConfigBySoeId(@Param("soeId") String soeId);
+
+	@Query("Select l from CLAAcessConfig l where LOWER(l.subModule) = LOWER(:subModule) and LOWER(l.role) = LOWER(:role)")
+	public CLAAcessConfig findCLAAcessConfigBySubModuleAndRole(@Param("subModule")String subModule, @Param("role")String role);
 }

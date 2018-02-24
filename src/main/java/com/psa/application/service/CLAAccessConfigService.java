@@ -44,4 +44,11 @@ public class CLAAccessConfigService {
 		listOfAllClaAccessConfig=cLAAcessConfigRepository.findAll();
 		return listOfAllClaAccessConfig;
 	}
+	
+	public CLAAcessConfig getCLAAcessConfigBySubModule(String subModule, String role)
+	{
+		CLAAcessConfig newCLAAcessConfig= null;
+		newCLAAcessConfig=cLAAcessConfigRepository.findCLAAcessConfigBySubModuleAndRole(subModule , role);
+		return newCLAAcessConfig;
+	}
 }

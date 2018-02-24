@@ -37,6 +37,8 @@ psaapp.controller('incidentCommController', function($scope,$http)
 	              $scope.changeIncidentCommDD($scope.incCommRetrieve.impactedRegion,'impacted_region_butt');
 	              //$scope.changeIncidentCommDD($scope.incCommRetrieve.impactedCountry,'impacted_country_butt');
 	              $scope.impacted_country=$scope.incCommRetrieve.impactedCountry;
+	              $scope.incident_date=$scope.incCommRetrieve.incidentDate;
+	              $('#date').val($scope.incCommRetrieve.incidentDate);
 	              $scope.start_time=$scope.incCommRetrieve.impactStartTime;
 	              $scope.end_time=$scope.incCommRetrieve.impactEndTime;
 	              var tempImpSec=$scope.incCommRetrieve.impactedSector;
@@ -69,23 +71,38 @@ psaapp.controller('incidentCommController', function($scope,$http)
 	              var tempImpact=$scope.incCommRetrieve.impact;
 	              if(tempImpact.length>1)
 	              {
-	            	  $scope.noOfimpact=[];
+	            	  var x=[];
+	            	  
 		              for(var i=0;i<tempImpact.length;i++)
 		              {
-		            	  var a=parseInt(i)+1;
-		            	  $scope.noOfimpact.push(a);
-		            	  //alert(tempImpact[i]["channel"]);
-		            	  //alert(obj.channel);
-		            	  $('#impacted_channel_'+a).val("CBOL");
-		            	  //$('#nature_of_impact_'+a).text(tempImpact[i]["natureOfImpact"]);
-		            	  //$('#volume_of_impact_'+a).text(tempImpact[i]["volumeOfImpact"]);
+		            	  x.push((parseInt(i)+1))
 		              }
+		              
+		              $scope.noOfimpact=x;
+		              console.log($scope.incCommRetrieve.impact);
+		              $(document).ready(
+		            	  function()
+		            	  {
+				              for(var i=0;i<tempImpact.length;i++)
+				              {
+				            	  var impactObj=JSON.parse($scope.incCommRetrieve.impact[i]);
+				            	  console.log(impactObj.channel);
+				            	  console.log(impactObj.natureOfImpact);
+				            	  console.log(impactObj.volumeOfImpact);
+				            	  var j=(parseInt(i)+1);
+				            	  //$scope.impacted_channel[i+'']=impactObj.channel;
+				            	  $("#impacted_channel_"+j+" option[value='"+impactObj.channel+"']").attr("selected", "selected");
+				            	  $('#nature_of_impact_'+j).val(impactObj.natureOfImpact);
+				            	  $('#volume_of_impact_'+j).val(impactObj.volumeOfImpact);
+				            	  console.log($('#volume_of_impact_'+j));
+				              }
+		              	  }
+		              );
+		              
 	              }
 	              else
 	              {
-	            	  $('#impacted_channel_1').val("CBOL");
-	            	  $('#nature_of_impact_1').val(tempImpact[i]["natureOfImpact"]);
-	            	  $('#volume_of_impact_1').val(tempImpact[i]["volumeOfImpact"]);
+	            	  
 	              }
 			});
 		
@@ -152,7 +169,7 @@ psaapp.controller('incidentCommController', function($scope,$http)
 		{
 			var a=parseInt(x)+1;
 			//alert($('#impacted_channel_'+a).val());
-			$scope.impact.push("{\"channel\":"+$('#impacted_channel_'+a).val()+","+"\"natureOfImpact\":" +$('#nature_of_impact_'+a).val()+","+"\"volumeOfImpact\":"+$('#volume_of_impact_'+a).val()+"}");
+			$scope.impact.push("{\"channel\":\""+$('#impacted_channel_'+a).val()+"\","+"\"natureOfImpact\":\"" +$('#nature_of_impact_'+a).val()+"\","+"\"volumeOfImpact\":\""+$('#volume_of_impact_'+a).val()+"\"}");
 		}
 		console.log($scope.impact);
 		$scope.impacted_sector=[];
@@ -202,5 +219,15 @@ psaapp.controller('incidentCommController', function($scope,$http)
 		 });
 		
 	};
+	
+	$scope.approve=function()
+	{
+		alert("Modal Confirm");
+	};
+	
+	$scope.checkBeforeApprove=function()
+	{
+		
+	}
 });
 
