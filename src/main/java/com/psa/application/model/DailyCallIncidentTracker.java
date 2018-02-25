@@ -1,7 +1,6 @@
 package com.psa.application.model;
 
-import java.sql.Date;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -10,22 +9,56 @@ import javax.persistence.Table;
 @Table(name="daily_call_incident_tracker")
 public class DailyCallIncidentTracker {
 
+	//@Column(name="id")
 	private long id;
+	
+	//@Column(name="inc_num")
 	private String incNum;
+	
+	//@Column(name="impacting_reg")
 	private String impactingReg;
+	
+	//@Column(name="impacting_ctry")
 	private String impactingCtry;
+	
+	//@Column(name="highlighted_by")
 	private String highlightedBy;
-	private Date highlightedDate;
-	private Date closedDate;
+	
+	//@Column(name="highlighted_date")
+	private String highlightedDate;
+	
+	//@Column(name="closed_date")
+	private String closedDate;
+	
+	//@Column(name="impacting_dept")
 	private String impactingDept;
+	
+	//@Column(name="reason_of_criticality")
 	private String reasonOfCriticality;
+	
+	//@Column(name="action_item")
 	private String actionItem;
+	
+	//@Column(name="inc_state")
 	private String incState;
-	private String ppInvolved;
+	
+	//@Column(name="pp_involved")
+	private String[] ppInvolved;
+	
+	//@Column(name="curr_owner")
 	private String currOwner;
+	
+	//@Column(name="curr_owner_app")
 	private String currOwnerApp;
+	
+	//@Column(name="incident_priority")
 	private String incidentPriority;
+	
+	//@Column(name="impact")
 	private String impact;
+	
+	//@Column(name="update_comm")
+	private String updateComm;
 	
 	
 	@Id
@@ -59,16 +92,16 @@ public class DailyCallIncidentTracker {
 	public void setHighlightedBy(String highlightedBy) {
 		this.highlightedBy = highlightedBy;
 	}
-	public Date getHighlightedDate() {
+	public String getHighlightedDate() {
 		return highlightedDate;
 	}
-	public void setHighlightedDate(Date highlightedDate) {
+	public void setHighlightedDate(String highlightedDate) {
 		this.highlightedDate = highlightedDate;
 	}
-	public Date getClosedDate() {
+	public String getClosedDate() {
 		return closedDate;
 	}
-	public void setClosedDate(Date closedDate) {
+	public void setClosedDate(String closedDate) {
 		this.closedDate = closedDate;
 	}
 	public String getImpactingDept() {
@@ -95,10 +128,10 @@ public class DailyCallIncidentTracker {
 	public void setIncState(String incState) {
 		this.incState = incState;
 	}
-	public String getPpInvolved() {
+	public String[] getPpInvolved() {
 		return ppInvolved;
 	}
-	public void setPpInvolved(String ppInvolved) {
+	public void setPpInvolved(String[] ppInvolved) {
 		this.ppInvolved = ppInvolved;
 	}
 	public String getCurrOwner() {
@@ -126,6 +159,11 @@ public class DailyCallIncidentTracker {
 	public void setImpact(String impact) {
 		this.impact = impact;
 	}
-	
+	public String getUpdateComm() {
+		return updateComm;
+	}
+	public void setUpdateComm(String update_comm) {
+		this.updateComm = update_comm;
+	}
 
 }

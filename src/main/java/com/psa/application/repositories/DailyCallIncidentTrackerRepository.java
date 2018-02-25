@@ -9,7 +9,7 @@ import com.psa.application.model.DailyCallIncidentTracker;
 @Repository
 public interface DailyCallIncidentTrackerRepository extends JpaRepository<DailyCallIncidentTracker, Long> {
 	
-	@Query("Select d from DailyCallIncidentTracker d where d.incNum=:incNum")
+	@Query("Select d from DailyCallIncidentTracker d where LOWER(d.incNum)=LOWER(:incNum)")
 	public DailyCallIncidentTracker getDailyCallIncidentTrackerByIncNum(String incNum);
 
 }

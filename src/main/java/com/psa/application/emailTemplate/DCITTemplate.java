@@ -1,7 +1,7 @@
 package com.psa.application.emailTemplate;
 
 import org.json.JSONException;
-import org.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -35,18 +35,7 @@ public class DCITTemplate implements EmailTemplate{
 		bodyTemp=bodyTemp.replace("@@ImpactStatement@@",newDailyCallIncidentTracker.getImpact());
 		bodyTemp=bodyTemp.replace("@@ReasonOfCriticality@@", newDailyCallIncidentTracker.getReasonOfCriticality());
 		bodyTemp=bodyTemp.replace("@@IncPriority@@", newDailyCallIncidentTracker.getIncidentPriority());
-		String actionItem = "<table border=\"1\"><tbody><tr><td>Action Item</td><td>Owner</td><td>ETA</td></tr>"; 
-		JSONObject obj = new JSONObject(newDailyCallIncidentTracker.getActionItem());
-		String[] actItems = obj.get("ActionItem").toString().split("||");
-		String[] owners = obj.get("Owner").toString().split("||");
-		String[] etas = obj.get("ETA").toString().split("||");
-		String actionTable="";
-		for(int i = 0; i<actItems.length;i++)
-		{
-			actionTable+="<tr><td>"+actItems[i]+"</td><td>"+owners[i]+"</td><td>"+etas[i]+"</td></tr>";
-		}
-		actionItem+=actionTable+"</tbody></table>";
-		bodyTemp=bodyTemp.replace("@@ActionItems@@", actionItem);
+		bodyTemp=bodyTemp.replace("@@ActionItems@@", newDailyCallIncidentTracker.getActionItem());
 		return bodyTemp;
 	}
 
