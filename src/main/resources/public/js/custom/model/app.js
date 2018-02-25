@@ -52,6 +52,10 @@ psaapp.controller('mainPsaAppController', function($rootScope,$scope,$http) {
 			when("/criticalIncidentTrackerPage",{
 				templateUrl:"/criticalIncidentTrackerPage.html",
 				controller: "criticalIncidentTrackerController"				
+			}).
+			when("/ChangeCommunication",{
+				templateUrl:"/changeCommPage.html",
+				controller: "changeCommController"				
 			})
 		}]);
 

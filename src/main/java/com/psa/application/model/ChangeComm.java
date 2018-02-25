@@ -19,6 +19,9 @@ public class ChangeComm {
 	private String impactedCountry;
 	private String sanityScope;
 	private String impactedRegion;
+	private String changeTitle;
+	private String changeDesc;
+	
 	
 	@Id
 	public long getId() {
@@ -75,6 +78,16 @@ public class ChangeComm {
 	public void setImpactedRegion(String impactedRegion) {
 		this.impactedRegion = impactedRegion;
 	}
-	
-	
+	public String getChangeTitle() {
+		return changeTitle;
+	}
+	public void setChangeTitle(String changeTitle) {
+		this.changeTitle = changeTitle;
+	}
+	public String getChangeDesc() {
+		return changeDesc;
+	}
+	public void setChangeDesc(String changeDesc) {
+		this.changeDesc = changeDesc;
+	}
 }
