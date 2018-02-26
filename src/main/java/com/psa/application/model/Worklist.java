@@ -1,10 +1,15 @@
 package com.psa.application.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.transaction.annotation.Transactional;
+
 @Entity
+@Transactional
 @Table(name="worklist")
 public class Worklist 
 {
@@ -13,8 +18,11 @@ public class Worklist
 	private String taskName;
 	private String link;
 	private String taskOwner;
+	private String status;
+	
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
 		return id;
 	}
@@ -46,5 +54,10 @@ public class Worklist
 		this.taskOwner = taskOwner;
 	}
 	
-	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 }

@@ -40,11 +40,11 @@
 	<div class="row">
 		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Change Start Time</strong></div>
 		<div class="col-sm-3" style="margin-top: 2%"> 
-			
+			<input type="text" id="change_start_time" class="from-control" ng-model="change_start_time">
 		</div>
 		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Change End Time</strong></div>
 		<div class="col-sm-3" style="margin-top: 2%"> 
-			
+			<input type="text" id="change_end_time" class="from-control" ng-model="change_end_time">
 		</div>
 	</div><!-- row 4 ends -->
 	<div class="row">
@@ -60,7 +60,7 @@
 		 </div>
 		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Impacted Country</strong></div>
 		<div class="col-sm-3" style="margin-top: 2%"> 
-					  	<select multiple class="form-control" id="impacted_country" ng-model="impacted_country">
+					  	<select multiple class="form-control" id="impacted_country" ng-model="impacted_country" ng-change="populateSanityCountry()">
 					        <option ng-repeat="country in countries">{{country.countryName}}</option>
 					    </select>
 						 
@@ -69,18 +69,19 @@
 	<div class="row">
 		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>PP Involved</strong></div>
 		<div class="col-sm-3" style="margin-top: 2%"> 
-					  	<select multiple class="form-control" id="pp_involved" ng-model="pp_involved" >
+					  	<select multiple class="form-control" id="pp_involved" ng-model="pp_involved" ng-change="populateApplication()" >
 					        <option ng-repeat="pp in listOfPP">{{pp.appName}}</option>
 					    </select>
 						 
 		 </div>		
-	</div><!-- row 6 ends -->
-	<div class="row">
+		 <div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Change Owner</strong></div>
+		<div class="col-sm-3" style="margin-top: 2%"> 
+					  	<select class="form-control" id="pp_involved" ng-model="change_owner">
+					        <option ng-repeat="pp in listOfPP">{{pp.appName}}</option>
+					    </select>
+						 
+		 </div>		
 	
-	</div><!-- row 7 ends -->
-	<div class="row">
-	
-	</div><!-- row 8 ends -->
 	<div class="row" >
 		<div class="col-sm-12"style="color: #405a7c; margin-top: 2%">
 		<table class="table table-bordered" id="sanity_scope">
@@ -97,20 +98,22 @@
 		     <tr ng-repeat="sanityCount in noOfSanityScope">
 		        <td>
 			        <select class="form-control" id="{{'application_'+sanityCount}}" ng-model="application['{{sanityCount}}']">
-				        <option ng-repeat="x in applications">{{x.appName}}</option>
+				        <option ng-repeat="x in applications">{{x}}</option>
 				    </select>
       			</td>
 		        <td>
-		        	<textarea class="form-control" rows="5" id="{{'country_'+sanityCount}}" ng-model="country['{{sanityCount}}']"></textarea>
+		        	<select class="form-control" id="{{'country_'+sanityCount}}" ng-model="country['{{sanityCount}}']">
+				        <option ng-repeat="country in selectCountry">{{country}}</option>
+				    </select>
 		        </td>
 		        <td>
-		        	<select class="form-control" id="{{'sanity_type_'+sanityCount}}" ng-model="{{'sanity_type_'+sanityCount}}">
+		        	<select class="form-control" id="{{'sanity_type_'+sanityCount}}" ng-model="sanity_type['{{sanityCount}}']">
 					        <option>Internal</option>
 					        <option>Business</option>					        
 					</select>
 		        </td>
 		        <td>
-		        	<textarea class="form-control" rows="5" id="{{'sanity_step_'+sanityCount}}" ng-model="{{'sanity_step_'+sanityCount}}"></textarea>
+		        	<textarea class="form-control" rows="5" id="{{'sanity_step_'+sanityCount}}" ng-model="sanity_step['{{sanityCount}}']"></textarea>
 		        </td>
 		        <td>
 		        	<button type="button" class="btn btn-success" ng-click="addSanity()">+</button>
@@ -123,7 +126,7 @@
 	</div><!-- row 9 ends -->
 	<div class="row">
 		<div class="col-sm-3"></div>
-		<div class="col-sm-6" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="submitForApproval()" ng-show="submitButt">Submit</button><!--</div>-->
+		<div class="col-sm-6" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="submitForCompletion()" ng-show="submitButt">Submit</button><!--</div>-->
 		<!--  <div class="col-sm-3" style="align-content: center;">--><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-show="submitSanity" ng-click="submitSanity()">Submit Sanity Scope</button></div>
 		<div class="col-sm-3"></div>
 	</div><!-- row 10 ends -->
@@ -147,5 +150,10 @@
 				todayHighlight: true,
 				autoclose: true,
 			})
-		})
+		});
+</script>
+
+<script type="text/javascript">
+    $( "#change_start_time" ).timepicker();
+    $( "#change_end_time" ).timepicker();
 </script>

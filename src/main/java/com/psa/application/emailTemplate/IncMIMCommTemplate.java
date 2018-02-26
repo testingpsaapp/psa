@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.psa.application.model.ChangeComm;
 import com.psa.application.model.DailyCallIncidentTracker;
 import com.psa.application.model.IncidentComm;
 import com.psa.application.repositories.EmailTemplateRepository;
@@ -93,6 +94,12 @@ public class IncMIMCommTemplate implements EmailTemplate{
 		
 		
 		return template;
+	}
+
+	@Override
+	public String replacePlaceHolder(String body, ChangeComm changeComm) throws JSONException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

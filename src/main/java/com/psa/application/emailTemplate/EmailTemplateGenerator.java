@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.psa.application.model.ChangeComm;
 import com.psa.application.model.DailyCallIncidentTracker;
 import com.psa.application.model.IncidentComm;
 
@@ -15,7 +16,11 @@ public class EmailTemplateGenerator{
 	
 	@Autowired
 	DCITTemplate newDCITTemplate;
-
+	
+	@Autowired
+	ChangeCommTemplate changeCommTemplate;
+	
+	
 	public String getEmailBody(String templateId,Object obj) throws JSONException
 	{
 		String body ="";
@@ -36,6 +41,12 @@ public class EmailTemplateGenerator{
 			EmailTemplate emailTemplate = newIncMIMCommTemplate;
 			IncidentComm newIncidentComm=(IncidentComm)obj;
 			body = emailTemplate.generateBody(templateId,newIncidentComm);
+		}
+		else if(templateId.equals("change_comm_sanity"))
+		{
+			EmailTemplate emailTemplate = changeCommTemplate;
+			ChangeComm newChangeComm=(ChangeComm)obj;
+			body = emailTemplate.generateBody(templateId,newChangeComm);
 		}
 		return body;
 	}

@@ -1,29 +1,34 @@
 package com.psa.application.model;
 
-import java.sql.Date;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.transaction.annotation.Transactional;
+
 @Entity
+@Transactional
 @Table(name="change_comm")
 public class ChangeComm {
 	
 	private long id;
 	private String changNum;
-	private Date changDate;
-	private Date changStartTime;
-	private Date changeEndTime;
-	private String impactedPp;
-	private String impactedCountry;
-	private String sanityScope;
+	private String changDate;
+	private String changStartTime;
+	private String changeEndTime;
+	private String[] impactedPp;
+	private String[] impactedCountry;
+	private String[] sanityScope;
 	private String impactedRegion;
 	private String changeTitle;
 	private String changeDesc;
+	private String changeOwner;
 	
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
 		return id;
 	}
@@ -36,40 +41,40 @@ public class ChangeComm {
 	public void setChangNum(String changNum) {
 		this.changNum = changNum;
 	}
-	public Date getChangDate() {
+	public String getChangDate() {
 		return changDate;
 	}
-	public void setChangDate(Date changDate) {
+	public void setChangDate(String changDate) {
 		this.changDate = changDate;
 	}
-	public Date getChangStartTime() {
+	public String getChangStartTime() {
 		return changStartTime;
 	}
-	public void setChangStartTime(Date changStartTime) {
+	public void setChangStartTime(String changStartTime) {
 		this.changStartTime = changStartTime;
 	}
-	public Date getChangeEndTime() {
+	public String getChangeEndTime() {
 		return changeEndTime;
 	}
-	public void setChangeEndTime(Date changeEndTime) {
+	public void setChangeEndTime(String changeEndTime) {
 		this.changeEndTime = changeEndTime;
 	}
-	public String getImpactedPp() {
+	public String[] getImpactedPp() {
 		return impactedPp;
 	}
-	public void setImpactedPp(String impactedPp) {
+	public void setImpactedPp(String[] impactedPp) {
 		this.impactedPp = impactedPp;
 	}
-	public String getImpactedCountry() {
+	public String[] getImpactedCountry() {
 		return impactedCountry;
 	}
-	public void setImpactedCountry(String impactedCountry) {
+	public void setImpactedCountry(String[] impactedCountry) {
 		this.impactedCountry = impactedCountry;
 	}
-	public String getSanityScope() {
+	public String[] getSanityScope() {
 		return sanityScope;
 	}
-	public void setSanityScope(String sanityScope) {
+	public void setSanityScope(String[] sanityScope) {
 		this.sanityScope = sanityScope;
 	}
 	public String getImpactedRegion() {
@@ -89,5 +94,12 @@ public class ChangeComm {
 	}
 	public void setChangeDesc(String changeDesc) {
 		this.changeDesc = changeDesc;
+	}
+	
+	public String getChangeOwner() {
+		return changeOwner;
+	}
+	public void setChangeOwner(String changeOwner) {
+		this.changeOwner = changeOwner;
 	}
 }

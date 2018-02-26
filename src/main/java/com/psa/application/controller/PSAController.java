@@ -17,6 +17,7 @@ import com.psa.application.mail.SendMail;
 import com.psa.application.model.AccessModule;
 import com.psa.application.model.AppConfig;
 import com.psa.application.model.CLAAcessConfig;
+import com.psa.application.model.ChangeComm;
 import com.psa.application.model.CommDlistConfig;
 import com.psa.application.model.Countries;
 import com.psa.application.model.DailyCallIncidentTracker;
@@ -28,6 +29,7 @@ import com.psa.application.model.TriageLeadConfig;
 import com.psa.application.service.AccessModuleService;
 import com.psa.application.service.AppConfigService;
 import com.psa.application.service.CLAAccessConfigService;
+import com.psa.application.service.ChangeCommService;
 import com.psa.application.service.CommDlistConfigService;
 import com.psa.application.service.CountryService;
 import com.psa.application.service.DailyCallIncidentTrackerService;
@@ -79,6 +81,9 @@ public class PSAController {
 	
 	@Autowired
 	EmailListService emailListService;
+	
+	@Autowired 
+	ChangeCommService changeCommService;
 	
 	@RequestMapping("/testing")
 	public String test()
@@ -490,5 +495,12 @@ public class PSAController {
 	/*
 	 * DailyIncidentActivity starts
 	 * */
-	
+	@RequestMapping(path="/changeComm/submitForSanityScope", method = RequestMethod.POST)
+	public String submitChangeForSanityScope(@RequestBody ChangeComm changeComm) throws JSONException, MessagingException
+	{
+		String result="";
+		System.out.println("Inside Controller");
+		result=changeCommService.submitForCompletion(changeComm);
+		return result;
+	}
 }
