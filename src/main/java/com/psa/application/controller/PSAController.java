@@ -493,7 +493,7 @@ public class PSAController {
 	}
 	
 	/*
-	 * DailyIncidentActivity starts
+	 * Change Communication starts
 	 * */
 	@RequestMapping(path="/changeComm/submitForSanityScope", method = RequestMethod.POST)
 	public String submitChangeForSanityScope(@RequestBody ChangeComm changeComm) throws JSONException, MessagingException
@@ -501,6 +501,22 @@ public class PSAController {
 		String result="";
 		System.out.println("Inside Controller");
 		result=changeCommService.submitForCompletion(changeComm);
+		return result;
+	}
+	@RequestMapping(path="/changeComm/{changeNum}/country", method = RequestMethod.GET)
+	public String[] getChangeCountryForSanityScope(@PathVariable("changeNum") String changeNum)
+	{
+		String[] countries;
+		countries=changeCommService.getChangeCountryForSanityScope(changeNum);
+		return countries;
+	}
+	
+	@RequestMapping(path="/changeComm/submitSanityScope/{changeNum}/{appName}", method = RequestMethod.POST)
+	public String submitSanityScope(@RequestBody String[] sanityScope, @PathVariable("changeNum") String changeNum, @PathVariable("appName") String appName) throws JSONException, MessagingException
+	{
+		String result="";
+		System.out.println("Inside Controller");
+		result=changeCommService.submitScope(sanityScope,changeNum,appName);
 		return result;
 	}
 }

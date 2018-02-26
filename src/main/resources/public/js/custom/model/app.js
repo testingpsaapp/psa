@@ -56,6 +56,10 @@ psaapp.controller('mainPsaAppController', function($rootScope,$scope,$http) {
 			when("/ChangeCommunication",{
 				templateUrl:"/changeCommPage.html",
 				controller: "changeCommController"				
+			}).
+			when("/ChangeCommunication/SanityScope",{
+				templateUrl:"/submitSanity.html",
+				controller: "submitSanityController"				
 			})
 		}]);
 

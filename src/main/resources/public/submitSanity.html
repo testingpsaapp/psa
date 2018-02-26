@@ -1,0 +1,70 @@
+<div>
+
+<p>  </p>
+	<nav class="navbar navbar-inverse " style= "background-color: #294e89; ">
+		<div class="container-fluid">
+			<div class="navbar-header" >
+				<a class="navbar-brand" href="#">Communication</a>
+			</div>
+			<ul class="nav navbar-nav" >
+				<li class=""><a href="#!ChangeCommunication">Change Communication</a></li>
+			</ul>
+			<ul class="nav navbar-nav" >
+				<li class="active"><a href="#">Submit Sanity Scope - {{changeNum}}</a></li>
+			</ul>
+		</div>
+	</nav>
+<div class="row" >
+		<div class="col-sm-12"style="color: #405a7c; margin-top: 2%">
+		<table class="table table-bordered" id="sanity_scope">
+		    <thead>
+		      <tr>
+		        <th>Application</th>
+		        <th>Country</th>
+		        <th>Sanity Type</th>
+		        <th>Sanity Steps</th>
+		        <th>Action</th>
+		       </tr>
+		    </thead>
+		    <tbody >
+		     <tr ng-repeat="sanityCount in noOfSanityScope">
+		        <td>
+			        <input type="text" class="form-control" id="{{'application_'+sanityCount}}" ng-model="appName" readonly>
+      			</td>
+		        <td>
+		        	<select class="form-control" id="{{'country_'+sanityCount}}" ng-model="country['{{sanityCount}}']">
+				        <option ng-repeat="country in selectCountry">{{country}}</option>
+				    </select>
+		        </td>
+		        <td>
+		        	<select class="form-control" id="{{'sanity_type_'+sanityCount}}" ng-model="sanity_type['{{sanityCount}}']">
+					        <option>Internal</option>
+					        <option>Business</option>					        
+					</select>
+		        </td>
+		        <td>
+		        	<textarea class="form-control" rows="5" id="{{'sanity_step_'+sanityCount}}" ng-model="sanity_step['{{sanityCount}}']"></textarea>
+		        </td>
+		        <td>
+		        	<button type="button" class="btn btn-success" ng-click="addSanity()">+</button>
+		        	<button type="button" class="btn btn-danger" ng-click="deleteSanity(sanityCount)">-</button>
+		        </td>		        
+        	  </tr>
+            </tbody>
+        </table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3"></div>
+		<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary" ng-show="submitSanity" ng-click="submitSanity()">Submit Sanity Scope</button></div>
+		<div class="col-sm-3" style="align-content: center;"><button type="button" class="btn btn-primary" ng-show="submitSanity" ng-click="ignoreSanity()">Defer Sanity Scope</button></div>
+		<div class="col-sm-3"></div>
+	</div>
+	<div style ="margin-top: 2%"><p>  </p></div>
+	<div class="alert alert-success" ng-show="successMessageModel">
+		<p><strong>{{saveMessage.message}}</strong></p>
+	</div>
+	<div class="alert alert-danger" ng-show="failureMessageModel">
+		<p><strong>{{saveMessage.message}}</strong></p>
+	</div>
+</div>

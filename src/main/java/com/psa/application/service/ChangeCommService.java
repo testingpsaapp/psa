@@ -96,4 +96,17 @@ public class ChangeCommService {
 		return result;
 	}
 
+	public String[] getChangeCountryForSanityScope(String changeNum) {
+		// TODO Auto-generated method stub
+		String countries[];
+		countries = changeCommRepository.findChangeCommByChangeNum(changeNum).getImpactedCountry();
+		
+		return countries;
+	}
+
+	public String submitScope(String[] sanityScope, String changeNum, String appName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
