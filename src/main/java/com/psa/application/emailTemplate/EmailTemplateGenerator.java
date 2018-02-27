@@ -48,6 +48,10 @@ public class EmailTemplateGenerator{
 			ChangeComm newChangeComm=(ChangeComm)obj;
 			body = emailTemplate.generateBody(templateId,newChangeComm);
 		}
+		else if(templateId.equals("change_comm_biz_sanity"))
+		{
+			
+		}
 		return body;
 	}
 }
