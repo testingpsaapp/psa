@@ -210,6 +210,14 @@
         </div>
 		
 	</div><!-- row 11 ends -->
+	<div class="row">
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Causing Application</strong></div>
+		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%">
+			<select class="form-control" id="causing_app" ng-model="causing_app">
+				<option ng-repeat="x in allApplications">{{x.appName}}</option>
+			</select>
+		</div>
+	</div><!-- row 12 ends -->
 	
 	<div class="row" style=" margin-top: 2%">
 		<div class="col-sm-3"></div>

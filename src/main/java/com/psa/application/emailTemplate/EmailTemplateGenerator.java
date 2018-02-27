@@ -53,7 +53,9 @@ public class EmailTemplateGenerator{
 		}
 		else if(templateId.equals("change_comm_biz_sanity"))
 		{
-			
+			EmailTemplate emailTemplate = changeCommBusinessTemplate;
+			ChangeComm newChangeComm=(ChangeComm)obj;
+			body = emailTemplate.generateBody(templateId,newChangeComm);
 		}
 		return body;
 	}

@@ -14,11 +14,10 @@ public interface WorklistRepository extends JpaRepository<Worklist,Long> {
 
 	@Query("SELECT w from Worklist w where LOWER(w.taskId) =LOWER (:changeNum) "
 			+ "and LOWER(w.taskOwner) = LOWER (:taskOwner) "
-			+ "and w.link like ('%:appName%') "
 			+ "and w.status = 'ACTIVE'")
-	Worklist findWorklistByTaskIdTaskOwnerAppName(@Param("changeNum")String changeNum,@Param("taskOwner") String taskOwner, @Param("appName")String appName);
+	List<Worklist> findWorklistByTaskIdTaskOwnerAppName(@Param("changeNum")String changeNum,@Param("taskOwner") String taskOwner);
 
 	@Query("SELECT w from Worklist w where LOWER(w.taskId) = (:changeNum) and w.status = 'ACTIVE'")
-	List<Worklist> findWorklistByTaskIdStatus(String changeNum);
+	List<Worklist> findWorklistByTaskIdStatus(@Param("changeNum")String changeNum);
 
 }

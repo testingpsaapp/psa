@@ -23,6 +23,7 @@ public class SendMail
 		helper = new MimeMessageHelper(message, true);
 		helper.setSubject(subject);
 		message.setContent("<html><body>"+body+"</body</html>","text/html");
+		System.out.println("<html><body>"+body+"</body</html>");
 		helper.setBcc(bcc);
 		helper.setCc(cc);
 		helper.setTo(to);

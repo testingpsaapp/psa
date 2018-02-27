@@ -9,6 +9,8 @@ psaapp.controller('submitSanityController', function($scope,$http)
 	$scope.appName=(((url.split('?')[1]).split("&"))[0]).split('=')[1];
 	$scope.changeNum=(((url.split('?')[1]).split("&"))[1]).split('=')[1];
 	console.log(url.split('?')[1]);
+	console.log('AppName:'+$scope.appName);
+	console.log('ChangeNum:'+$scope.changeNum);
 	$scope.noOfSanityScope=['1'];
 	$scope.submitSanity=true;
 	
@@ -47,8 +49,8 @@ psaapp.controller('submitSanityController', function($scope,$http)
 		}
 		
 		console.log($scope.sanityScope);
-		
-		$http.post("/changeComm/submitSanityScope/"+$scope.changeNum+"/"+$scope.appName,$scope.sanityScope)
+		console.log("/changeComm/submitSanityScope/"+$scope.changeNum+"/"+$scope.appName);
+		$http.post('/changeComm/submitSanityScope/'+$scope.changeNum+'/'+$scope.appName+'/',$scope.sanityScope)
 		 .then(function(data){
 			 $scope.saveMessage = data.data;
              console.log($scope.saveMessage);
@@ -61,5 +63,23 @@ psaapp.controller('submitSanityController', function($scope,$http)
 	         $scope.successMessageModel=false;
 		 });
 	}
+	
+	$scope.ignoreSanity=function()
+	{
+		$http.post('/changeComm/ignoreSanity/'+$scope.changeNum+'/'+$scope.appName+'/')
+		.then(function(data){
+			$scope.saveMessage = data.data;
+            console.log($scope.saveMessage);
+            $scope.successMessageModel=true;
+            $scope.failureMessageModel=false;
+		},function(data){
+			$scope.saveMessage = data.data;
+	        console.log($scope.saveMessage);
+	        $scope.failureMessageModel=true;
+	        $scope.successMessageModel=false;
+		}
+		
+		);
+	};
 	
 });

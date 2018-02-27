@@ -1,8 +1,11 @@
 package com.psa.application.service;
 
+import java.util.List;
+
 import javax.mail.MessagingException;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -114,11 +117,21 @@ public class ChangeCommService {
 		String result="{\"message\":\"Sanity Scope Submission Failed\"}";
 		//step 1 extract worklist with change num and appowner and look if active or not
 		String taskOwner=appConfigRepository.getAppConfigByAppName(appName).getLobLead();
-		Worklist worklist = worklistRepository.findWorklistByTaskIdTaskOwnerAppName(changeNum,taskOwner, appName);
-		if(worklist!=null)
+		System.out.println("'%"+appName+"%'");
+		List<Worklist> listOfworklist = worklistRepository.findWorklistByTaskIdTaskOwnerAppName(changeNum,taskOwner);
+		Worklist tempWorkList=null;
+		if(listOfworklist!=null)
 		{
 			//step 2 if worklist active extract changecomm with changenumm and append sanity scope and update
 			ChangeComm changeComm= changeCommRepository.findChangeCommByChangeNum(changeNum);
+			for(Worklist worklist : listOfworklist)
+			{
+				if(worklist.getLink().contains("appName="+appName))
+				{
+					tempWorkList=worklist;
+					break;
+				}
+			}
 			
 			int newSize =changeComm.getSanityScope().length + sanityScope.length;
 			String[] sanityScope_temp = new String[ newSize ];
@@ -135,8 +148,8 @@ public class ChangeCommService {
 			changeComm.setSanityScope(sanityScope_temp);
 			changeCommRepository.saveAndFlush(changeComm);
 			//step 3 set worklist to completed
-			worklist.setStatus("COMPLETED");
-			worklistRepository.saveAndFlush(worklist);
+			tempWorkList.setStatus("COMPLETED");
+			worklistRepository.saveAndFlush(tempWorkList);
 			//step 4 check if any worklist for changenum is active
 			if(worklistRepository.findWorklistByTaskIdStatus(changeNum)== null || worklistRepository.findWorklistByTaskIdStatus(changeNum).size()<=0)		
 			{
@@ -154,11 +167,28 @@ public class ChangeCommService {
 					String subject = changeComm.getChangNum()+"- Business Sanity Communication";
 					String body =emailTemplateGenerator.getEmailBody("change_comm_biz_sanity", changeComm);
 					body=body.replace("@@Country@@", country);
-					
+					String countrySpecificSanity="<table><thead><tr><th>Application</th><th>Sanity Step</th>";//table header to be put in here
+					String[] tempSanity =changeComm.getSanityScope();
+					for(int k=0;k<tempSanity.length;k++)
+					{
+						JSONObject obj = new JSONObject(tempSanity[k]);
+						String countryTemp=obj.getString("country");
+						if(country.equals(countryTemp))
+						{
+							countrySpecificSanity+="<tr>"
+									+ "<td>"+obj.getString("application")+"</td>"
+									+ "<td>"+obj.getString("sanityStep")+"</td>"
+									+ "</tr>";
+						}
+						//impact += "<tr><td>"+obj.getString("channel")+"</td><td>"+obj.getString("natureOfImpact")+"</td><td>"+obj.get("volumeOfImpact").toString()+"</td></tr>";
+					}
+					countrySpecificSanity+="</table></thead>";
+					body=body.replaceAll("@@SanityScope@@", countrySpecificSanity);
 					//Step 5.3 send mail
 					sendMail.sendMail(to, cc, bcc, subject, body);
 				}
 			}
+			result="{\"message\":\"Sanity Scope Submitted Successfully\"}";
 		}
 		else //step 1 else return corresponding workitem already completed
 		{
@@ -166,6 +196,68 @@ public class ChangeCommService {
 		}
 		
 		
+		return result;
+	}
+
+	public String ignoreScope(String changeNum, String appName) throws MessagingException, JSONException {
+		// TODO Auto-generated method stub
+		
+		String result="{\"message\":\"Sanity Scope Ignore Failed\"}";
+		List<Worklist> listOfWorkList=null;
+		listOfWorkList=worklistRepository.findWorklistByTaskIdStatus(changeNum);
+		int flag=0;
+		for(Worklist worklist:listOfWorkList)
+		{
+			if(worklist.getLink().contains("appName="+appName))
+			{
+				worklist.setStatus("COMPLETED");
+				worklistRepository.saveAndFlush(worklist);
+				result="{\"message\":\"Sanity Scope Ignore Successful. Workflow Updated.\"}";
+				flag=1;
+				break;
+			}
+		}
+		if(flag==1)
+		{
+			List<Worklist> listOfNewWorkList=worklistRepository.findWorklistByTaskIdStatus(changeNum);
+			if(listOfNewWorkList == null || listOfNewWorkList.size()==0)
+			{
+				ChangeComm changeComm= changeCommRepository.findChangeCommByChangeNum(changeNum);
+				String[] countriesInChange = changeComm.getImpactedCountry();
+				//Step 5.2 for each country prepare separate body
+				for(int i=0;i<countriesInChange.length;i++)
+				{
+					String country =countriesInChange[i];
+					Countries countryObj=countryRepository.findByCountryName(country);
+					String to = countryObj.getCountryDlist();
+					String cc = countryObj.getTechHead()+"@"+environment.getProperty("psa.mailing.domain");
+					String bcc = appConfigRepository.getAppConfigByAppName(changeComm.getChangeOwner()).getLobLead()+"@"+environment.getProperty("psa.mailing.domain");
+					String subject = changeComm.getChangNum()+"- Business Sanity Communication";
+					String body =emailTemplateGenerator.getEmailBody("change_comm_biz_sanity", changeComm);
+					body=body.replace("@@Country@@", country);
+					String countrySpecificSanity="<table><thead><tr><th>Application</th><th>Sanity Step</th>";//table header to be put in here
+					String[] tempSanity =changeComm.getSanityScope();
+					for(int k=0; k<tempSanity.length;k++)
+					{
+						JSONObject obj = new JSONObject(tempSanity[k]);
+						String countryTemp=obj.getString("country");
+						if(country.equals(countryTemp))
+						{
+							countrySpecificSanity+="<tr>"
+									+ "<td>"+obj.getString("application")+"</td>"
+									+ "<td>"+obj.getString("sanityStep")+"</td>"
+									+ "</tr>";
+						}
+						//impact += "<tr><td>"+obj.getString("channel")+"</td><td>"+obj.getString("natureOfImpact")+"</td><td>"+obj.get("volumeOfImpact").toString()+"</td></tr>";
+					}
+					countrySpecificSanity+="</table></thead>";
+					body=body.replaceAll("@@SanityScope@@", countrySpecificSanity);
+					//Step 5.3 send mail
+					System.out.println(body);
+					sendMail.sendMail(to, cc, bcc, subject, body);
+				}
+			}
+		}
 		return result;
 	}
 

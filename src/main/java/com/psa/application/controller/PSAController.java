@@ -511,12 +511,21 @@ public class PSAController {
 		return countries;
 	}
 	
-	@RequestMapping(path="/changeComm/submitSanityScope/{changeNum}/{appName}", method = RequestMethod.POST)
-	public String submitSanityScope(@RequestBody String[] sanityScope, @PathVariable("changeNum") String changeNum, @PathVariable("appName") String appName) throws JSONException, MessagingException
+	@RequestMapping(path="/changeComm/submitSanityScope/{changeNum}/{appName}/", method = RequestMethod.POST)
+	public String submitSanityScope(@PathVariable("changeNum") String changeNum, @PathVariable("appName") String appName, @RequestBody String[] sanityScope) throws JSONException, MessagingException
 	{
 		String result="";
 		System.out.println("Inside Controller");
 		result=changeCommService.submitScope(sanityScope,changeNum,appName);
+		return result;
+	}
+	
+	@RequestMapping(path="/changeComm/ignoreSanity/{changeNum}/{appName}/", method = RequestMethod.POST)
+	public String ignoreSanityScope(@PathVariable("changeNum") String changeNum, @PathVariable("appName") String appName) throws JSONException, MessagingException
+	{
+		String result="";
+		System.out.println("Inside Controller");
+		result=changeCommService.ignoreScope(changeNum,appName);
 		return result;
 	}
 }
