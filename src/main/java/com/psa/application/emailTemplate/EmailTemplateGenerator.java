@@ -9,7 +9,7 @@ import com.psa.application.model.DailyCallIncidentTracker;
 import com.psa.application.model.IncidentComm;
 
 @Component
-public class EmailTemplateGenerator{
+public class EmailTemplateGenerator{ 
 	
 	@Autowired
 	IncMIMCommTemplate newIncMIMCommTemplate;
@@ -19,6 +19,9 @@ public class EmailTemplateGenerator{
 	
 	@Autowired
 	ChangeCommTemplate changeCommTemplate;
+	
+	@Autowired 
+	ChangeCommBusinessTemplate changeCommBusinessTemplate;
 	
 	
 	public String getEmailBody(String templateId,Object obj) throws JSONException
@@ -44,7 +47,7 @@ public class EmailTemplateGenerator{
 		}
 		else if(templateId.equals("change_comm_sanity"))
 		{
-			EmailTemplate emailTemplate = changeCommTemplate;
+			EmailTemplate emailTemplate = changeCommBusinessTemplate;
 			ChangeComm newChangeComm=(ChangeComm)obj;
 			body = emailTemplate.generateBody(templateId,newChangeComm);
 		}

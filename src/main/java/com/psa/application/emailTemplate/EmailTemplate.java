@@ -12,4 +12,5 @@ public interface EmailTemplate
 	public String replacePlaceHolder(String body,DailyCallIncidentTracker newDailyCallIncidentTracker) throws JSONException;
 	public String replacePlaceHolder(String body,IncidentComm newIncidentComm) throws JSONException;
 	public String replacePlaceHolder(String body,ChangeComm changeComm) throws JSONException;
+	
 }

@@ -153,6 +153,7 @@ public class ChangeCommService {
 					String bcc = appConfigRepository.getAppConfigByAppName(changeComm.getChangeOwner()).getLobLead()+"@"+environment.getProperty("psa.mailing.domain");
 					String subject = changeComm.getChangNum()+"- Business Sanity Communication";
 					String body =emailTemplateGenerator.getEmailBody("change_comm_biz_sanity", changeComm);
+					body=body.replace("@@Country@@", country);
 					
 					//Step 5.3 send mail
 					sendMail.sendMail(to, cc, bcc, subject, body);
