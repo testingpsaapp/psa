@@ -557,7 +557,7 @@ public class PSAController {
 	}
 	
 	@RequestMapping(path="/briefingPaper/review/{mimNum}/lobleads/{reviewer}/{appName}", method = RequestMethod.PUT)
-	public String reviewBriefingPaperSubmitLobLead(@PathVariable("reviewer") String reviewer,@PathVariable("mimNum")String mimNum,@PathVariable("appName") String appName,@RequestBody BriefPapPub briefPapPub) throws JSONException, MessagingException
+	public String reviewBriefingPaperSubmitLobLead(@PathVariable(value="reviewer") String reviewer,@PathVariable(value="mimNum")String mimNum,@PathVariable(value="appName") String appName,@RequestBody BriefPapPub briefPapPub) throws JSONException, MessagingException
 	{
 		String result="";
 		System.out.println("Inside Controller");
@@ -566,7 +566,7 @@ public class PSAController {
 	}
 	
 	@RequestMapping(path="/briefingPaper/review/{mimNum}/psm/{reviewer}/{appName}", method = RequestMethod.PUT)
-	public String reviewBriefingPaperSubmitPSM(@PathVariable("reviewer") String reviewer,@PathVariable("mimNum")String mimNum,@PathVariable("appName") String appName,@RequestBody BriefPapPub briefPapPub) throws JSONException, MessagingException
+	public String reviewBriefingPaperSubmitPSM(@PathVariable(value="reviewer") String reviewer,@PathVariable(value="mimNum")String mimNum,@PathVariable(value="appName") String appName,@RequestBody BriefPapPub briefPapPub) throws JSONException, MessagingException
 	{
 		String result="";
 		System.out.println("Inside Controller");

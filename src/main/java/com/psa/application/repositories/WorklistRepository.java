@@ -21,7 +21,7 @@ public interface WorklistRepository extends JpaRepository<Worklist,Long> {
 	List<Worklist> findWorklistByTaskIdStatus(@Param("changeNum")String changeNum);
 
 	@Query("SELECT w from Worklist w where LOWER(w.taskId) = (:taskid) and w.status = 'ACTIVE'")
-	List<Worklist> getBriefingPaperTaskForReviewByLOBLead(String taskid);
+	List<Worklist> getBriefingPaperTaskForReviewByLOBLead(@Param("taskid")String taskid);
 	
 	@Query("SELECT w from Worklist w where w.status = 'ACTIVE'")
 	List<Worklist> findAllActive();

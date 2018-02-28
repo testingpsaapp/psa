@@ -2,7 +2,7 @@
  * briefingPaperPublisherController starts
  */
 
-psaapp.controller('briefingPaperPublisherController', function($scope,$http) 
+psaapp.controller('briefingPaperPublisherController', function($scope,$http,$q) 
 {
 	$scope.successMessageModel=false;
 	$scope.failureMessageModel=false;
@@ -164,12 +164,14 @@ psaapp.controller('briefingPaperPublisherController', function($scope,$http)
 	
 	$scope.approveLobLead=function()
 	{
+		$scope.reviewer = window.location.href.split('?')[1].split('&')[2].split('=')[1];
+		$scope.appName= window.location.href.split('?')[1].split('&')[3].split('=')[1];
 		$scope.chronology=[];
 		for(x in $scope.noOfChrono)
 		{
 			var a=parseInt(x)+1;
 			//alert($('#impacted_channel_'+a).val());
-			$scope.chronology.push("{\"chrono\":\""+$('#chrono_'+a).val()+"\","+"\"chronoAction\":\"" +$('#chrono_action_'+a).val()+"\","+"\"chronoDateTime\":\""+$('#chrono_datetime_'+a).val()+"\"}");
+			$scope.chronology.push("{\"chrono\":\""+a+"\","+"\"chronoAction\":\"" +$('#chrono_action_'+a).val()+"\","+"\"chronoDateTime\":\""+$('#chrono_datetime_'+a).val()+"\"}");
 		}
 		$scope.impact=[];
 		for(x in $scope.noOfimpact)
@@ -213,7 +215,7 @@ psaapp.controller('briefingPaperPublisherController', function($scope,$http)
 				
 		};
 		console.log($scope.briefingPaperObj);
-		 $http.put('/briefingPaper/review/{$scope.mim_num_retrieve}/lobleads/{$scope.reviewer}/{$scope.appName}', $scope.briefingPaperObj)
+		 $http.put('/briefingPaper/review/'+$scope.inc_num+'/lobleads/'+$scope.reviewer+'/'+$scope.appName, $scope.briefingPaperObj)
 		 .then(function(data){
 			 $scope.saveMessage = data.data;
             console.log($scope.saveMessage);
@@ -279,7 +281,7 @@ psaapp.controller('briefingPaperPublisherController', function($scope,$http)
 				
 		};
 		console.log($scope.briefingPaperObj);
-		 $http.put('/briefingPaper/review/{$scope.mim_num_retrieve}/psm/{$scope.reviewer}/{$scope.appName}', $scope.briefingPaperObj)
+		 $http.put('/briefingPaper/review/'+$scope.mim_num_retrieve+'/psm/'+$scope.reviewer+'/'+$scope.appName, $scope.briefingPaperObj)
 		 .then(function(data){
 			 $scope.saveMessage = data.data;
             console.log($scope.saveMessage);
@@ -345,7 +347,7 @@ psaapp.controller('briefingPaperPublisherController', function($scope,$http)
 				
 		};
 		console.log($scope.briefingPaperObj);
-		 $http.put('/briefingPaper/review/{$scope.mim_num_retrieve}/pssm/{$scope.reviewer}/{$scope.appName}', $scope.briefingPaperObj)
+		 $http.post('/briefingPaper/review/'+$scope.mim_num_retrieve+'/pssm/'+$scope.reviewer+'/'+$scope.appName, $scope.briefingPaperObj)
 		 .then(function(data){
 			 $scope.saveMessage = data.data;
             console.log($scope.saveMessage);
@@ -365,162 +367,149 @@ psaapp.controller('briefingPaperPublisherController', function($scope,$http)
 		$scope.mim_num_retrieve=window.location.href.split('?')[1].split('&')[1].split('=')[1];
 		$scope.reviewer = window.location.href.split('?')[1].split('&')[2].split('=')[1];
 		$scope.appName= window.location.href.split('?')[1].split('&')[3].split('=')[1];
-		$http.get('/briefingPaper/'+$scope.mim_num_retrieve).then(function(data){
-            $scope.briefingPaperRetrieve = data.data;
-            //console.log($scope.briefingPaperRetrieve);
+		$http.get('/briefingPaper/'+$scope.mim_num_retrieve)
+		.then(function(data){
+			$scope.briefingPaperRetrieve = data.data;
+			$scope.inc_num = $scope.briefingPaperRetrieve.mimNum;
+			$scope.start_time=$scope.briefingPaperRetrieve.mimStartDate
+			$scope.end_time=$scope.briefingPaperRetrieve.mimEndDate
+			if(t!=-1)
+			{
+				$scope.approveButtLobLead=true;
+				$scope.approveButtPSM=false;
+				$scope.approveButtPSSM=false;
+
+			}
+			else if(q!=-1)
+			{
+				$scope.approveButtPSM=true;
+				$scope.approveButtLobLead=false;
+				$scope.approveButtPSSM=false;
+
+			}
+			else if(r!=-1)
+			{
+				$scope.approveButtPSSM=true;
+				$scope.approveButtLobLead=false;
+				$scope.approveButtPSM=false;
+
+			}
+			
+			$scope.changeBriefingPaperCommDD($scope.briefingPaperRetrieve.severity,'incident_severity_butt');
+			var tempIncType=$scope.briefingPaperRetrieve.severity;
+			if((tempIncType).indexOf('Priority')> -1)
+	        {
+				$scope.changeBriefingPaperCommDD('Standard Incident','incident_type_butt');
+	        }
+	        else
+	        {
+	        	$scope.changeBriefingPaperCommDD('Major Incident','incident_type_butt');
+	        }
+			$scope.incident_date=$scope.briefingPaperRetrieve.mimDate;
+			$('#date').val($scope.briefingPaperRetrieve.mimDate);
+			$scope.changeBriefingPaperCommDD($scope.briefingPaperRetrieve.impactedRegion,'impacted_region_butt');
+			$scope.impacted_country=$scope.briefingPaperRetrieve.impactedCountry;
+			var tempImpSec=$scope.briefingPaperRetrieve.impactedSector;
+	        for(var i=0; i<tempImpSec.length;i++)
+	        {
+	      	  if(tempImpSec[i]=='CTI')
+	      	  {
+	      		  $scope.impacted_sector_cti=true;
+	      	  }
+	      	  else if(tempImpSec[i]=='GCG')
+	      	  {
+	      		  $scope.impacted_sector_gcg=true;
+	      	  }
+	      	  else if(tempImpSec[i]=='ICG')
+	      	  {
+	      		  $scope.impacted_sector_icg=true;
+	      	  }
+	        }
+	        //$('#date').val($scope.briefingPaperRetrieve.incidentDate);
+	        $scope.start_time=$scope.briefingPaperRetrieve.impactStartTime;
+	        $scope.end_time=$scope.briefingPaperRetrieve.impactEndTime;
+	        $scope.impacted_lob=$scope.briefingPaperRetrieve.impactedLob;
+	        $http.post('/appConfig/multiple',$scope.impacted_lob).then(function(data){
+	            $scope.applications = data.data;
+	            
+			});
+	        $scope.title = $scope.briefingPaperRetrieve.title;
+	        $scope.description=$scope.briefingPaperRetrieve.description;
+	        $scope.fix_details=$scope.briefingPaperRetrieve.fix;
+	        var tempImpact=$scope.briefingPaperRetrieve.impact;
+	        if(tempImpact.length>1)
+	        {
+	      	  var x=[];
+	      	  
+	            for(var i=0;i<tempImpact.length;i++)
+	            {
+	          	  x.push((parseInt(i)+1))
+	            }
+	            
+	            $scope.noOfimpact=x;
+	            //console.log($scope.briefingPaperRetrieve.impact);
+	            $(document).ready(
+	          	  function()
+	          	  {
+			              for(var i=0;i<tempImpact.length;i++)
+			              {
+			            	  var impactObj=JSON.parse($scope.briefingPaperRetrieve.impact[i]);
+			            	  //console.log(impactObj.channel);
+			            	  //console.log(impactObj.natureOfImpact);
+			            	  //console.log(impactObj.volumeOfImpact);
+			            	  var j=(parseInt(i)+1);
+			            	  //$scope.impacted_channel[i+'']=impactObj.channel;
+			            	  $("#impacted_channel_"+j+" option[value='"+impactObj.channel+"']").attr("selected", "selected");
+			            	  $('#nature_of_impact_'+j).val(impactObj.natureOfImpact);
+			            	  $('#volume_of_impact_'+j).val(impactObj.volumeOfImpact);
+			            	  //console.log($('#volume_of_impact_'+j));
+			              }
+	            	  }
+	            );
+	            
+	        }
+	        else
+	        {
+	      	  
+	        }
+	        $scope.preventive_actions = $scope.briefingPaperRetrieve.preventiveAct;
+	        var tempCausingApp=$scope.briefingPaperRetrieve.causingApp;
+	        $("#causing_app"+" option[value='"+tempCausingApp+"']").attr("selected", "selected");
+	        
+	        var tempChrono=$scope.briefingPaperRetrieve.chronology;
+	        //alert(tempChrono);
+	        if(tempChrono.length>=1)
+	        {
+	      	  var x=[];
+	      	  
+	            for(var i=0;i<tempChrono.length;i++)
+	            {
+	          	  x.push((parseInt(i)+1)+'');
+	            }
+	            
+	            $scope.noOfChrono=x;
+	            //console.log($scope.briefingPaperRetrieve.chronology);
+	             for(var i=0;i<tempChrono.length;i++)
+			              {
+			            	  var chronoObj=JSON.parse(tempChrono[i]);
+			            	  //console.log(chronoObj.chrono);
+			            	  //console.log(chronoObj.chronoAction);
+			            	  //console.log(chronoObj.chronoDateTime);
+			            	  var j=(parseInt(i)+1);
+			            	  //$scope.impacted_channel[i+'']=impactObj.channel;
+			            	  //alert(chronoObj.chrono);
+			            	  $("#chrono_"+j).val(chronoObj.chrono);
+			            	  $('#chrono_action_'+j).val(chronoObj.chronoAction);
+			            	  $('#chrono_datetime_'+j).val(chronoObj.chronoDateTime);
+			            	  //console.log($('#volume_of_impact_'+j));
+			              }
+	            	            
+	        }
+	        else
+	        {
+	      	  
+	        }
 		});
 		
-		if(t!=-1)
-		{
-			$scope.approveButtLobLead=true;
-			$scope.approveButtPSM=false;
-			$scope.approveButtPSSM=false;
-//			$http.get('/briefingPaper/'+$scope.mim_num_retrieve).then(function(data){
-//	            $scope.briefingPaperRetrieve = data.data;
-//	            //console.log($scope.briefingPaperRetrieve);
-//			});
-		}
-		else if(q!=-1)
-		{
-			$scope.approveButtPSM=true;
-			$scope.approveButtLobLead=false;
-			$scope.approveButtPSSM=false;
-//			$http.get('/briefingPaper/'+$scope.mim_num_retrieve).then(function(data){
-//	            $scope.briefingPaperRetrieve = data.data;
-//	            //console.log($scope.briefingPaperRetrieve);
-//			});
-		}
-		else if(r!=-1)
-		{
-			$scope.approveButtPSSM=true;
-			$scope.approveButtLobLead=false;
-			$scope.approveButtPSM=false;
-//			$http.get('/briefingPaper/'+$scope.mim_num_retrieve).then(function(data){
-//	            $scope.briefingPaperRetrieve = data.data;
-//	            //console.log($scope.briefingPaperRetrieve);
-//			},function(data){});
-		}
-		
-		
-		/*console.log($scope.mim_num_retrieve);
-		console.log($scope.reviewer);
-		
-		console.log($scope.briefingPaperRetrieve);*/
-		$scope.changeBriefingPaperCommDD($scope.briefingPaperRetrieve.severity,'incident_severity_butt');
-		var tempIncType=$scope.briefingPaperRetrieve.severity;
-		if((tempIncType).indexOf('Priority')> -1)
-        {
-			$scope.changeBriefingPaperCommDD('Standard Incident','incident_type_butt');
-        }
-        else
-        {
-        	$scope.changeBriefingPaperCommDD('Major Incident','incident_type_butt');
-        }
-		$scope.incident_date=$scope.briefingPaperRetrieve.briefingPaperRetrieve;
-		$scope.changeBriefingPaperCommDD($scope.briefingPaperRetrieve.impactedRegion,'impacted_region_butt');
-		$scope.impacted_country=$scope.briefingPaperRetrieve.impactedCountry;
-		var tempImpSec=$scope.briefingPaperRetrieve.impactedSector;
-        for(var i=0; i<tempImpSec.length;i++)
-        {
-      	  if(tempImpSec[i]=='CTI')
-      	  {
-      		  $scope.impacted_sector_cti=true;
-      	  }
-      	  else if(tempImpSec[i]=='GCG')
-      	  {
-      		  $scope.impacted_sector_gcg=true;
-      	  }
-      	  else if(tempImpSec[i]=='ICG')
-      	  {
-      		  $scope.impacted_sector_icg=true;
-      	  }
-        }
-        $('#date').val($scope.briefingPaperRetrieve.incidentDate);
-        $scope.start_time=$scope.briefingPaperRetrieve.impactStartTime;
-        $scope.end_time=$scope.briefingPaperRetrieve.impactEndTime;
-        $scope.impacted_lob=$scope.briefingPaperRetrieve.impactedLob;
-        $http.post('/appConfig/multiple',$scope.impacted_lob).then(function(data){
-            $scope.applications = data.data;
-            
-		});
-        $scope.title = $scope.briefingPaperRetrieve.title;
-        $scope.description=$scope.briefingPaperRetrieve.description;
-        $scope.fix_details=$scope.briefingPaperRetrieve.fix;
-        var tempImpact=$scope.briefingPaperRetrieve.impact;
-        if(tempImpact.length>1)
-        {
-      	  var x=[];
-      	  
-            for(var i=0;i<tempImpact.length;i++)
-            {
-          	  x.push((parseInt(i)+1))
-            }
-            
-            $scope.noOfimpact=x;
-            //console.log($scope.briefingPaperRetrieve.impact);
-            $(document).ready(
-          	  function()
-          	  {
-		              for(var i=0;i<tempImpact.length;i++)
-		              {
-		            	  var impactObj=JSON.parse($scope.briefingPaperRetrieve.impact[i]);
-		            	  //console.log(impactObj.channel);
-		            	  //console.log(impactObj.natureOfImpact);
-		            	  //console.log(impactObj.volumeOfImpact);
-		            	  var j=(parseInt(i)+1);
-		            	  //$scope.impacted_channel[i+'']=impactObj.channel;
-		            	  $("#impacted_channel_"+j+" option[value='"+impactObj.channel+"']").attr("selected", "selected");
-		            	  $('#nature_of_impact_'+j).val(impactObj.natureOfImpact);
-		            	  $('#volume_of_impact_'+j).val(impactObj.volumeOfImpact);
-		            	  //console.log($('#volume_of_impact_'+j));
-		              }
-            	  }
-            );
-            
-        }
-        else
-        {
-      	  
-        }
-        $scope.preventive_actions = $scope.briefingPaperRetrieve.preventiveAct;
-        var tempCausingApp=$scope.briefingPaperRetrieve.causingApp;
-        $("#causing_app"+" option[value='"+tempCausingApp+"']").attr("selected", "selected");
-        
-        var tempChrono=$scope.briefingPaperRetrieve.chronology;
-        if(tempChrono.length>1)
-        {
-      	  var x=[];
-      	  
-            for(var i=0;i<tempChrono.length;i++)
-            {
-          	  x.push((parseInt(i)+1))
-            }
-            
-            $scope.noOfChrono=x;
-            //console.log($scope.briefingPaperRetrieve.chronology);
-            $(document).ready(
-          	  function()
-          	  {
-		              for(var i=0;i<tempChrono.length;i++)
-		              {
-		            	  var chronoObj=JSON.parse($scope.briefingPaperRetrieve.chronology[i]);
-		            	  //console.log(chronoObj.chrono);
-		            	  //console.log(chronoObj.chronoAction);
-		            	  //console.log(chronoObj.chronoDateTime);
-		            	  var j=(parseInt(i)+1);
-		            	  //$scope.impacted_channel[i+'']=impactObj.channel;
-		            	  $("#chrono_"+j).val(chronoObj.chrono);
-		            	  $('#chrono_action_'+j).val(chronoObj.chronoAction);
-		            	  $('#chrono_datetime_'+j).val(chronoObj.chronoDateTime);
-		            	  //console.log($('#volume_of_impact_'+j));
-		              }
-            	  }
-            );
-            
-        }
-        else
-        {
-      	  
-        }
 	}
 });

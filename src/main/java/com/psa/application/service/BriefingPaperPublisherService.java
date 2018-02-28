@@ -204,9 +204,9 @@ public class BriefingPaperPublisherService {
 			for(int i =0; i<impactedCountries.length;i++)
 			{
 				to.add(countryRepository.findByCountryName(impactedCountries[i]).getCountryDlist());
-				cc.add(countryRepository.findByCountryName(impactedCountries[i]).getTechHead());
-				bcc.add(countryRepository.findByCountryName(impactedCountries[i]).getOntHead());
-				bcc.add(countryRepository.findByCountryName(impactedCountries[i]).getCbmHead());
+				cc.add(countryRepository.findByCountryName(impactedCountries[i]).getTechHead()+"@"+environment.getProperty("psa.mailing.domain"));
+				bcc.add(countryRepository.findByCountryName(impactedCountries[i]).getOntHead()+"@"+environment.getProperty("psa.mailing.domain"));
+				bcc.add(countryRepository.findByCountryName(impactedCountries[i]).getCbmHead()+"@"+environment.getProperty("psa.mailing.domain"));
 			}
 			String[] toMailId = new String[to.size()];
 			toMailId = to.toArray(toMailId);

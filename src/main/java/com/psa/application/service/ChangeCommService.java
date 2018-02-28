@@ -79,10 +79,11 @@ public class ChangeCommService {
 					body = body.replaceAll("@@ImpactedPP@@", newChangeComm.getImpactedPp()[i]);
 					System.out.println(body);
 					String subject =newChangeComm.getChangNum()+"- Pending Action Item";
-					messageResult=sendMail.sendMail(appConfigRepository.getAppConfigByAppName(newChangeComm.getImpactedPp()[i]).getdList(), 
+					messageResult=sendMail.sendMail(appConfigRepository.getAppConfigByAppName(newChangeComm.getImpactedPp()[i]).getdList()+"@"+environment.getProperty("psa.mailing.domain"), 
 							appConfigRepository.getAppConfigByAppName(newChangeComm.getImpactedPp()[i]).getLobLead()+"@"+environment.getProperty("psa.mailing.domain"), 
 							appConfigRepository.getAppConfigByAppName(newChangeComm.getImpactedPp()[i]).getPsm()+"@"+environment.getProperty("psa.mailing.domain"), 
 							subject, body);
+					
 					if(("Mail Sending Failed").equals(messageResult) || ("Failed").equals(messageResult))
 					{
 						worklistRepository.delete(newWorklist);
