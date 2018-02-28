@@ -18,4 +18,6 @@ public interface CountryRepository extends JpaRepository<Countries, Long> {
 	@Query("SELECT c FROM Countries c WHERE LOWER(c.countryName) = LOWER(:countryName)")
 	public Countries findByCountryName(@Param("countryName") String countryName);
 
+	
+
 }

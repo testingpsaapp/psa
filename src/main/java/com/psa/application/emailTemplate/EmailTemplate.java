@@ -2,6 +2,7 @@ package com.psa.application.emailTemplate;
 
 import org.json.JSONException;
 
+import com.psa.application.model.BriefPapPub;
 import com.psa.application.model.ChangeComm;
 import com.psa.application.model.DailyCallIncidentTracker;
 import com.psa.application.model.IncidentComm;
@@ -12,5 +13,6 @@ public interface EmailTemplate
 	public String replacePlaceHolder(String body,DailyCallIncidentTracker newDailyCallIncidentTracker) throws JSONException;
 	public String replacePlaceHolder(String body,IncidentComm newIncidentComm) throws JSONException;
 	public String replacePlaceHolder(String body,ChangeComm changeComm) throws JSONException;
+	public String replacePlaceHolder(String body,BriefPapPub briefPapPub) throws JSONException;
 	
 }

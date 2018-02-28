@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.psa.application.model.BriefPapPub;
 import com.psa.application.model.ChangeComm;
 import com.psa.application.model.DailyCallIncidentTracker;
 import com.psa.application.model.IncidentComm;
@@ -48,6 +49,12 @@ public class DCITTemplate implements EmailTemplate{
 
 	@Override
 	public String replacePlaceHolder(String body, ChangeComm changeComm) throws JSONException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String replacePlaceHolder(String body, BriefPapPub briefPapPub) throws JSONException {
 		// TODO Auto-generated method stub
 		return null;
 	}

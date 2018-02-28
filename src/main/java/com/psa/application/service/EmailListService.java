@@ -47,7 +47,7 @@ public class EmailListService {
 		for(int i=0; i<incidentComm.getImpactedCountry().length;i++)
 		{
 			//Country DList Set
-			listOfToMailId.add((countryRepository.findByCountryName(incidentComm.getImpactedCountry()[i])).getCountryDlist()+"@"+environment.getProperty("psa.mailing.domain"));
+			listOfToMailId.add((countryRepository.findByCountryName(incidentComm.getImpactedCountry()[i])).getCountryDlist());
 			
 			//Tech Head Set
 			listOfCCMailId.add((countryRepository.findByCountryName(incidentComm.getImpactedCountry()[i])).getTechHead()+"@"+environment.getProperty("psa.mailing.domain"));
@@ -64,7 +64,7 @@ public class EmailListService {
 		{
 			Gson gsonObj = new Gson(); 
 			IncidentCommImpact incidentCommImpact = gsonObj.fromJson(incidentComm.getImpact()[i], IncidentCommImpact.class);
-			listOfToMailId.add((appConfigRepository.getAppConfigByAppName(incidentCommImpact.getChannel())).getdList());
+			listOfToMailId.add((appConfigRepository.getAppConfigByAppName(incidentCommImpact.getChannel())).getdList()+"@"+environment.getProperty("psa.mailing.domain"));
 			
 			listOfCCMailId.add((appConfigRepository.getAppConfigByAppName(incidentCommImpact.getChannel())).getLobLead()+"@"+environment.getProperty("psa.mailing.domain"));
 			listOfCCMailId.add((appConfigRepository.getAppConfigByAppName(incidentCommImpact.getChannel())).getPsm()+"@"+environment.getProperty("psa.mailing.domain"));
@@ -75,12 +75,19 @@ public class EmailListService {
 		}
 		
 		//Step 4 set default CC and BCC Mail Ids
-		listOfCCMailId.add(environment.getProperty("psa.mailing.default.ccemail"));
-		listOfBCCMailId.add(environment.getProperty("psa.mailing.default.bccemail"));
+		//listOfCCMailId.add(environment.getProperty("psa.mailing.default.ccemail"));
+		//listOfBCCMailId.add(environment.getProperty("psa.mailing.default.bccemail"));
 		
-		emailList.setListOfToMailId(listOfToMailId);
-		emailList.setListOfCCMailId(listOfCCMailId);
-		emailList.setListOfBCCMailId(listOfBCCMailId);
+		String[] toMailId = new String[listOfToMailId.size()];
+		toMailId = listOfToMailId.toArray(toMailId);
+		String[] ccMailId = new String[listOfCCMailId.size()];
+		ccMailId = listOfCCMailId.toArray(ccMailId);
+		String[] bccMailId = new String[listOfBCCMailId.size()];
+		bccMailId = listOfBCCMailId.toArray(bccMailId);
+		
+		emailList.setListOfToMailId(toMailId);
+		emailList.setListOfCCMailId(ccMailId);
+		emailList.setListOfBCCMailId(bccMailId);
 		return emailList;
 	}
 

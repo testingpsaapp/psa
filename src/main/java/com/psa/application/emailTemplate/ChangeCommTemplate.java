@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.psa.application.model.BriefPapPub;
 import com.psa.application.model.ChangeComm;
 import com.psa.application.model.DailyCallIncidentTracker;
 import com.psa.application.model.IncidentComm;
@@ -47,6 +48,12 @@ public class ChangeCommTemplate implements EmailTemplate{
 		bodyTemp = bodyTemp.replace("@@ChangeEndTime@@", changeComm.getChangeEndTime());
 		
 		return bodyTemp;
+	}
+
+	@Override
+	public String replacePlaceHolder(String body, BriefPapPub briefPapPub) throws JSONException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

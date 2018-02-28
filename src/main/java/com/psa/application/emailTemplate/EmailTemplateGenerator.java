@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.psa.application.model.BriefPapPub;
 import com.psa.application.model.ChangeComm;
 import com.psa.application.model.DailyCallIncidentTracker;
 import com.psa.application.model.IncidentComm;
@@ -22,6 +23,12 @@ public class EmailTemplateGenerator{
 	
 	@Autowired 
 	ChangeCommBusinessTemplate changeCommBusinessTemplate;
+	
+	@Autowired
+	BriefingPaperReviewTemplate briefingPaperReviewTemplate;
+	
+	@Autowired
+	BriefingPaperBusinessTemplate briefingPaperBusinessTemplate;
 	
 	
 	public String getEmailBody(String templateId,Object obj) throws JSONException
@@ -56,6 +63,17 @@ public class EmailTemplateGenerator{
 			EmailTemplate emailTemplate = changeCommBusinessTemplate;
 			ChangeComm newChangeComm=(ChangeComm)obj;
 			body = emailTemplate.generateBody(templateId,newChangeComm);
+		}
+		else if(templateId.equals("briefing_paper_review"))
+		{
+			EmailTemplate emailTemplate = briefingPaperReviewTemplate;
+			body = emailTemplate.generateBody(templateId,obj);
+		}
+		else if(templateId.equals("briefing_paper_business"))
+		{
+			EmailTemplate emailTemplate = briefingPaperBusinessTemplate;
+			BriefPapPub briefPapPub=(BriefPapPub) obj;
+			body = emailTemplate.generateBody(templateId,briefPapPub);
 		}
 		return body;
 	}

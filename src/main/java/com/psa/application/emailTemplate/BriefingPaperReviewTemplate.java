@@ -1,6 +1,7 @@
 package com.psa.application.emailTemplate;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,18 +12,17 @@ import com.psa.application.model.IncidentComm;
 import com.psa.application.repositories.EmailTemplateRepository;
 
 @Component
-public class ChangeCommBusinessTemplate implements EmailTemplate{
+public class BriefingPaperReviewTemplate implements EmailTemplate{
 
 	@Autowired
 	EmailTemplateRepository emailTemplateRepository;
 	
 	@Override
 	public String generateBody(String templateId, Object obj) throws JSONException {
-		String bodyTemp ="";
-		String bodyFinal="";
-		bodyTemp = emailTemplateRepository.getEmailTemplateByTemplateId(templateId).getTemplate();
-		bodyFinal = replacePlaceHolder(bodyTemp,(ChangeComm)obj);
-		return bodyFinal;
+		// TODO Auto-generated method stub
+		String body =emailTemplateRepository.getEmailTemplateByTemplateId(templateId).getTemplate();
+		body=body.replaceAll("@@MIMNum@@", (String)obj);
+		return body;
 	}
 
 	@Override
@@ -41,20 +41,11 @@ public class ChangeCommBusinessTemplate implements EmailTemplate{
 	@Override
 	public String replacePlaceHolder(String body, ChangeComm changeComm) throws JSONException {
 		// TODO Auto-generated method stub
-		String bodyTemp = body.replace("@@ChangeOwner@@", changeComm.getChangeOwner());
-		bodyTemp = bodyTemp.replace("@@ChangeNumber@@", changeComm.getChangNum());
-		bodyTemp = bodyTemp.replace("@@ChangeTitle@@", changeComm.getChangeTitle());
-		bodyTemp = bodyTemp.replace("@@ChangeDescription@@", changeComm.getChangeDesc());
-		bodyTemp = bodyTemp.replace("@@ChangeDate@@", changeComm.getChangDate());
-		bodyTemp = bodyTemp.replace("@@ChangeStartTime@@", changeComm.getChangStartTime());
-		bodyTemp = bodyTemp.replace("@@ChangeEndTime@@", changeComm.getChangeEndTime());
-		
-		return bodyTemp;
+		return null;
 	}
 
 	@Override
 	public String replacePlaceHolder(String body, BriefPapPub briefPapPub) throws JSONException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

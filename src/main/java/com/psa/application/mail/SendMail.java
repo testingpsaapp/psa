@@ -24,8 +24,8 @@ public class SendMail
 		helper.setSubject(subject);
 		message.setContent("<html><body>"+body+"</body</html>","text/html");
 		System.out.println("<html><body>"+body+"</body</html>");
-		helper.setBcc(bcc);
-		helper.setCc(cc);
+		if(bcc!=null)helper.setBcc(bcc);
+		if(cc!=null)helper.setCc(cc);
 		helper.setTo(to);
 		
 		javaMailSender.send(message);

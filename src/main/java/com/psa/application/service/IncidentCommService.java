@@ -112,13 +112,10 @@ public class IncidentCommService
 		String template = emailTemplateGenerator.getEmailBody("inc_comm_a",incidentComm);
 		//Step 3 Mail to Stake holders
 		String subject = incidentComm.getIncidentNum()+"|"+incidentComm.getIncidentSeverity()+"|"+incidentComm.getTitle()+"|"+incidentComm.getCommTyp();
-		String[] toMailId = new String[emailList.getListOfToMailId().size()];
-		toMailId = emailList.getListOfToMailId().toArray(toMailId);
-		String[] ccMailId = new String[emailList.getListOfCCMailId().size()];
-		ccMailId = emailList.getListOfCCMailId().toArray(ccMailId);
-		String[] bccMailId = new String[emailList.getListOfBCCMailId().size()];
-		bccMailId = emailList.getListOfBCCMailId().toArray(bccMailId);
-		
+		String[] toMailId = emailList.getListOfToMailId();
+		String[] ccMailId =  emailList.getListOfCCMailId();
+		String[] bccMailId = emailList.getListOfBCCMailId();
+		System.out.println(toMailId.toString());
 		
 		String mailingMessage=sendMail.sendMailToMultiple(toMailId,ccMailId ,bccMailId , subject, template);
 		if(("Mail Sending Successful").equals(mailingMessage))

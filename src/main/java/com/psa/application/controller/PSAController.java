@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.psa.application.mail.SendMail;
 import com.psa.application.model.AccessModule;
 import com.psa.application.model.AppConfig;
+import com.psa.application.model.BriefPapPub;
 import com.psa.application.model.CLAAcessConfig;
 import com.psa.application.model.ChangeComm;
 import com.psa.application.model.CommDlistConfig;
@@ -28,6 +29,7 @@ import com.psa.application.model.LobConfig;
 import com.psa.application.model.TriageLeadConfig;
 import com.psa.application.service.AccessModuleService;
 import com.psa.application.service.AppConfigService;
+import com.psa.application.service.BriefingPaperPublisherService;
 import com.psa.application.service.CLAAccessConfigService;
 import com.psa.application.service.ChangeCommService;
 import com.psa.application.service.CommDlistConfigService;
@@ -84,6 +86,9 @@ public class PSAController {
 	
 	@Autowired 
 	ChangeCommService changeCommService;
+	
+	@Autowired
+	BriefingPaperPublisherService briefingPaperPublisherService;
 	
 	@RequestMapping("/testing")
 	public String test()
@@ -528,4 +533,55 @@ public class PSAController {
 		result=changeCommService.ignoreScope(changeNum,appName);
 		return result;
 	}
+	
+	/*
+	 * Briefing paper starts here
+	 * */
+	@RequestMapping(path="/briefingPaper/review/lobleads", method = RequestMethod.POST)
+	public String reviewBriefingPaper(@RequestBody BriefPapPub briefPapPub) throws JSONException, MessagingException
+	{
+		String result="";
+		System.out.println("Inside Controller");
+		result=briefingPaperPublisherService.review(briefPapPub);
+		return result;
+	}
+	
+	@RequestMapping(path="/briefingPaper/{mimNum}", method = RequestMethod.GET)
+	public BriefPapPub getBriefingPaper(@PathVariable("mimNum")String briefPapPub) throws JSONException, MessagingException
+	{
+		//String result="";
+		System.out.println("Inside Controller");
+		BriefPapPub briefPapPubObj=null;
+		briefPapPubObj=briefingPaperPublisherService.getBriefingPaper(briefPapPub);
+		return briefPapPubObj;
+	}
+	
+	@RequestMapping(path="/briefingPaper/review/{mimNum}/lobleads/{reviewer}/{appName}", method = RequestMethod.PUT)
+	public String reviewBriefingPaperSubmitLobLead(@PathVariable("reviewer") String reviewer,@PathVariable("mimNum")String mimNum,@PathVariable("appName") String appName,@RequestBody BriefPapPub briefPapPub) throws JSONException, MessagingException
+	{
+		String result="";
+		System.out.println("Inside Controller");
+		result=briefingPaperPublisherService.reviewLobLeadSubmit(briefPapPub,mimNum, reviewer, appName);
+		return result;
+	}
+	
+	@RequestMapping(path="/briefingPaper/review/{mimNum}/psm/{reviewer}/{appName}", method = RequestMethod.PUT)
+	public String reviewBriefingPaperSubmitPSM(@PathVariable("reviewer") String reviewer,@PathVariable("mimNum")String mimNum,@PathVariable("appName") String appName,@RequestBody BriefPapPub briefPapPub) throws JSONException, MessagingException
+	{
+		String result="";
+		System.out.println("Inside Controller");
+		result=briefingPaperPublisherService.reviewPSMSubmit(briefPapPub,mimNum, reviewer, appName);
+		return result;
+	}
+	
+	@RequestMapping(path="/briefingPaper/review/{mimNum}/pssm/{reviewer}/{appName}", method = RequestMethod.POST)
+	public String reviewBriefingPaperSubmitPSSM(@PathVariable("reviewer") String reviewer,@PathVariable("mimNum")String mimNum,@PathVariable("appName") String appName,@RequestBody BriefPapPub briefPapPub) throws JSONException, MessagingException
+	{
+		String result="";
+		System.out.println("Inside Controller");
+		result=briefingPaperPublisherService.reviewPSSMSubmit(briefPapPub, mimNum, reviewer, appName);
+		return result;
+	}
+	
+	
 }

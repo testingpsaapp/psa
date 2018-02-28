@@ -24,8 +24,8 @@
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
-					<li><a href="" ng-click="changeIncidentCommDD('Major Incident','incident_type_butt')">Major Incident</a></li>
-					<li><a href="" ng-click="changeIncidentCommDD('Standard Incident','incident_type_butt')">Standard Incident</a></li>
+					<li><a href="" ng-click="changeBriefingPaperCommDD('Major Incident','incident_type_butt')">Major Incident</a></li>
+					<li><a href="" ng-click="changeBriefingPaperCommDD('Standard Incident','incident_type_butt')">Standard Incident</a></li>
 				</ul>
 			</div>
 			<input type ="hidden" ng-model ="incident_type"/>
@@ -42,7 +42,7 @@
 				</button>
 				<ul class="dropdown-menu">
 					<li ng-repeat="severity in incidentSeverity">
-        				<a href="" ng-click="changeIncidentCommDD(severity.severityType,'incident_severity_butt')">{{severity.severityType}} </a>
+        				<a href="" ng-click="changeBriefingPaperCommDD(severity.severityType,'incident_severity_butt')">{{severity.severityType}} </a>
     				</li>
 				</ul>
 				<input type ="hidden" ng-model="incident_severity"/>
@@ -68,27 +68,19 @@
 			<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="impacted_region_butt">Select Region
 			<span class="caret"></span></button>
 		      <ul class="dropdown-menu">
-				<li><a href="" ng-click="changeIncidentCommDD('NAM','impacted_region_butt')">NAM</a></li>
-				<li><a href="" ng-click="changeIncidentCommDD('LATAM','impacted_region_butt')">LATAM</a></li>
-				<li><a href="" ng-click="changeIncidentCommDD('EMEA','impacted_region_butt')">EMEA</a></li>
-				<li><a href="" ng-click="changeIncidentCommDD('APAC','impacted_region_butt')">APAC</a></li>
+				<li><a href="" ng-click="changeBriefingPaperCommDD('NAM','impacted_region_butt')">NAM</a></li>
+				<li><a href="" ng-click="changeBriefingPaperCommDD('LATAM','impacted_region_butt')">LATAM</a></li>
+				<li><a href="" ng-click="changeBriefingPaperCommDD('EMEA','impacted_region_butt')">EMEA</a></li>
+				<li><a href="" ng-click="changeBriefingPaperCommDD('APAC','impacted_region_butt')">APAC</a></li>
 			  </ul>
 		    </div>
 			<input type ="hidden" ng-model ="impacted_region"/>
 		</div>
 		<div class="col-sm-3" style="color: #405a7c; margin-top: 2%"><strong>Impacted Country</strong></div>
 		<div class="col-sm-3" style="margin-top: 2%"> 
-			<div class="dropdown">
-				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="impacted_country_butt">Select Country
-					<span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu">
-					<li ng-repeat="country in countries">
-        				<a href="" ng-click="changeIncidentCommDD(country.countryName,'impacted_country_butt')">{{country.countryName}}</a>
-    				</li>						      	      
-				</ul>
-			</div>
-			<input type ="hidden" ng-model ="impacted_country"/>
+			<select multiple class="form-control" id="impacted_country" ng-model="impacted_country" ng-change="populateSanityCountry()">
+				<option ng-repeat="country in countries">{{country.countryName}}</option>
+			</select>
 		</div>	
 	</div><!-- row 3 ends -->
 	
@@ -201,8 +193,8 @@
 		        	<input type="text" class="form-control" id="{{'chrono_datetime_'+chrono}}" ng-model="chrono_datetime['{{chrono}}']">
 		        </td>
 		        <td>
-		        	<button type="button" class="btn btn-success" ng-click="addImpact()">+</button>
-		        	<button type="button" class="btn btn-danger" ng-click="deleteImpact(impactCount)">-</button>
+		        	<button type="button" class="btn btn-success" ng-click="addChrono()">+</button>
+		        	<button type="button" class="btn btn-danger" ng-click="deleteChrono(chrono)">-</button>
 		        </td>		        
         	  </tr>
             </tbody>
@@ -221,8 +213,12 @@
 	
 	<div class="row" style=" margin-top: 2%">
 		<div class="col-sm-3"></div>
-		<div class="col-sm-6" style="align-content: center;"><button type="button" class="btn btn-primary" ng-click="submitForApproval()" ng-show="submitButt">Submit</button><!--</div>-->
-		<!--  <div class="col-sm-3" style="align-content: center;">--><button type="button" class="btn btn-primary" ng-click="approve()" ng-show="approveButt">Approve</button>  </div>
+		<div class="col-sm-6" style="align-content: center;">
+		<button type="button" class="btn btn-primary" ng-click="submitForApproval()" ng-show="submitButt">Submit</button>
+		<button type="button" class="btn btn-primary" ng-click="approveLobLead()" ng-show="approveButtLobLead">Approve</button>
+		<button type="button" class="btn btn-primary" ng-click="approvePSM()" ng-show="approveButtPSM">Approve</button>
+		<button type="button" class="btn btn-primary" ng-click="approvePSSM()" ng-show="approveButtPSSM">Approve</button>
+		  </div>
 		<div class="col-sm-3"></div>
 	
 	</div><!-- row 12 ends -->

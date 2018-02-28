@@ -1,7 +1,5 @@
 package com.psa.application.model;
 
-import java.sql.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,24 +10,26 @@ public class BriefPapPub
 {
 	private long id;
 	private String mimNum;
-	private Date mimDate;
-	private Date mimStartDate;
-	private Date mimEndDate;
-	private String impactedLob;
+	private String mimDate;
+	private String mimStartDate;
+	private String mimEndDate;
+	private String[] impactedLob;
 	private String title;
 	private String description;
-	private String impactedCountry;
+	private String[] impactedCountry;
 	private String impactedDepartment;
-	private String impact;
+	private String[] impact;
 	private String fix;
 	private String preventiveAct;
-	private String chronology;
+	private String[] chronology;
 	private String preparedBy;
 	private String firstReviewer;
 	private String secondReviewer;
 	private String status;
 	private String impactedRegion;
-	private String impactedSector;
+	private String[] impactedSector;
+	private String causingApp;
+	private String severity;
 	
 	@Id
 	public long getId() {
@@ -44,28 +44,28 @@ public class BriefPapPub
 	public void setMimNum(String mimNum) {
 		this.mimNum = mimNum;
 	}
-	public Date getMimDate() {
+	public String getMimDate() {
 		return mimDate;
 	}
-	public void setMimDate(Date mimDate) {
+	public void setMimDate(String mimDate) {
 		this.mimDate = mimDate;
 	}
-	public Date getMimStartDate() {
+	public String getMimStartDate() {
 		return mimStartDate;
 	}
-	public void setMimStartDate(Date mimStartDate) {
+	public void setMimStartDate(String mimStartDate) {
 		this.mimStartDate = mimStartDate;
 	}
-	public Date getMimEndDate() {
+	public String getMimEndDate() {
 		return mimEndDate;
 	}
-	public void setMimEndDate(Date mimEndDate) {
+	public void setMimEndDate(String mimEndDate) {
 		this.mimEndDate = mimEndDate;
 	}
-	public String getImpactedLob() {
+	public String[] getImpactedLob() {
 		return impactedLob;
 	}
-	public void setImpactedLob(String impactedLob) {
+	public void setImpactedLob(String[] impactedLob) {
 		this.impactedLob = impactedLob;
 	}
 	public String getTitle() {
@@ -80,10 +80,10 @@ public class BriefPapPub
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getImpactedCountry() {
+	public String[] getImpactedCountry() {
 		return impactedCountry;
 	}
-	public void setImpactedCountry(String impactedCountry) {
+	public void setImpactedCountry(String[] impactedCountry) {
 		this.impactedCountry = impactedCountry;
 	}
 	public String getImpactedDepartment() {
@@ -92,10 +92,10 @@ public class BriefPapPub
 	public void setImpactedDepartment(String impactedDepartment) {
 		this.impactedDepartment = impactedDepartment;
 	}
-	public String getImpact() {
+	public String[] getImpact() {
 		return impact;
 	}
-	public void setImpact(String impact) {
+	public void setImpact(String[] impact) {
 		this.impact = impact;
 	}
 	public String getFix() {
@@ -110,10 +110,10 @@ public class BriefPapPub
 	public void setPreventiveAct(String preventiveAct) {
 		this.preventiveAct = preventiveAct;
 	}
-	public String getChronology() {
+	public String[] getChronology() {
 		return chronology;
 	}
-	public void setChronology(String chronology) {
+	public void setChronology(String[] chronology) {
 		this.chronology = chronology;
 	}
 	public String getPreparedBy() {
@@ -146,11 +146,23 @@ public class BriefPapPub
 	public void setImpactedRegion(String impactedRegion) {
 		this.impactedRegion = impactedRegion;
 	}
-	public String getImpactedSector() {
+	public String[] getImpactedSector() {
 		return impactedSector;
 	}
-	public void setImpactedSector(String impactedSector) {
+	public void setImpactedSector(String[] impactedSector) {
 		this.impactedSector = impactedSector;
+	}
+	public String getCausingApp() {
+		return causingApp;
+	}
+	public void setCausingApp(String causingApp) {
+		this.causingApp = causingApp;
+	}
+	public String getSeverity() {
+		return severity;
+	}
+	public void setSeverity(String severity) {
+		this.severity = severity;
 	}
 	
 	

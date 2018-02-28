@@ -11,6 +11,9 @@ psaapp.controller('incidentCommController', function($scope,$http)
 	$scope.submitButt=true;
 	var t = window.location.href.indexOf('action=review');
 	$scope.incident_date="";
+	$scope.cc_mail_id=[];
+	$scope.bcc_mail_id=[];
+	//$scope.to_mail_id=[];
 	$scope.emailList=[];
 	//alert(t);
 	if(t!=-1)
@@ -147,7 +150,7 @@ psaapp.controller('incidentCommController', function($scope,$http)
 	$scope.addImpact=function()
 	{
 		$scope.noOfimpact.push(parseInt(($scope.noOfimpact.length))+1);
-	}
+	};
 	
 	$scope.deleteImpact=function(x)
 	{
@@ -161,7 +164,7 @@ psaapp.controller('incidentCommController', function($scope,$http)
 			var index = $scope.noOfimpact.indexOf("\""+x+"\"")
 			$scope.noOfimpact.splice(index,1);
 		}
-	}
+	};
 	
 	$scope.submitForApproval = function()
 	{
@@ -269,9 +272,13 @@ psaapp.controller('incidentCommController', function($scope,$http)
 		console.log($scope.incidentCommObj);
 		$http.put('/incidentCommunication', $scope.incidentCommObj)
 		 .then(function(data){
-			 $scope.emailList["listOfToMailId"]=($scope.to_mail_id).split(',');
-			 $scope.emailList["listOfCCMailId"]=($scope.cc_mail_id).split(',');
-			 $scope.emailList["listOfBCCMailId"]=($scope.bcc_mail_id).split(',');
+			 //var x=$scope.to_mail_id;
+			 //var y=$scope.cc_mail_id;
+			 //var x=$scope.bcc_mail_id;
+			 $scope.emailList["listOfToMailId"]=$scope.to_mail_id;
+			 $scope.emailList["listOfCCMailId"]=$scope.cc_mail_id;
+			 $scope.emailList["listOfBCCMailId"]=$scope.bcc_mail_id;
+			 console.log($scope.emailList);
 			 $http.post('/incidentCommunication/approve/'+$scope.inc_num,$scope.emailList)
 			 .then(function(data){
 				 $scope.saveMessage = data.data;
@@ -297,7 +304,20 @@ psaapp.controller('incidentCommController', function($scope,$http)
 		$http.get('/incidentCommunication/'+$scope.inc_num+'/emailList').then(function(data){
 			$scope.emailList = data.data;
 			console.log($scope.emailList);
-			$scope.to_mail_id=$scope.emailList["listOfToMailId"];
+			$scope.to_mail_id=[];
+			for(var i =0;i<$scope.emailList["listOfToMailId"].length;i++)
+			{
+				($scope.to_mail_id).push($scope.emailList["listOfToMailId"][i]);
+			}
+			//$scope.to_mail_id=$scope.emailList["listOfToMailId"];
+			/*for(var i =0;i<$scope.emailList["listOfCCMailId"].length;i++)
+			{
+				($scope.cc_mail_id).push($scope.emailList["listOfCCMailId"][i]);
+			}
+			for(var i =0;i<$scope.emailList["listOfBCCMailId"].length;i++)
+			{
+				($scope.bcc_mail_id).push($scope.emailList["listOfBCCMailId"][i]);
+			}*/
 			$scope.cc_mail_id=$scope.emailList["listOfCCMailId"];
 			$scope.bcc_mail_id=$scope.emailList["listOfBCCMailId"];
 			

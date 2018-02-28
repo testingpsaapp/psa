@@ -4,26 +4,26 @@ import java.util.List;
 
 public class EmailList 
 {
-	private List<String> listOfToMailId;
-	private List<String> listOfCCMailId;
-	private List<String> listOfBCCMailId;
+	private String[] listOfToMailId;
+	private String[] listOfCCMailId;
+	private String[] listOfBCCMailId;
 	
-	public List<String> getListOfToMailId() {
+	public String[] getListOfToMailId() {
 		return listOfToMailId;
 	}
-	public void setListOfToMailId(List<String> listOfToMailId) {
+	public void setListOfToMailId(String[] listOfToMailId) {
 		this.listOfToMailId = listOfToMailId;
 	}
-	public List<String> getListOfCCMailId() {
+	public String[] getListOfCCMailId() {
 		return listOfCCMailId;
 	}
-	public void setListOfCCMailId(List<String> listOfCCMailId) {
+	public void setListOfCCMailId(String[] listOfCCMailId) {
 		this.listOfCCMailId = listOfCCMailId;
 	}
-	public List<String> getListOfBCCMailId() {
+	public String[] getListOfBCCMailId() {
 		return listOfBCCMailId;
 	}
-	public void setListOfBCCMailId(List<String> listOfBCCMailId) {
+	public void setListOfBCCMailId(String[] listOfBCCMailId) {
 		this.listOfBCCMailId = listOfBCCMailId;
 	}
 	
