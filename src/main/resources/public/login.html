@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>LCMS</title>
+</head>
+	<!-- Bootstrap Core CSS -->
+	<link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Custom CSS -->
+	<link href="../css/custom/custom.css" rel="stylesheet">
+	
+	<link href="../css/lib/font-awesome.min.css" rel="stylesheet" type="text/css">
+<body ng-app="loginApp" ng-controller="loginController">
+	<nav class="navbar navbar-inverse" style="margin-bottom:0px;">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">Production Support - Life Cycle Management System</a>
+	    </div>
+	    <ul class="nav navbar-nav navbar-right">
+	      <li><a href="" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-user"></span>Register</a></li>
+	     <li><a href="" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+		    <ul class="dropdown-menu" style="background:linear-gradient(to bottom,black,gray); min-width:300px; color:white">
+    			<li >
+					<div  style="margin:7%;border-color:white; border-width: thin">
+						<label for="usr_id">SOE ID:</label> <input type="text" class="form-control" id="soe_id" ng-model="soe_id" placeholder="Enter SOE ID...">
+						<label for="pwd">Password:</label> <input type="password" class="form-control" id="password" ng-model="password" placeholder="Enter Password...">
+						<div class="button_holder"><button type="button" class="btn btn-default" ng-click="login()">Login</button></div>
+						
+					</div>
+				</li>
+  			</ul>	      
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
+ 	<div class="home_background">
+ 		 <div class="home_background_inner">
+ 			<div class="login_holder"> 
+ 				<div class="container">
+ 					<div class="row">
+ 						<div class="col-lg-12">
+		 					<div class="jumbotron text-center">
+							  <h1>Production Support</h1>
+							  <h3>Life Cycle Management System</h3> 
+							</div>
+						</div>
+						
+					</div>
+ 				</div>
+ 			</div>	
+ 		</div> 
+ 	<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" >
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="background:linear-gradient(to bottom, #98e0f2, #79949b);" >
+        <div class="modal-header register_modal_header" style="color:white" >
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Please fill the details below to register</h4>
+        </div>
+        <div class="modal-body" style="color:white;">
+          <div class="row">
+			<div class="col-sm-3" style="margin-top: 2%"><strong>SOE ID</strong></div>
+			<div class="col-sm-9" style="margin-top: 2%"> 
+				<input type="text" class="form-control" id="reg_soe_id" ng-model="reg_soe_id">
+		  	</div>
+          </div>
+          <div class="row">
+			<div class="col-sm-3" style="margin-top: 2%"><strong>First Name</strong></div>
+			<div class="col-sm-9" style="margin-top: 2%"> 
+				<input type="text" class="form-control" id="first_name" ng-model="first_name">
+		  	</div>
+          </div>
+          <div class="row">
+			<div class="col-sm-3" style="margin-top: 2%"><strong>Last Name</strong></div>
+			<div class="col-sm-9" style="margin-top: 2%"> 
+				<input type="text" class="form-control" id="last_name" ng-model="last_name">
+		  	</div>
+          </div>
+          <div class="row">
+			<div class="col-sm-3" style="margin-top: 2%"><strong>Region</strong></div>
+			<div class="col-sm-9" style="margin-top: 2%"> 
+				<select multiple class="form-control" id="region" ng-model="region">
+					<option>NAM</option>
+					<option>LATAM</option>
+					<option>EMEA</option>
+					<option>APAC</option>
+				</select>
+		  	</div>	
+          </div>
+          <div class="row">
+			<div class="col-sm-3" style="margin-top: 2%"><strong>LOB</strong></div>
+			<div class="col-sm-9" style="margin-top: 2%"> 
+				<select class="form-control" id="sel2" ng-model="lob" ng-change="getApplications()">
+					<option>---Select LOB---</option>
+					<option>Core Banking</option>
+					<option>Cards</option>
+					<option>CMS</option>
+					<option>Digital</option>
+					<option>Wealth Management</option>
+					<option>DABI</option>
+					<option>ESB</option>
+				</select>
+		  	</div>
+          </div>
+          <div class="row">
+			<div class="col-sm-3" style="margin-top: 2%"><strong>Applications</strong></div>
+			<div class="col-sm-9" style="margin-top: 2%"> 
+				<select multiple class="form-control" id="application" ng-model="application" ng-change="">
+					<option ng-repeat="x in applications">{{x.appName}}</option>
+				</select>
+		  	</div>
+          </div>
+          <div class="row">
+			<div class="col-sm-3" style="margin-top: 2%"><strong>Password</strong></div>
+			<div class="col-sm-9" style="margin-top: 2%"> 
+				<input type="password" class="form-control" id="reg_password" ng-model="reg_password">
+		  	</div>
+          </div>
+          <div class="row">
+			<div class="col-sm-3" style="margin-top: 2%"><strong>Confirm Password</strong></div>
+			<div class="col-sm-9" style="margin-top: 2%"> 
+				<input type="password" class="form-control" id="reg_confirm_password" ng-model="reg_confirm_password">
+		  	</div>
+          </div>
+        
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default"  ng-click="register()"><strong>Register<strong></strong></button>
+        </div>
+    </div>
+  </div>
+  </div>	
+ 	</div> 	
+ 	<!-- jQuery -->
+    <script src="../js/lib/jquery.min.js"></script>
+    
+	<!-- AngularJS -->
+	<script src="../js/lib/angular.min.js"></script>
+	<script src="../js/lib/angular-route.js"></script>
+	
+	<!-- Bootstrap Core JavaScript -->
+    <script src="../js/lib/bootstrap.min.js"></script>
+    
+    <!-- Angular Custom Imports -->
+    <script src="../js/custom/model/loginApp.js"></script>
+    <script src="../js/custom/controller/loginController.js"></script>
+</body>
+</html>

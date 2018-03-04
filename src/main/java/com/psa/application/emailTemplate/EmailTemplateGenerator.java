@@ -22,7 +22,7 @@ public class EmailTemplateGenerator{
 	ChangeCommTemplate changeCommTemplate;
 	
 	@Autowired 
-	ChangeCommBusinessTemplate changeCommBusinessTemplate;
+	ChangeCommBusinessTemplate changeCommBusinessTemplate; 
 	
 	@Autowired
 	BriefingPaperReviewTemplate briefingPaperReviewTemplate;
