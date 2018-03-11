@@ -67,7 +67,7 @@ public class BriefingPaperPublisherService {
 			worklist.setTaskName("Pending LOB Lead Review - "+newBriefPapPub.getMimNum());
 			AppConfig appConfig = appConfigRepository.getAppConfigByAppName(impactedApp);
 			worklist.setTaskOwner(appConfig.getLobLead());
-			worklist.setLink("http://localhost:8080/index.html#!/briefingPaperPublisher?action=briefingPaperReviewLobLead&mimNum="+newBriefPapPub.getMimNum()+"&loblead="+appConfig.getLobLead()+"&appName="+impactedApp);
+			worklist.setLink(environment.getProperty("psa.links.initial")+"#!/briefingPaperPublisher?action=briefingPaperReviewLobLead&mimNum="+newBriefPapPub.getMimNum()+"&loblead="+appConfig.getLobLead()+"&appName="+impactedApp);
 			worklistRepository.saveAndFlush(worklist);
 			//Step 3 mailing
 			to= appConfig.getLobLead()+"@"+environment.getProperty("psa.mailing.domain");
@@ -109,7 +109,7 @@ public class BriefingPaperPublisherService {
 		newWorkList.setTaskId("Pending PSM Review - "+newBriefPapPub.getMimNum());
 		newWorkList.setTaskName("Pending PSM Review - "+newBriefPapPub.getMimNum());
 		newWorkList.setTaskOwner(psm);
-		newWorkList.setLink("http://localhost:8080/index.html#!/briefingPaperPublisher?action=briefingPaperReviewPSM&mimNum="+newBriefPapPub.getMimNum()+"&loblead="+psm+"&appName="+appName);
+		newWorkList.setLink(environment.getProperty("psa.links.initial")+"#!/briefingPaperPublisher?action=briefingPaperReviewPSM&mimNum="+newBriefPapPub.getMimNum()+"&loblead="+psm+"&appName="+appName);
 		worklistRepository.saveAndFlush(newWorkList);
 		String to = "";	
 		String cc = null;	
@@ -149,7 +149,7 @@ public class BriefingPaperPublisherService {
 		newWorkList.setTaskId("Pending PSSM Review - "+newBriefPapPub.getMimNum());
 		newWorkList.setTaskName("Pending PSSM Review - "+newBriefPapPub.getMimNum());
 		newWorkList.setTaskOwner(pssm);
-		newWorkList.setLink("http://localhost:8080/index.html#!/briefingPaperPublisher?action=briefingPaperReviewPSSM&mimNum="+newBriefPapPub.getMimNum()+"&loblead="+pssm+"&appName="+appName);
+		newWorkList.setLink(environment.getProperty("psa.links.initial")+"#!/briefingPaperPublisher?action=briefingPaperReviewPSSM&mimNum="+newBriefPapPub.getMimNum()+"&loblead="+pssm+"&appName="+appName);
 		worklistRepository.saveAndFlush(newWorkList);
 		String to = "";	
 		String cc = null;	

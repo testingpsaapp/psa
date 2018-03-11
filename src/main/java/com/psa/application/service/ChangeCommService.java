@@ -65,7 +65,7 @@ public class ChangeCommService {
 				worklist.setTaskName(newChangeComm.getChangNum()+"- Sanity Scope Submission Pending");
 				worklist.setStatus("ACTIVE");
 				worklist.setTaskOwner(taskOwner);
-				worklist.setLink("http://localhost:8080/index.html#!/ChangeCommunication/SanityScope?appName="+newChangeComm.getImpactedPp()[i]+"&changeNum="+newChangeComm.getChangNum());
+				worklist.setLink("http://localhost:8080/home.html#!/ChangeCommunication/SanityScope?appName="+newChangeComm.getImpactedPp()[i]+"&changeNum="+newChangeComm.getChangNum());
 				newWorklist=worklistRepository.saveAndFlush(worklist);
 				worklist=null;
 				

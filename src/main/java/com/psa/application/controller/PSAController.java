@@ -28,6 +28,7 @@ import com.psa.application.model.IncidentComm;
 import com.psa.application.model.LobConfig;
 import com.psa.application.model.TriageLeadConfig;
 import com.psa.application.model.User;
+import com.psa.application.model.Worklist;
 import com.psa.application.service.AccessModuleService;
 import com.psa.application.service.AppConfigService;
 import com.psa.application.service.BriefingPaperPublisherService;
@@ -42,6 +43,7 @@ import com.psa.application.service.IncidentCommService;
 import com.psa.application.service.LobConfigService;
 import com.psa.application.service.TriageLeadConfigService;
 import com.psa.application.service.UserService;
+import com.psa.application.service.WorklistService;
 import com.psa.application.utilities.CommonUtilities;
 
 @RestController
@@ -94,6 +96,9 @@ public class PSAController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	WorklistService worklistService;
 	
 	@RequestMapping("/testing")
 	public String test()
@@ -595,9 +600,22 @@ public class PSAController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registration(@RequestBody User user) {
 		String message = "{\"message\":\"Registration Failed\"}";
-		System.out.println("Inside MVC Controller: /register");
+		//System.out.println("Inside MVC Controller: /register");
 		System.out.println("User Received:" +user.getSoeId());
 		message=userService.registerUser(user);
         return message;
+    }
+	
+	/*
+	 * Worklist starts here
+	 * */
+	
+	@RequestMapping(value = "/worklist/{user}/all", method = RequestMethod.GET)
+    public List<Worklist> getWorklist(@PathVariable("user") String user) {
+		List<Worklist> listOfWorklist=null;
+		//System.out.println("Inside MVC Controller: /register");
+		System.out.println("User Received:" +user);
+		listOfWorklist=worklistService.getUserWorklist(user);
+        return listOfWorklist;
     }
 }

@@ -52,7 +52,7 @@ public class IncidentCommService
 		else
 		{
 			//Step 2 -> Entry in worklist table
-			newWorklist.setLink("http://localhost:8080/index.html#!/incidentMIMComm?incNum="+newIncidentComm.getIncidentNum()+"&action=review");
+			newWorklist.setLink(environment.getProperty("psa.links.initial")+"#!/incidentMIMComm?incNum="+newIncidentComm.getIncidentNum()+"&action=review");
 			newWorklist.setTaskName("Review Incident Communication For "+newIncidentComm.getIncidentNum());
 			newWorklist.setTaskOwner(cLAAccessConfigService.getCLAAcessConfigBySubModule("Incident - MIM Communication","Reviewer").getSoeId());
 			newWorklist.setTaskId(newIncidentComm.getIncidentNum());

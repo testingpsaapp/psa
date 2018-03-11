@@ -26,4 +26,7 @@ public interface WorklistRepository extends JpaRepository<Worklist,Long> {
 	@Query("SELECT w from Worklist w where w.status = 'ACTIVE'")
 	List<Worklist> findAllActive();
 
+	@Query("SELECT w from Worklist w where w.status = 'ACTIVE' and lower(w.taskOwner) = lower(:user)")
+	List<Worklist> findWorklistByTaskOwner(@Param("user")String user);
+
 }

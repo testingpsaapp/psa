@@ -5,11 +5,9 @@ var psaapp = angular.module('mainPsaApp', ['ngRoute']);
 psaapp.controller('mainPsaAppController', function($rootScope,$scope,$http) {
 	$scope.loadData=function()
 	{
-		console.log('hi');
-		var url=window.location.href;
-		var user = decodeURIComponent(url.split('username=')[1]);
-		$rootScope.logged_in_user = user;
-		console.log($rootScope.logged_in_user);
+		var url = window.location.href;
+		var tempUser = url.split('?username=')[1];
+		$rootScope.user = tempUser;
 	}
 })
 .config(['$routeProvider',function($routeProvider){
@@ -67,6 +65,10 @@ psaapp.controller('mainPsaAppController', function($rootScope,$scope,$http) {
 			when("/ChangeCommunication/SanityScope",{
 				templateUrl:"/submitSanity.html",
 				controller: "submitSanityController"				
+			}).
+			when("/worklist",{
+				templateUrl:"/worklist.html",
+				controller: "worklistController"				
 			})
 		}]);
 
