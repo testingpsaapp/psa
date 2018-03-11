@@ -618,4 +618,15 @@ public class PSAController {
 		listOfWorklist=worklistService.getUserWorklist(user);
         return listOfWorklist;
     }
+	
+	@RequestMapping(value = "/worklist/{user}/count", method = RequestMethod.GET)
+    public String getWorklistCount(@PathVariable("user") String user) {
+		String message = "{\"count\":";
+		int count=0;
+		message+="\""+count+"\"}";
+		//System.out.println("Inside MVC Controller: /register");
+		System.out.println("User Received:" +user);
+		count=worklistService.getUserWorklistCount(user); 
+        return message;
+    }
 }

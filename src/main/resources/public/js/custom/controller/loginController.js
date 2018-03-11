@@ -31,7 +31,7 @@ loginApp.controller('loginController', function($rootScope,$scope,$http,$locatio
 	{
 		var encodedString = '?username=' +encodeURIComponent($scope.soe_id);
 		console.log('hi');
-		 window.location.href='http://localhost:8080/home.html'+encodedString;
+		window.location.href='http://localhost:8080/home.html'+encodedString+"#!/worklist";
 	};
 	
 	$scope.register = function()

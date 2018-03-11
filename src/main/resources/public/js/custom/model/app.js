@@ -3,10 +3,18 @@
  */
 var psaapp = angular.module('mainPsaApp', ['ngRoute']);
 psaapp.controller('mainPsaAppController', function($rootScope,$scope,$http) {
+	$rootScope.countOfWorklist=[];
 	$scope.loadData=function()
 	{
 		var url = window.location.href;
-		var tempUser = url.split('?username=')[1];
+		var tempUser = (url.split('?username=')[1]).split('#')[0];
+		$rootScope.countOfWorklist='0';
+		$http.get('/worklist/'+$rootScope.user+'/count').then(function(data){
+			console.log(data);
+			$rootScope.countOfWorklist = data.data.count;
+	        //$scope.tableAppConfig = true;
+	        console.log($rootScope.countOfWorklist);
+		});
 		$rootScope.user = tempUser;
 	}
 })
@@ -69,6 +77,10 @@ psaapp.controller('mainPsaAppController', function($rootScope,$scope,$http) {
 			when("/worklist",{
 				templateUrl:"/worklist.html",
 				controller: "worklistController"				
+			}).
+			when("/highlightCriticalIncident",{
+				templateUrl:"/highlightCriticalIncident.html",
+				controller: "highlightCriticalIncidentController"				
 			})
 		}]);
 

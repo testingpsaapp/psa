@@ -19,4 +19,9 @@ public class WorklistService {
 		return worklistRepository.findWorklistByTaskOwner(user);
 	}
 
+	public int getUserWorklistCount(String user) {
+		// TODO Auto-generated method stub
+		return worklistRepository.getUserWorklistCount(user); 
+	}
+
 }
