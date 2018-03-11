@@ -107,7 +107,7 @@
           <div class="row">
 			<div class="col-sm-3" style="margin-top: 2%"><strong>Applications</strong></div>
 			<div class="col-sm-9" style="margin-top: 2%"> 
-				<select multiple class="form-control" id="application" ng-model="application" ng-change="">
+				<select multiple class="form-control" id="application" ng-model="application">
 					<option ng-repeat="x in applications">{{x.appName}}</option>
 				</select>
 		  	</div>
@@ -127,8 +127,18 @@
         
       </div>
       <div class="modal-footer">
-          <button type="button" class="btn btn-default"  ng-click="register()"><strong>Register<strong></strong></button>
-        </div>
+      	<div class="row">
+        <div class="col-sm-9">
+        	<div ng-show="successMessageModel">
+				<p><strong>{{saveMessage.message}}</strong></p>
+			</div>
+			<div ng-show="failureMessageModel">
+				<p><strong>{{saveMessage.message}}</strong></p>
+			</div>
+        </div>  
+        <div class="col-sm-3"><button type="button" class="btn btn-default"  ng-click="register()"><strong>Register<strong></strong></button></div>
+      	</div>
+      </div>
     </div>
   </div>
   </div>	

@@ -1,5 +1,6 @@
 package com.psa.application.model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -8,6 +9,8 @@ import javax.persistence.Table;
 @Table(name="user")
 public class User 
 {
+	
+	
 	private long id;
 	private String soeId;
 	private String firstName;

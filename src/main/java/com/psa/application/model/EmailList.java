@@ -1,6 +1,5 @@
 package com.psa.application.model;
 
-import java.util.List;
 
 public class EmailList 
 {

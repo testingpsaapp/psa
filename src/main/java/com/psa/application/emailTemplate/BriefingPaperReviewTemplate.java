@@ -1,7 +1,6 @@
 package com.psa.application.emailTemplate;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
